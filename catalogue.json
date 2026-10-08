@@ -1,0 +1,339 @@
+[
+  {
+    "id": "axu-01",
+    "slug": "ephesus-shore-excursion",
+    "title": "Ephesus Shore Excursion from Kusadasi",
+    "summary": "Explore the streets and monuments of Ephesus with a local guide, with return transport from Kusadasi.",
+    "departure": "Kusadasi",
+    "duration": "4 hours",
+    "durationGroup": "Up to 6 hours",
+    "destinations": [
+      "Ephesus"
+    ],
+    "types": [
+      "Archaeology",
+      "Shore excursion"
+    ],
+    "itinerary": [
+      "Kusadasi cruise port or hotel meeting point.",
+      "Ephesus: Roman baths, council house, Domitian and Hadrian temples, Trajan Fountain, Nike relief, Celsus Library, Curetes Street and Great Theatre.",
+      "Terrace Houses are listed in the source itinerary.",
+      "Return to Kusadasi."
+    ],
+    "included": [
+      "English-speaking guide; other languages on request.",
+      "Listed sightseeing and round-trip port transport.",
+      "Air-conditioned, non-smoking vehicle.",
+      "Priority ticket arrangements at Ephesus."
+    ],
+    "excluded": [],
+    "conditions": [],
+    "conditionsConfirmed": false,
+    "price": null,
+    "currency": null,
+    "images": []
+  },
+  {
+    "id": "axu-02",
+    "slug": "archeological-ephesus-tour-from-kusadasi",
+    "title": "Private Archaeological Ephesus Tour from Kusadasi Port",
+    "summary": "Discover Ephesus, the House of the Virgin Mary and the remains of the Temple of Artemis on a private excursion.",
+    "departure": "Kusadasi Port / hotels",
+    "duration": null,
+    "durationGroup": null,
+    "destinations": [
+      "Ephesus"
+    ],
+    "types": [
+      "Archaeology",
+      "Private tour",
+      "Shore excursion"
+    ],
+    "itinerary": [
+      "Port or hotel pickup; travel to the House of the Virgin Mary.",
+      "Guided exploration of Ephesus, including its baths, council house, temples, fountains, Celsus Library, Curetes Street and Great Theatre.",
+      "Photo stop at the Temple of Artemis.",
+      "Local lunch and return to Kusadasi."
+    ],
+    "included": [
+      "English-speaking guide; other languages on request.",
+      "Local lunch, itinerary visits and return transfers.",
+      "Air-conditioned, non-smoking transport.",
+      "Priority ticket arrangements."
+    ],
+    "excluded": [
+      "Attraction admission."
+    ],
+    "conditions": [],
+    "conditionsConfirmed": false,
+    "price": null,
+    "currency": null,
+    "images": []
+  },
+  {
+    "id": "axu-03",
+    "slug": "biblical-ephesus-tour-from-kusadasi",
+    "title": "Private Biblical Ephesus Tour from Kusadasi Port with Lunch",
+    "summary": "Explore the Christian heritage of the Ephesus area on a private tour combining archaeological sites and pilgrimage landmarks.",
+    "departure": "Kusadasi Port / hotels",
+    "duration": "4–6 hours",
+    "durationGroup": "Up to 6 hours",
+    "destinations": [
+      "Ephesus"
+    ],
+    "types": [
+      "Biblical heritage",
+      "Private tour",
+      "Shore excursion"
+    ],
+    "itinerary": [
+      "Pickup and visit to the House of the Virgin Mary.",
+      "Explore Ephesus, including Celsus Library, Great Theatre and Hadrian Temple.",
+      "Visit the Basilica of St. John and view the Temple of Artemis.",
+      "Lunch at a local restaurant; return to port or hotel."
+    ],
+    "included": [
+      "English-speaking guide; other languages on request.",
+      "Lunch, stated sightseeing and return transfers.",
+      "Air-conditioned, non-smoking transport.",
+      "Priority ticket arrangements."
+    ],
+    "excluded": [
+      "Site admission; prepaid tickets can be arranged separately."
+    ],
+    "conditions": [],
+    "conditionsConfirmed": false,
+    "price": null,
+    "currency": null,
+    "images": []
+  },
+  {
+    "id": "axu-04",
+    "slug": "ephesus-tour-from-istanbul",
+    "title": "Ephesus Day Tour from Istanbul",
+    "summary": "Travel from Istanbul to the Ephesus region by air, with transfers and a guided visit arranged around the flights.",
+    "departure": "Istanbul",
+    "duration": null,
+    "durationGroup": null,
+    "destinations": [
+      "Ephesus"
+    ],
+    "types": [
+      "Archaeology",
+      "Day tour"
+    ],
+    "itinerary": [
+      "Hotel-to-airport transfer in Istanbul.",
+      "Flight to Izmir; meet guide and private vehicle.",
+      "Visit Ephesus, including Terrace Houses, the Temple of Artemis and Ephesus Museum.",
+      "Source also describes a local hand-weaving visit.",
+      "Return to Izmir Airport, fly to Istanbul and transfer to hotel."
+    ],
+    "included": [
+      "Return Istanbul–Izmir flights.",
+      "Return Istanbul airport transfers.",
+      "Private vehicle and driver, professional guide.",
+      "Parking and local restaurant lunch."
+    ],
+    "excluded": [
+      "Museum and archaeological-site admission.",
+      "Guide/driver gratuities and drinks."
+    ],
+    "conditions": [],
+    "conditionsConfirmed": false,
+    "price": null,
+    "currency": null,
+    "images": []
+  },
+  {
+    "id": "axu-05",
+    "slug": "pamukkale-tour-from-kusadasi",
+    "title": "Private Pamukkale Tour from Kusadasi",
+    "summary": "Private Pamukkale tour departing from Kusadasi.",
+    "departure": "Kusadasi",
+    "duration": null,
+    "durationGroup": null,
+    "destinations": [
+      "Pamukkale"
+    ],
+    "types": [
+      "Private tour"
+    ],
+    "itinerary": [],
+    "included": [],
+    "excluded": [],
+    "conditions": [],
+    "conditionsConfirmed": false,
+    "price": null,
+    "currency": null,
+    "images": []
+  },
+  {
+    "id": "axu-06",
+    "slug": "pergamon-tour-c",
+    "title": "Private Pergamon Tour from Izmir",
+    "summary": "Discover the archaeological heritage of Pergamon and Asklepion on a private full-day tour.",
+    "departure": "Izmir",
+    "duration": "Full day",
+    "durationGroup": "Full day",
+    "destinations": [
+      "Pergamon"
+    ],
+    "types": [
+      "Archaeology",
+      "Private tour"
+    ],
+    "itinerary": [
+      "Explore Pergamon: theatre, Trajan and Athena temples, library remains, ancient water systems and the altar area.",
+      "Visit Asklepion.",
+      "Lunch at a local restaurant."
+    ],
+    "included": [
+      "English-speaking guide; other languages on request.",
+      "Lunch and listed visits.",
+      "Pickup/transfer from central Izmir hotels or airport; source also offers Dikili Port and Kusadasi."
+    ],
+    "excluded": [
+      "Attraction admission."
+    ],
+    "conditions": [],
+    "conditionsConfirmed": false,
+    "price": null,
+    "currency": null,
+    "images": []
+  },
+  {
+    "id": "axu-07",
+    "slug": "didyma-priene-miletos-tour-from-kusadasi",
+    "title": "Didyma, Priene and Miletus Tour from Kusadasi",
+    "summary": "Explore three ancient sites associated with the history and intellectual life of Ionia.",
+    "departure": "Kusadasi",
+    "duration": "8 hours",
+    "durationGroup": "Full day",
+    "destinations": [
+      "Didyma",
+      "Miletus",
+      "Priene"
+    ],
+    "types": [
+      "Archaeology"
+    ],
+    "itinerary": [
+      "Visit Miletus.",
+      "Explore Priene.",
+      "Visit the Temple of Apollo at Didyma."
+    ],
+    "included": [
+      "English-speaking guide; other languages on request.",
+      "Local restaurant lunch and listed sightseeing.",
+      "Air-conditioned, non-smoking transport.",
+      "Site entrance tickets.",
+      "Pickup/return transfer is listed."
+    ],
+    "excluded": [],
+    "conditions": [],
+    "conditionsConfirmed": false,
+    "price": null,
+    "currency": null,
+    "images": []
+  },
+  {
+    "id": "axu-08",
+    "slug": "sirince-wine-tasting-relaxing-and-shopping-tour-c",
+    "title": "Sirince Wine Tasting and Shopping Tour from Izmir",
+    "summary": "Discover Sirince village, its traditional streets and local products, followed by a regional craft visit.",
+    "departure": "Izmir",
+    "duration": "5 hours",
+    "durationGroup": "Up to 6 hours",
+    "destinations": [
+      "Sirince"
+    ],
+    "types": [
+      "Wine & local crafts"
+    ],
+    "itinerary": [
+      "Pickup in Izmir and travel to Sirince; source estimates about one hour.",
+      "Explore village architecture, fruit wines and shops selling products such as soap and olive oil.",
+      "Visit one of the described craft venues: pottery, rug weaving or leather goods/model presentation.",
+      "Return to Izmir hotel or port."
+    ],
+    "included": [],
+    "excluded": [],
+    "conditions": [],
+    "conditionsConfirmed": false,
+    "price": null,
+    "currency": null,
+    "images": []
+  },
+  {
+    "id": "axu-09",
+    "slug": "seven-churches-tour",
+    "title": "Private Seven Churches of Revelation Tour",
+    "summary": "Follow the Seven Churches route through the Aegean region, combining biblical heritage, archaeology and overnight stays.",
+    "departure": "Izmir Airport",
+    "duration": "5 days / 4 nights",
+    "durationGroup": "Multi-day",
+    "destinations": [
+      "Ephesus",
+      "Pamukkale",
+      "Pergamon",
+      "Seven Churches route"
+    ],
+    "types": [
+      "Biblical heritage",
+      "Multi-day tour",
+      "Private tour"
+    ],
+    "itinerary": [
+      "Day 1: Izmir Airport arrival, hotel transfer and free time.",
+      "Day 2: Pergamon Acropolis, Asklepion, Red Basilica photo stop and Thyatira; panoramic Izmir visit and Clock Tower.",
+      "Day 3: Sardis, Philadelphia, Hierapolis and Laodicea; overnight in Pamukkale.",
+      "Day 4: House of the Virgin Mary, Ephesus and Basilica of St. John; overnight in Kusadasi or Selcuk.",
+      "Day 5: Breakfast and transfer to Izmir Airport."
+    ],
+    "included": [
+      "English-speaking guide; other languages on request.",
+      "Private air-conditioned, non-smoking transport and itinerary visits.",
+      "Four hotel nights: four-star in Izmir/Pamukkale, boutique in Kusadasi.",
+      "Three lunches and one dinner."
+    ],
+    "excluded": [
+      "Attraction admission."
+    ],
+    "conditions": [],
+    "conditionsConfirmed": false,
+    "price": null,
+    "currency": null,
+    "images": []
+  },
+  {
+    "id": "axu-10",
+    "slug": "philosophers-stone-tour-from-izmir",
+    "title": "Philosopher’s Stone: Didyma, Miletus and Priene from Izmir",
+    "summary": "Explore Didyma, Miletus and Priene through the theme of ancient thought and Ionian civilisation.",
+    "departure": "Izmir",
+    "duration": null,
+    "durationGroup": null,
+    "destinations": [
+      "Didyma",
+      "Miletus",
+      "Priene"
+    ],
+    "types": [
+      "Archaeology"
+    ],
+    "itinerary": [
+      "Visit Miletus.",
+      "Explore Priene.",
+      "Visit the Temple of Apollo at Didyma.",
+      "The source discusses Thales, Anaximander, Anaximenes, urban planning and the region’s intellectual heritage."
+    ],
+    "included": [],
+    "excluded": [],
+    "conditions": [],
+    "conditionsConfirmed": false,
+    "price": null,
+    "currency": null,
+    "images": []
+  }
+]
