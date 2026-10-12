@@ -1,14 +1,124 @@
 {
-  "verifiedOn": "2026-10-12",
-  "status": "Download blocked by network EACCES; no photographs installed or published.",
-  "photos": [
-    {"title":"Celsus Library", "file":"ephesus-celsus.jpg", "author":"Benh LIEU SONG", "sourceUrl":"https://commons.wikimedia.org/wiki/File:Ephesus_Celsus_Library_Fa%C3%A7ade.jpg", "originalUrl":"https://upload.wikimedia.org/wikipedia/commons/8/84/Ephesus_Celsus_Library_Fa%C3%A7ade.jpg", "license":"CC BY-SA 3.0", "licenseUrl":"https://creativecommons.org/licenses/by-sa/3.0/", "commercialUse":true, "shareAlike":true},
-    {"title":"House of the Virgin Mary", "file":"house-of-virgin-mary.jpg", "author":"Peter C in Toronto Canada", "sourceUrl":"https://commons.wikimedia.org/wiki/File:House_of_the_Virgin_Mary_in_Ephesus.jpg", "originalUrl":"https://upload.wikimedia.org/wikipedia/commons/4/4b/House_of_the_Virgin_Mary_in_Ephesus.jpg", "originalSource":"https://www.flickr.com/photos/pchiu/9361802076/", "license":"CC BY 2.0", "licenseUrl":"https://creativecommons.org/licenses/by/2.0/", "commercialUse":true, "shareAlike":false},
-    {"title":"Great Theatre of Ephesus", "file":"ephesus-great-theatre.jpg", "author":"Austrian Archaeological Institute", "sourceUrl":"https://commons.wikimedia.org/wiki/File:Great_Theatre,_Ephesus.jpg", "originalUrl":"https://upload.wikimedia.org/wikipedia/commons/7/78/Great_Theatre%2C_Ephesus.jpg", "license":"CC BY-SA 3.0", "licenseUrl":"https://creativecommons.org/licenses/by-sa/3.0/", "alternativeLicense":"CC0 1.0 also listed; CC BY-SA 3.0 selected for this use.", "commercialUse":true, "shareAlike":true},
-    {"title":"Temple of Artemis", "file":"temple-of-artemis.jpg", "author":"Ronan Reinart", "sourceUrl":"https://commons.wikimedia.org/wiki/File:Site_of_Temple_of_Artemis.jpg", "originalUrl":"https://upload.wikimedia.org/wikipedia/commons/c/cb/Site_of_Temple_of_Artemis.jpg", "license":"CC BY-SA 3.0", "licenseUrl":"https://creativecommons.org/licenses/by-sa/3.0/", "commercialUse":true, "shareAlike":true},
-    {"title":"Curetes Street", "file":"ephesus-curetes-street.jpg", "author":"Rita1234", "sourceUrl":"https://commons.wikimedia.org/wiki/File:Ephesus_Curetes_street.jpg", "originalUrl":"https://upload.wikimedia.org/wikipedia/commons/f/f1/Ephesus_Curetes_street.jpg", "license":"CC BY-SA 3.0", "licenseUrl":"https://creativecommons.org/licenses/by-sa/3.0/", "alternativeLicense":"GFDL also listed; CC BY-SA 3.0 selected for this use.", "commercialUse":true, "shareAlike":true}
-  ],
-  "attributionRequirements": "Credit title and author, link the Commons file page and selected license, identify modifications, and do not imply endorsement.",
-  "adaptationTerms": "Resizing and compression are permitted. Publish any adapted BY-SA photographs under CC BY-SA 3.0. BY 2.0 has no share-alike requirement. Image licenses apply to the photographs, not the entire website.",
-  "plannedChanges": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+    "verifiedOn":  "2026-10-12",
+    "status":  "Installed; validate gallery and commit before publishing.",
+    "photos":  [
+                   {
+                       "title":  "Celsus Library",
+                       "file":  "ephesus-celsus.jpg",
+                       "author":  "Benh LIEU SONG",
+                       "sourceUrl":  "https://commons.wikimedia.org/wiki/File:Ephesus_Celsus_Library_Fa%C3%A7ade.jpg",
+                       "originalUrl":  "https://upload.wikimedia.org/wikipedia/commons/8/84/Ephesus_Celsus_Library_Fa%C3%A7ade.jpg",
+                       "license":  "CC BY-SA 3.0",
+                       "licenseUrl":  "https://creativecommons.org/licenses/by-sa/3.0/",
+                       "commercialUse":  true,
+                       "shareAlike":  true
+                   },
+                   {
+                       "title":  "House of the Virgin Mary",
+                       "file":  "house-of-virgin-mary.jpg",
+                       "author":  "Peter C in Toronto Canada",
+                       "sourceUrl":  "https://commons.wikimedia.org/wiki/File:House_of_the_Virgin_Mary_in_Ephesus.jpg",
+                       "originalUrl":  "https://upload.wikimedia.org/wikipedia/commons/4/4b/House_of_the_Virgin_Mary_in_Ephesus.jpg",
+                       "originalSource":  "https://www.flickr.com/photos/pchiu/9361802076/",
+                       "license":  "CC BY 2.0",
+                       "licenseUrl":  "https://creativecommons.org/licenses/by/2.0/",
+                       "commercialUse":  true,
+                       "shareAlike":  false
+                   },
+                   {
+                       "title":  "Great Theatre of Ephesus",
+                       "file":  "ephesus-great-theatre.jpg",
+                       "author":  "Austrian Archaeological Institute",
+                       "sourceUrl":  "https://commons.wikimedia.org/wiki/File:Great_Theatre,_Ephesus.jpg",
+                       "originalUrl":  "https://upload.wikimedia.org/wikipedia/commons/7/78/Great_Theatre%2C_Ephesus.jpg",
+                       "license":  "CC BY-SA 3.0",
+                       "licenseUrl":  "https://creativecommons.org/licenses/by-sa/3.0/",
+                       "alternativeLicense":  "CC0 1.0 also listed; CC BY-SA 3.0 selected for this use.",
+                       "commercialUse":  true,
+                       "shareAlike":  true
+                   },
+                   {
+                       "title":  "Temple of Artemis",
+                       "file":  "temple-of-artemis.jpg",
+                       "author":  "Ronan Reinart",
+                       "sourceUrl":  "https://commons.wikimedia.org/wiki/File:Site_of_Temple_of_Artemis.jpg",
+                       "originalUrl":  "https://upload.wikimedia.org/wikipedia/commons/c/cb/Site_of_Temple_of_Artemis.jpg",
+                       "license":  "CC BY-SA 3.0",
+                       "licenseUrl":  "https://creativecommons.org/licenses/by-sa/3.0/",
+                       "commercialUse":  true,
+                       "shareAlike":  true
+                   },
+                   {
+                       "title":  "Curetes Street",
+                       "file":  "ephesus-curetes-street.jpg",
+                       "author":  "Rita1234",
+                       "sourceUrl":  "https://commons.wikimedia.org/wiki/File:Ephesus_Curetes_street.jpg",
+                       "originalUrl":  "https://upload.wikimedia.org/wikipedia/commons/f/f1/Ephesus_Curetes_street.jpg",
+                       "license":  "CC BY-SA 3.0",
+                       "licenseUrl":  "https://creativecommons.org/licenses/by-sa/3.0/",
+                       "alternativeLicense":  "GFDL also listed; CC BY-SA 3.0 selected for this use.",
+                       "commercialUse":  true,
+                       "shareAlike":  true
+                   }
+               ],
+    "attributionRequirements":  "Credit title and author, link the Commons file page and selected license, identify modifications, and do not imply endorsement.",
+    "adaptationTerms":  "Resizing and compression are permitted. Publish any adapted BY-SA photographs under CC BY-SA 3.0. BY 2.0 has no share-alike requirement. Image licenses apply to the photographs, not the entire website.",
+    "plannedChanges":  "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally.",
+    "assets":  [
+                   {
+                       "file":  "ephesus-celsus.jpg",
+                       "width":  1920,
+                       "height":  1488,
+                       "bytes":  761376,
+                       "originalSha256":  "25845FB2CBBA4B34C1B806BCD6A585B360C09672B7664DA746DAF0ECB57E160F",
+                       "sha256":  "12B52E2BF41E490D0247FB89788CC3528AF147CF6F057450F8EDFE7927EAFB42",
+                       "sourceUrl":  "https://commons.wikimedia.org/wiki/File:Ephesus_Celsus_Library_Fa%C3%A7ade.jpg",
+                       "originalUrl":  "https://upload.wikimedia.org/wikipedia/commons/8/84/Ephesus_Celsus_Library_Fa%C3%A7ade.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=original",
+                       "verifiedOn":  "2026-10-12T12:18:28.6164540Z"
+                   },
+                   {
+                       "file":  "house-of-virgin-mary.jpg",
+                       "width":  1920,
+                       "height":  1143,
+                       "bytes":  808850,
+                       "originalSha256":  "4586E5EB1306BB5115B3BBFD82BB29CF8FBF5AF29E1A3AA134F082D5BF3DABA8",
+                       "sha256":  "75E11C0896CC6BD34E87C84AFC1AF0F97356BB4A69AE9C80BFB61A9D82999F46",
+                       "sourceUrl":  "https://commons.wikimedia.org/wiki/File:House_of_the_Virgin_Mary_in_Ephesus.jpg",
+                       "originalUrl":  "https://upload.wikimedia.org/wikipedia/commons/4/4b/House_of_the_Virgin_Mary_in_Ephesus.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=original",
+                       "verifiedOn":  "2026-10-12T12:19:02.3899029Z"
+                   },
+                   {
+                       "file":  "ephesus-great-theatre.jpg",
+                       "width":  1920,
+                       "height":  1344,
+                       "bytes":  926146,
+                       "originalSha256":  "22BA76A5323F516423642CB6DA204AE7C60ECFB98A3AFB1CE4535AEA8DABDFFD",
+                       "sha256":  "252BA5EE80568CF2B946B95C7305BAB5B12AB8FE54C046DF450A66810A56616E",
+                       "sourceUrl":  "https://commons.wikimedia.org/wiki/File:Great_Theatre,_Ephesus.jpg",
+                       "originalUrl":  "https://upload.wikimedia.org/wikipedia/commons/7/78/Great_Theatre%2C_Ephesus.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=original",
+                       "verifiedOn":  "2026-10-12T12:19:10.4185940Z"
+                   },
+                   {
+                       "file":  "temple-of-artemis.jpg",
+                       "width":  1920,
+                       "height":  289,
+                       "bytes":  144611,
+                       "originalSha256":  "B93FFBF3FD7EE603E63D546D31AC2955386A433C6B137C2BEAB3580859F36E45",
+                       "sha256":  "1EED6A726354713FE345D10C120483A6427559B6B161DC466DD079802B8389E5",
+                       "sourceUrl":  "https://commons.wikimedia.org/wiki/File:Site_of_Temple_of_Artemis.jpg",
+                       "originalUrl":  "https://upload.wikimedia.org/wikipedia/commons/c/cb/Site_of_Temple_of_Artemis.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=original",
+                       "verifiedOn":  "2026-10-12T12:19:17.4763676Z"
+                   },
+                   {
+                       "file":  "ephesus-curetes-street.jpg",
+                       "width":  1920,
+                       "height":  1282,
+                       "bytes":  688724,
+                       "originalSha256":  "7ED519FE913D7DAA020668AF5C24622C393853CE162FFFB83BF8FE36766F17A4",
+                       "sha256":  "CE0B57B49BC9D77A108D50EE334F61D9E30F00CA5F6EE08452FF438A0994919E",
+                       "sourceUrl":  "https://commons.wikimedia.org/wiki/File:Ephesus_Curetes_street.jpg",
+                       "originalUrl":  "https://upload.wikimedia.org/wikipedia/commons/f/f1/Ephesus_Curetes_street.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=original",
+                       "verifiedOn":  "2026-10-12T12:19:25.0883335Z"
+                   }
+               ]
 }
