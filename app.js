@@ -85,6 +85,14 @@ function itineraryStop(item, index) {
  if(duration && typeof item === 'string') description = description.replace(/\s*Suggested visit:\s*.+$/, '');
  return `<li class="td-stop"><span>${String(index+1).padStart(2,'0')}</span><div><h3>${esc(title)}</h3><p>${esc(description)}</p>${duration ? `<p class="td-visit">Suggested visit: ${esc(duration)}</p>` : ''}${typeof item === 'object' && item.image ? tourPhoto(item.image,index,false,false) : ''}</div></li>`;
 }
+function photoCredits(photos) {
+ const credited = photos.filter(photo => photo.url && photo.credit);
+ if (!credited.length) return '';
+ return `<details class="td-photo-credits"><summary>Photo Credits</summary><ul>${credited.map(photo => {
+  const credit = photo.credit;
+  return `<li><strong>${esc(credit.title)}</strong> — ${esc(credit.author)} · <a href="${esc(credit.sourceUrl)}" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a> · <a href="${esc(credit.licenseUrl)}" target="_blank" rel="noopener noreferrer">${esc(credit.license)}</a><p>${esc(credit.changes)}${credit.shareAlike ? ` Adapted photograph distributed under ${esc(credit.license)}.` : ''}</p></li>`;
+ }).join('')}</ul></details>`;
+}
 function details(tour) {
  if (!tour) return `${heading('AXU TOURS','Tour not found.','This tour is not available.')}<div class="section"><a class="button" href="/tours">Browse tours</a></div>`;
  const photos = tourPhotos(tour);
@@ -102,6 +110,7 @@ function details(tour) {
  <section><h2>Important Information</h2>${listContent(important,'')}</section></div>
  <aside id="request-quote" class="td-quote"><p class="eyebrow">MAKE IT YOUR JOURNEY</p>${requestForm(tour)}<p class="td-note">Itinerary and price must be confirmed before booking.</p></aside></div>
  <section class="td-related"><div class="td-section-heading"><div><p class="eyebrow">KEEP EXPLORING</p><h2>Related Tours</h2></div></div><div class="tour-grid">${tours.filter(t=>t.id!==tour.id).sort((a,b)=>Number(b.destinations.some(d=>tour.destinations.includes(d)))-Number(a.destinations.some(d=>tour.destinations.includes(d)))).slice(0,3).map(card).join('')}</div></section>
+ ${photoCredits(photos)}
  <div class="td-overlay" hidden><section class="td-modal" role="dialog" aria-modal="true" aria-label="Tour photo gallery" tabindex="-1"><div class="td-modal-photo"></div><p class="td-modal-caption" aria-live="polite"></p><div class="td-modal-bar"><button type="button" data-gallery-action="prev" aria-label="Previous photo">← Previous</button><span class="td-counter"></span><button type="button" data-gallery-action="next" aria-label="Next photo">Next →</button><button type="button" data-gallery-action="close">Close</button></div></section></div></article>`;
 }
 function bindTourGallery() {
