@@ -2,32 +2,47 @@
   {
     "id": "axu-01",
     "slug": "ephesus-shore-excursion",
-    "title": "Ephesus Shore Excursion from Kusadasi",
-    "summary": "Explore the streets and monuments of Ephesus with a local guide, with return transport from Kusadasi.",
-    "departure": "Kusadasi",
-    "duration": "4 hours",
+    "title": "Private Ephesus Shore Excursion – On-Time Cruise Return",
+    "summary": "Discover the wonders of ancient Ephesus with AXU TOURS on a private shore excursion designed for cruise passengers arriving at Kusadasi Port.\n\nExplore the magnificent ruins of Ephesus, visit the House of the Virgin Mary and discover the Temple of Artemis with your private licensed guide.\n\nEnjoy comfortable transportation, a flexible itinerary tailored to your cruise schedule and a personalized experience without mandatory shopping stops.",
+    "departure": "Kusadasi Cruise Port",
+    "duration": "Approximately 4–6 Hours",
     "durationGroup": "Up to 6 hours",
     "destinations": [
       "Ephesus"
     ],
     "types": [
       "Archaeology",
+      "Private tour",
       "Shore excursion"
     ],
     "itinerary": [
-      "Kusadasi cruise port or hotel meeting point.",
-      "Ephesus: Roman baths, council house, Domitian and Hadrian temples, Trajan Fountain, Nike relief, Celsus Library, Curetes Street and Great Theatre.",
-      "Terrace Houses are listed in the source itinerary.",
-      "Return to Kusadasi."
+      "Kusadasi Cruise Port Pickup — Meet your private guide at the agreed meeting point near Kusadasi Cruise Port. Begin your journey in a comfortable, air-conditioned private vehicle.",
+      "House of the Virgin Mary — Visit the peaceful pilgrimage site on Mount Koressos, traditionally associated with the final years of the Virgin Mary. Suggested visit: 40–45 minutes.",
+      "Ancient City of Ephesus — Discover one of the most remarkable archaeological sites of the ancient Mediterranean world. Explore the Library of Celsus, Great Theatre, Curetes Street, Temple of Hadrian, Fountain of Trajan and other important archaeological remains. Your licensed guide will introduce you to the history, architecture and daily life of ancient Ephesus. Suggested visit: approximately 2 hours.",
+      "Temple of Artemis — Visit the remains of the Temple of Artemis, one of the Seven Wonders of the Ancient World. Suggested visit: 15–20 minutes.",
+      "Optional Experiences — Depending on available time and guest preferences, add the Terrace Houses, Basilica of St. John or a local lunch. Optional activities and entrance fees may require additional arrangements.",
+      "Return to Kusadasi Cruise Port — Enjoy a comfortable return transfer to the cruise port. The return time will be planned around the ship's scheduled departure. No mandatory carpet, leather or souvenir shopping stops."
     ],
     "included": [
-      "English-speaking guide; other languages on request.",
-      "Listed sightseeing and round-trip port transport.",
-      "Air-conditioned, non-smoking vehicle.",
-      "Priority ticket arrangements at Ephesus."
+      "Private guided sightseeing with a licensed local guide",
+      "Private air-conditioned transportation",
+      "Kusadasi Cruise Port pickup and drop-off",
+      "Personalized itinerary planning"
     ],
-    "excluded": [],
-    "conditions": [],
+    "excluded": [
+      "Archaeological site admission fees unless specifically stated in the quotation",
+      "Lunch and beverages",
+      "Personal expenses",
+      "Optional visits and additional admission tickets"
+    ],
+    "conditions": [
+      "Tour duration may vary according to cruise schedules, traffic and selected attractions.",
+      "Exact meeting instructions will be provided after reservation confirmation.",
+      "The final itinerary will be organized according to the cruise ship's docking and departure times.",
+      "Entrance fees, cancellation conditions and optional services must be confirmed before booking.",
+      "Return timing is planned around your ship's schedule; unforeseen circumstances may affect the journey, so an unconditional cruise-return guarantee is not offered.",
+      "Skip-the-line access is not included unless ticketing arrangements have been explicitly confirmed."
+    ],
     "conditionsConfirmed": false,
     "price": null,
     "currency": null,
