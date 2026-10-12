@@ -23,7 +23,7 @@ function card(tour) {
  return `<article class="tour-card"><a class="cover-link" href="${link(tour)}" aria-label="Explore ${esc(tour.title)}">${cover(tour)}</a>
  <div class="card-body"><p class="eyebrow">${esc(tour.destinations.join(' / '))}</p><h3><a href="${link(tour)}">${esc(tour.title)}</a></h3>
  <p class="card-summary">${esc(tour.summary)}</p><div class="card-meta"><span>From ${esc(tour.departure)}</span>${tour.duration ? `<span>${esc(tour.duration)}</span>` : ''}</div>
- <div class="card-bottom"><span>Request a Quote</span><a href="${link(tour)}">View tour</a></div></div></article>`;
+ <div class="card-bottom"><a class="quote-link" href="${link(tour)}#request-quote">Request a Quote</a><a href="${link(tour)}">View tour</a></div></div></article>`;
 }
 const heading = (kicker, title, copy) => `<div class="page-heading"><p class="eyebrow">${kicker}</p><h1>${title}</h1><p>${copy}</p></div>`;
 function home() {
@@ -62,7 +62,59 @@ function setupFilters(path) {
  form.addEventListener('reset',()=>{setTimeout(update,0);});
  update();
 }
-function requestForm() { return '<section class="quote-form"><div class="form-intro"><p class="eyebrow">TEST VERSION</p><h2>Request a Quote</h2><p>Quote requests are unavailable in this test version. No booking requests or contact details are collected.</p></div><button class="button full" type="button" disabled>Quote requests unavailable</button></section>'; }
+const WHATSAPP_URL = 'https://wa.me/905367040944';
+const todayDate = () => { const now = new Date(); return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`; };
+function requestForm(tour) {
+ return `<form id="quote-form" class="quote-form" ${tour ? `data-tour-id="${esc(tour.id)}"` : ''}>
+ <div class="form-intro"><h2>Request a Quote</h2><p>Prepare your request for AXU TOURS on WhatsApp. You will review the message and send it yourself.</p></div>
+ ${tour ? `<label class="full">Tour Name<textarea name="tourName" rows="3" readonly>${esc(tour.title)}</textarea></label>` : `<label class="full">Tour Name (required)<select name="tourId" required><option value="">Select a tour</option>${tours.map(item=>`<option value="${esc(item.id)}">${esc(item.title)}</option>`).join('')}</select></label>`}
+ <label class="full">Full Name (required)<input name="fullName" autocomplete="name" required maxlength="120"></label>
+ <label>Tour Date (required)<input name="tourDate" type="date" min="${todayDate()}" required></label>
+ <label>Number of Guests (required)<input name="guests" type="number" min="1" step="1" inputmode="numeric" required></label>
+ <label class="full">Cruise Ship / Hotel Name (optional)<input name="shipOrHotel" maxlength="200"></label>
+ <label class="full">Additional Notes (optional)<textarea name="notes" rows="3" maxlength="1500"></textarea></label>
+ <p class="full quote-privacy">Your details are used only to prepare this WhatsApp message. This website does not save your request. Availability and pricing must be confirmed by AXU TOURS.</p>
+ <button class="button full whatsapp-button" type="submit"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M21 11.5a9 9 0 0 1-13.3 7.9L3 21l1.6-4.7A9 9 0 1 1 21 11.5Z"/><path d="m8 7 2 3-1 1c1 2 2 3 4 4l1-1 3 2c-1 2-3 2-5 1-3-1-6-4-6-7 0-1 1-2 2-3Z"/></svg>Send via WhatsApp</button>
+ <p id="quote-status" class="form-status full" role="status" aria-live="polite"></p>
+ <a id="whatsapp-fallback" class="text-link full" target="_blank" rel="noopener noreferrer" hidden>Open your prepared message in WhatsApp</a>
+ </form>`;
+}
+function whatsappMessage(tour, values) {
+ const [year, month, day] = values.tourDate.split('-').map(Number);
+ const date = new Date(year, month-1, day, 12);
+ const formattedDate = new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'long',year:'numeric'}).format(date);
+ return ['Hello AXU TOURS,', '', 'I would like to request a quote.', '', `Tour: ${tour.title}`, `Name: ${values.fullName.trim()}`, `Date: ${formattedDate}`, `Guests: ${values.guests}`, ...(values.shipOrHotel.trim() ? [`Cruise Ship / Hotel: ${values.shipOrHotel.trim()}`] : []), ...(values.notes.trim() ? [`Additional Notes: ${values.notes.trim()}`] : []), '', 'Please send me availability and pricing information.'].join('\n');
+}
+function bindQuoteForm() {
+ const form = document.querySelector('#quote-form');
+ if (!form) return;
+ const status = form.querySelector('#quote-status'), fallback = form.querySelector('#whatsapp-fallback');
+ const clearPreparedMessage = () => { status.textContent='';fallback.hidden=true;fallback.removeAttribute('href'); };
+ const validate = () => {
+  form.elements.fullName.setCustomValidity(form.elements.fullName.value.trim() ? '' : 'Please enter your full name.');
+  const guests = Number(form.elements.guests.value);
+  form.elements.guests.setCustomValidity(Number.isSafeInteger(guests) && guests>0 ? '' : 'Please enter a whole number of guests greater than zero.');
+  form.elements.tourDate.min = todayDate();
+  const dateValue=form.elements.tourDate.value, date=new Date(`${dateValue}T12:00:00`);
+  const [year,month,day]=dateValue.split('-').map(Number);
+  const validDate=/^\d{4}-\d{2}-\d{2}$/.test(dateValue) && date.getFullYear()===year && date.getMonth()+1===month && date.getDate()===day && dateValue>=form.elements.tourDate.min;
+  form.elements.tourDate.setCustomValidity(validDate ? '' : 'Please choose today or a future tour date.');
+ };
+ form.addEventListener('input',()=>{clearPreparedMessage();validate();});
+ form.addEventListener('change',()=>{clearPreparedMessage();validate();});
+ form.addEventListener('submit',event=>{
+  event.preventDefault();clearPreparedMessage();validate();
+  const tour = tours.find(item=>item.id===(form.dataset.tourId || form.elements.tourId?.value));
+  if (!form.reportValidity()) return;
+  if (!tour) { status.textContent='Please select an available tour.';return; }
+  const values = Object.fromEntries(new FormData(form));
+  const url = `${WHATSAPP_URL}?text=${encodeURIComponent(whatsappMessage(tour,values))}`;
+  fallback.href=url;fallback.hidden=false;
+  status.textContent='Your request is prepared. Complete sending in WhatsApp. If it did not open, use the link below.';
+  window.open(url,'_blank','noopener,noreferrer');
+ });
+ form.addEventListener('reset',()=>{clearPreparedMessage();for(const field of [form.elements.fullName,form.elements.guests,form.elements.tourDate])field.setCustomValidity('');});
+}
 function tourPhotos(tour) {
  const photos = (tour.gallery?.length ? tour.gallery : tour.images || []).map((photo, i) => ({...tour.images?.[i], ...photo, url: photo.url || tour.images?.[i]?.url, alt: photo.alt || tour.images?.[i]?.alt, caption: photo.caption || photo.alt || `${tour.destinations.join(' / ')} ${i+1}`}));
  if(tour.images?.length > photos.length) photos.push(...tour.images.slice(photos.length).map(photo=>({...photo,caption:photo.alt || tour.title})));
@@ -150,7 +202,7 @@ function about() {
 }
 function contact() {
  return `${heading('LET’S PLAN YOUR VISIT','Your journey starts here.','Tell us which tour interests you and when you would like to travel.')}
- <section class="contact-page section"><div><p class="eyebrow">REQUEST A QUOTE</p><h2>A few details.<br>A journey to look forward to.</h2><p>Choose your tour and share your preferred date and party size. Add your hotel or ship details if you have them.</p><p>The itinerary and price will need to be confirmed before a booking can be made.</p>${hostedTest ? '<p class="detail-notice">Test version: quote requests are currently unavailable.</p>' : preview ? '<p class="detail-notice">This local preview stores requests on this computer. Requests are not sent to AXU.</p>' : ''}</div><div>${tours.length ? requestForm() : '<p>Quote requests will open when tours are available.</p>'}</div></section>`;
+ <section class="contact-page section"><div><p class="eyebrow">REQUEST A QUOTE</p><h2>A few details.<br>A journey to look forward to.</h2><p>Choose your tour and share your preferred date and party size. Add your hotel or ship details if you have them.</p><p>The itinerary and price will need to be confirmed before a booking can be made.</p><p>Continue on WhatsApp to review and send your request to AXU TOURS.</p></div><div>${tours.length ? requestForm() : '<p>Quote requests will open when tours are available.</p>'}</div></section>`;
 }
 function bindImages() {
  document.querySelectorAll('.cover img').forEach(img=>{img.addEventListener('error',()=>img.remove(),{once:true});});
@@ -169,6 +221,8 @@ function render() {
  main.querySelectorAll('a[href^="/"]').forEach(a=>{const href=a.getAttribute('href');if(!href.startsWith(BASE+'/')){const [path,query]=href.split('?');a.setAttribute('href',BASE+path+(path.endsWith('/')?'':'/')+(query?'?'+query:''));}});
  bindImages();
  bindTourGallery();
+ bindQuoteForm();
+ if(location.hash==='#request-quote') requestAnimationFrame(()=>document.querySelector('#request-quote')?.scrollIntoView());
 }
 document.querySelector('.menu-toggle').addEventListener('click',event=>{const open=event.currentTarget.getAttribute('aria-expanded')!=='true';event.currentTarget.setAttribute('aria-expanded',open);document.querySelector('#navigation').classList.toggle('open',open);});
 async function start() {
@@ -176,7 +230,7 @@ async function start() {
   const response=await fetch(`${BASE}/catalogue.json`);if(!response.ok)throw new Error('Tours could not be loaded.');
   const data=await response.json();tours=data;
   const bar=document.querySelector('#preview-bar');bar.hidden=!preview;
-  if(hostedTest)bar.innerHTML='TEST VERSION <span>Draft itineraries · Quote requests unavailable</span>';
+  if(hostedTest)bar.innerHTML='TEST VERSION <span>Draft itineraries · Quotes via WhatsApp</span>';
   render();
  } catch(error) {main.innerHTML=`<section class="section empty"><h1>We couldn’t load the tours.</h1><p>Please try again in a moment.</p><button class="button" id="retry">Try again</button></section>`;document.querySelector('#retry').addEventListener('click',start);}
 }
