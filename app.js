@@ -63,26 +63,77 @@ function setupFilters(path) {
  update();
 }
 function requestForm() { return '<section class="quote-form"><div class="form-intro"><p class="eyebrow">TEST VERSION</p><h2>Request a Quote</h2><p>Quote requests are unavailable in this test version. No booking requests or contact details are collected.</p></div><button class="button full" type="button" disabled>Quote requests unavailable</button></section>'; }
-function ephesusHighlights() {
- return listContent(['Private Ephesus Experience', 'Licensed Local Tour Guide', 'Comfortable Private Transportation', 'Flexible Cruise-Friendly Itinerary', 'No Mandatory Shopping Stops', "Return Planned Around Your Ship's Schedule"], '');
+function tourPhotos(tour) {
+ const photos = (tour.gallery?.length ? tour.gallery : tour.images || []).map((photo, i) => ({...tour.images?.[i], ...photo, url: photo.url || tour.images?.[i]?.url, alt: photo.alt || tour.images?.[i]?.alt, caption: photo.caption || photo.alt || `${tour.destinations.join(' / ')} ${i+1}`}));
+ if(tour.images?.length > photos.length) photos.push(...tour.images.slice(photos.length).map(photo=>({...photo,caption:photo.alt || tour.title})));
+ while (photos.length < 5) photos.push({caption: `${tour.destinations.join(' / ')} / Tour view ${photos.length+1}`});
+ return photos;
 }
-function ephesusStop(item) {
- const [title, ...description] = item.split(' \u2014 ');
- return '<div><h3>'+esc(title)+'</h3><p>'+esc(description.join(' \u2014 '))+'</p></div>';
+function tourPhoto(photo, index, hero = false, interactive = true) {
+ const label = `PHOTO ${String(index+1).padStart(2,'0')}`;
+ const inside = `<span class="td-photo-label"><strong>${label}</strong><small>${esc(photo.caption)}</small></span>`;
+ const image = photo.url ? `<img src="${esc(photo.url)}" alt="${esc(photo.alt || photo.caption)}" loading="${hero ? 'eager' : 'lazy'}" decoding="async" ${hero ? 'fetchpriority="high"' : ''}>` : '';
+ return `<${interactive ? 'button' : 'div'} class="td-photo${hero ? ' td-hero-photo' : ''}" ${interactive ? `type="button" data-photo="${index}" aria-label="Open ${esc(photo.caption)} in photo gallery"` : ''}>${inside}${image}</${interactive ? 'button' : 'div'}>`;
+}
+function itineraryStop(item, index) {
+ const text = typeof item === 'string' ? visitorWording(item) : item.description || '';
+ const separator = text.indexOf(' — ');
+ const day = text.match(/^(Day \d+):\s*/);
+ const title = typeof item === 'object' && item.title ? item.title : separator >= 0 ? text.slice(0, separator) : day ? day[1] : `Stop ${index+1}`;
+ let description = separator >= 0 ? text.slice(separator+3) : day ? text.slice(day[0].length) : text;
+ const duration = typeof item === 'object' && item.duration ? item.duration : description.match(/Suggested visit:\s*(.+)$/)?.[1];
+ if(duration && typeof item === 'string') description = description.replace(/\s*Suggested visit:\s*.+$/, '');
+ return `<li class="td-stop"><span>${String(index+1).padStart(2,'0')}</span><div><h3>${esc(title)}</h3><p>${esc(description)}</p>${duration ? `<p class="td-visit">Suggested visit: ${esc(duration)}</p>` : ''}${typeof item === 'object' && item.image ? tourPhoto(item.image,index,false,false) : ''}</div></li>`;
 }
 function details(tour) {
  if (!tour) return `${heading('AXU TOURS','Tour not found.','This tour is not available.')}<div class="section"><a class="button" href="/tours">Browse tours</a></div>`;
- const ephesus = tour.id === 'axu-01';
- return `<section class="detail-heading"><a class="text-link" href="/tours">All tours</a><p class="eyebrow">${esc(ephesus ? 'Ephesus, T\u00fcrkiye' : tour.destinations.join(' / '))}</p><h1>${esc(tour.title)}</h1><p>${ephesus ? tour.summary.split("\n\n").map(esc).join("</p><p>") : esc(tour.summary)}</p>${ephesus ? '<a class="button" href="#request-quote">Request a Quote</a>' : ''}<div class="detail-meta"><span><small>DEPARTURE</small>${esc(tour.departure)}</span>${tour.duration ? `<span><small>DURATION</small>${esc(tour.duration)}</span>`:''}<span><small>PRICE</small>Request a Quote</span>${ephesus ? '<span><small>TOUR TYPE</small>Private Shore Excursion</span><span><small>LANGUAGE</small>English; other languages on request</span>' : ''}</div></section>
- <section class="detail-cover section" aria-label="Tour gallery">${cover(tour,true)}${tour.images.length>1 ? `<div class="gallery">${tour.images.slice(1).map(i=>`<img src="${esc(i.url)}" alt="${esc(i.alt)}" loading="lazy">`).join('')}</div>` : ''}</section>
- <section class="detail-layout section"><div class="detail-content"><p class="detail-notice">${ephesus ? 'Your private itinerary and return time are planned around your cruise schedule. Final arrangements will be confirmed with your quote.' : 'This itinerary is being prepared. The final programme, inclusions and travel arrangements will be confirmed with your quote.'}</p>
- ${ephesus ? `<section><h2>Tour Highlights</h2>${ephesusHighlights()}</section>` : ''}
- <section><p class="eyebrow">THE JOURNEY</p><h2>${tour.id==='axu-09' ? 'Your day-by-day itinerary' : ephesus ? 'Detailed Itinerary' : 'Itinerary'}</h2>${tour.itinerary.length ? `<ol class="itinerary">${tour.itinerary.map((item,i)=>`<li><span class="step-number">${String(i+1).padStart(2,'0')}</span>${ephesus ? ephesusStop(item) : `<p>${esc(visitorWording(item))}</p>`}</li>`).join('')}</ol>` : '<p>The detailed itinerary will be confirmed with your quote.</p>'}</section>
- <section><h2>What to expect</h2><div class="inclusions"><div><h3>${ephesus ? 'Included Services' : 'Included in the draft itinerary'}</h3>${listContent(tour.included,'Inclusions will be confirmed with your quote.')}</div><div><h3>${ephesus ? 'Excluded Services' : 'Not included in the draft itinerary'}</h3>${listContent(tour.excluded,'Exclusions will be confirmed with your quote.')}</div></div></section>
- <section><h2>Meeting & departure</h2><p>Departure: ${esc(tour.departure)}.</p><p>Your exact meeting point and pickup time will be confirmed with your quote.</p></section>
- <section><h2>${ephesus ? 'Important Information' : 'Before you travel'}</h2>${(ephesus || tour.conditionsConfirmed) && tour.conditions.length ? listContent(tour.conditions,'') : '<p>Please request confirmation of cancellation terms, admission arrangements and any accessibility requirements before booking.</p>'}</section></div><aside id="request-quote">${requestForm(tour)}</aside></section>
- <section class="section"><div class="section-heading"><div><p class="eyebrow">KEEP EXPLORING</p><h2>More journeys to consider</h2></div></div><div class="tour-grid">${tours.filter(t=>t.id!==tour.id).slice(0,3).map(card).join('')}</div></section>`;
+ const photos = tourPhotos(tour);
+ const important = [...tour.conditions];
+ important.push(`Departure: ${tour.departure}. Your exact meeting point and pickup time will be confirmed with your quote.`);
+ if (!tour.conditionsConfirmed) important.push('Please request confirmation of cancellation terms, admission arrangements and any accessibility requirements before booking.');
+ return `<article class="tour-detail" data-tour-id="${esc(tour.id)}">
+ <div class="td-crumb"><a href="/tours">All Tours</a> / ${esc(tour.destinations.join(' / '))}</div>
+ <section class="td-hero"><div><p class="eyebrow">${esc(tour.types.join(' · '))} · ${esc(tour.departure)}</p><h1>${esc(tour.title)}</h1>${tour.summary.split('\n\n').map(p=>`<p class="td-intro">${esc(p)}</p>`).join('')}<a class="button" href="#request-quote">Request a Quote</a></div>${tourPhoto(photos[0],0,true)}</section>
+ <section class="td-stats" aria-label="Tour information">${[['Departure',tour.departure],['Duration',tour.duration || 'Confirm with your quote'],['Tour Type',tour.types.join(' / ')],['Language',tour.language || 'English; other languages on request']].map(([label,value])=>`<div><small>${label}</small><b>${esc(value)}</b></div>`).join('')}</section>
+ <section id="tour-gallery"><div class="td-section-heading"><div><p class="eyebrow">THE EXPERIENCE IN PICTURES</p><h2>Explore the journey</h2></div><span>Click any photo to view gallery</span></div><div class="td-gallery">${tourPhoto(photos[0],0)}<div class="td-gallery-grid">${photos.slice(1,5).map((p,i)=>tourPhoto(p,i+1)).join('')}</div></div>${photos.some(p=>!p.url) ? '<p class="td-note">Labeled placeholders mark photographs to be added. They are not destination photographs.</p>' : ''}</section>
+ <section class="td-highlights"><div class="td-section-heading"><h2>Tour Highlights</h2></div><div class="td-features">${(tour.highlights || [...tour.types,...tour.destinations]).map(h=>`<div><b>${esc(h)}</b></div>`).join('')}</div></section>
+ <div class="td-columns"><div class="td-content"><section id="tour-itinerary"><p class="eyebrow">THE JOURNEY</p><h2>Detailed Itinerary</h2><p class="td-note">The final programme, inclusions and travel arrangements will be confirmed with your quote.</p>${tour.itinerary.length ? `<ol class="td-itinerary">${tour.itinerary.map(itineraryStop).join('')}</ol>` : '<p>The detailed itinerary will be confirmed with your quote.</p>'}</section>
+ <section><h2>Included / Excluded Services</h2><div class="td-inclusions"><div><h3>Included Services</h3>${listContent(tour.included,'Inclusions will be confirmed with your quote.')}</div><div><h3>Excluded Services</h3>${listContent(tour.excluded,'Exclusions will be confirmed with your quote.')}</div></div></section>
+ <section><h2>Important Information</h2>${listContent(important,'')}</section></div>
+ <aside id="request-quote" class="td-quote"><p class="eyebrow">MAKE IT YOUR JOURNEY</p>${requestForm(tour)}<p class="td-note">Itinerary and price must be confirmed before booking.</p></aside></div>
+ <section class="td-related"><div class="td-section-heading"><div><p class="eyebrow">KEEP EXPLORING</p><h2>Related Tours</h2></div></div><div class="tour-grid">${tours.filter(t=>t.id!==tour.id).sort((a,b)=>Number(b.destinations.some(d=>tour.destinations.includes(d)))-Number(a.destinations.some(d=>tour.destinations.includes(d)))).slice(0,3).map(card).join('')}</div></section>
+ <div class="td-overlay" hidden><section class="td-modal" role="dialog" aria-modal="true" aria-label="Tour photo gallery" tabindex="-1"><div class="td-modal-photo"></div><p class="td-modal-caption" aria-live="polite"></p><div class="td-modal-bar"><button type="button" data-gallery-action="prev" aria-label="Previous photo">← Previous</button><span class="td-counter"></span><button type="button" data-gallery-action="next" aria-label="Next photo">Next →</button><button type="button" data-gallery-action="close">Close</button></div></section></div></article>`;
 }
+function bindTourGallery() {
+ const page = main.querySelector('.tour-detail');
+ if (!page) return;
+ const tour = tours.find(t=>t.id===page.dataset.tourId), photos = tourPhotos(tour);
+ const overlay = page.querySelector('.td-overlay'), modal = overlay.querySelector('.td-modal');
+ let active = 0, opener, touchStart, previousOverflow;
+ const fallback = container => container.querySelectorAll('.td-photo img').forEach(img=>img.addEventListener('error',()=>img.remove(),{once:true}));
+ const show = index => {
+  active = (index+photos.length)%photos.length;
+  overlay.querySelector('.td-modal-photo').innerHTML = tourPhoto(photos[active],active,true,false);
+  overlay.querySelector('.td-modal-caption').textContent = photos[active].caption;
+  overlay.querySelector('.td-counter').textContent = `${active+1} / ${photos.length}`;
+  fallback(overlay);
+ };
+ const close = () => {overlay.hidden=true;document.body.style.overflow=previousOverflow;opener?.focus();};
+ page.querySelectorAll('[data-photo]').forEach(button=>button.addEventListener('click',()=>{
+  opener=button;previousOverflow=document.body.style.overflow;show(Number(button.dataset.photo));overlay.hidden=false;document.body.style.overflow='hidden';modal.querySelector('[data-gallery-action="close"]').focus();
+ }));
+ overlay.addEventListener('click',event=>{const action=event.target.closest('[data-gallery-action]')?.dataset.galleryAction;if(action==='close'||event.target===overlay)close();else if(action==='prev')show(active-1);else if(action==='next')show(active+1);});
+ overlay.addEventListener('keydown',event=>{
+  if(event.key==='Escape'){event.preventDefault();close();}
+  if(event.key==='ArrowLeft'){event.preventDefault();show(active-1);}
+  if(event.key==='ArrowRight'){event.preventDefault();show(active+1);}
+  if(event.key==='Tab'){const buttons=[...modal.querySelectorAll('button')];const first=buttons[0],last=buttons.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}}
+ });
+ overlay.addEventListener('touchstart',event=>{touchStart={x:event.touches[0].clientX,y:event.touches[0].clientY};},{passive:true});
+ overlay.addEventListener('touchend',event=>{if(!touchStart)return;const dx=event.changedTouches[0].clientX-touchStart.x,dy=event.changedTouches[0].clientY-touchStart.y;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy))show(active+(dx<0?1:-1));touchStart=null;},{passive:true});
+ fallback(page);
+}
+
 function listContent(items,fallback) { return items.length ? `<ul>${items.map(i=>`<li>${esc(visitorWording(i))}</li>`).join('')}</ul>` : `<p>${fallback}</p>`; }
 function about() {
  return `${heading('ABOUT AXU TOURS','The Aegean, at your own pace.','A collection of journeys through Türkiye’s ancient places and living culture.')}
@@ -108,6 +159,7 @@ function render() {
  document.querySelectorAll('nav a').forEach(a=>{if(a.getAttribute('href').replace(BASE,'').replace(/\/$/,'')===(path==='/'?'':path))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
  main.querySelectorAll('a[href^="/"]').forEach(a=>{const href=a.getAttribute('href');if(!href.startsWith(BASE+'/')){const [path,query]=href.split('?');a.setAttribute('href',BASE+path+(path.endsWith('/')?'':'/')+(query?'?'+query:''));}});
  bindImages();
+ bindTourGallery();
 }
 document.querySelector('.menu-toggle').addEventListener('click',event=>{const open=event.currentTarget.getAttribute('aria-expanded')!=='true';event.currentTarget.setAttribute('aria-expanded',open);document.querySelector('#navigation').classList.toggle('open',open);});
 async function start() {

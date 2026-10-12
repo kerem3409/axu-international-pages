@@ -46,7 +46,32 @@
     "conditionsConfirmed": false,
     "price": null,
     "currency": null,
-    "images": []
+    "images": [],
+    "gallery": [
+      {
+        "caption": "Ephesus Ancient City"
+      },
+      {
+        "caption": "House of the Virgin Mary"
+      },
+      {
+        "caption": "Great Theatre"
+      },
+      {
+        "caption": "Temple of Artemis"
+      },
+      {
+        "caption": "Curetes Street"
+      }
+    ],
+    "highlights": [
+      "Private Ephesus Experience",
+      "Licensed Local Tour Guide",
+      "Comfortable Private Transportation",
+      "Flexible Cruise-Friendly Itinerary",
+      "No Mandatory Shopping Stops",
+      "Return Planned Around Your Ship's Schedule"
+    ]
   },
   {
     "id": "axu-02",
@@ -83,7 +108,30 @@
     "conditionsConfirmed": false,
     "price": null,
     "currency": null,
-    "images": []
+    "images": [],
+    "gallery": [
+      {
+        "caption": "Ephesus Ancient City"
+      },
+      {
+        "caption": "House of the Virgin Mary"
+      },
+      {
+        "caption": "Library of Celsus"
+      },
+      {
+        "caption": "Temple of Artemis"
+      },
+      {
+        "caption": "Great Theatre"
+      }
+    ],
+    "highlights": [
+      "Archaeology",
+      "Private tour",
+      "Shore excursion",
+      "Ephesus"
+    ]
   },
   {
     "id": "axu-03",
@@ -120,7 +168,30 @@
     "conditionsConfirmed": false,
     "price": null,
     "currency": null,
-    "images": []
+    "images": [],
+    "gallery": [
+      {
+        "caption": "Ephesus Ancient City"
+      },
+      {
+        "caption": "House of the Virgin Mary"
+      },
+      {
+        "caption": "Basilica of St. John"
+      },
+      {
+        "caption": "Temple of Artemis"
+      },
+      {
+        "caption": "Library of Celsus"
+      }
+    ],
+    "highlights": [
+      "Biblical heritage",
+      "Private tour",
+      "Shore excursion",
+      "Ephesus"
+    ]
   },
   {
     "id": "axu-04",
@@ -158,7 +229,29 @@
     "conditionsConfirmed": false,
     "price": null,
     "currency": null,
-    "images": []
+    "images": [],
+    "gallery": [
+      {
+        "caption": "Ephesus Ancient City"
+      },
+      {
+        "caption": "Terrace Houses"
+      },
+      {
+        "caption": "Temple of Artemis"
+      },
+      {
+        "caption": "Ephesus Museum"
+      },
+      {
+        "caption": "Library of Celsus"
+      }
+    ],
+    "highlights": [
+      "Archaeology",
+      "Day tour",
+      "Ephesus"
+    ]
   },
   {
     "id": "axu-05",
@@ -181,7 +274,28 @@
     "conditionsConfirmed": false,
     "price": null,
     "currency": null,
-    "images": []
+    "images": [],
+    "gallery": [
+      {
+        "caption": "Pamukkale"
+      },
+      {
+        "caption": "Pamukkale Terrace Views"
+      },
+      {
+        "caption": "Pamukkale Landscape"
+      },
+      {
+        "caption": "Pamukkale Details"
+      },
+      {
+        "caption": "Pamukkale Panorama"
+      }
+    ],
+    "highlights": [
+      "Private tour",
+      "Pamukkale"
+    ]
   },
   {
     "id": "axu-06",
@@ -215,7 +329,29 @@
     "conditionsConfirmed": false,
     "price": null,
     "currency": null,
-    "images": []
+    "images": [],
+    "gallery": [
+      {
+        "caption": "Pergamon Acropolis"
+      },
+      {
+        "caption": "Pergamon Theatre"
+      },
+      {
+        "caption": "Temple of Trajan"
+      },
+      {
+        "caption": "Asklepion"
+      },
+      {
+        "caption": "Pergamon Library Remains"
+      }
+    ],
+    "highlights": [
+      "Archaeology",
+      "Private tour",
+      "Pergamon"
+    ]
   },
   {
     "id": "axu-07",
@@ -250,7 +386,30 @@
     "conditionsConfirmed": false,
     "price": null,
     "currency": null,
-    "images": []
+    "images": [],
+    "gallery": [
+      {
+        "caption": "Miletus"
+      },
+      {
+        "caption": "Priene"
+      },
+      {
+        "caption": "Temple of Apollo at Didyma"
+      },
+      {
+        "caption": "Miletus Archaeological Remains"
+      },
+      {
+        "caption": "Priene Archaeological Remains"
+      }
+    ],
+    "highlights": [
+      "Archaeology",
+      "Didyma",
+      "Miletus",
+      "Priene"
+    ]
   },
   {
     "id": "axu-08",
@@ -278,7 +437,28 @@
     "conditionsConfirmed": false,
     "price": null,
     "currency": null,
-    "images": []
+    "images": [],
+    "gallery": [
+      {
+        "caption": "Sirince Village"
+      },
+      {
+        "caption": "Village Architecture"
+      },
+      {
+        "caption": "Fruit Wines"
+      },
+      {
+        "caption": "Village Shops"
+      },
+      {
+        "caption": "Sirince Streets"
+      }
+    ],
+    "highlights": [
+      "Wine & local crafts",
+      "Sirince"
+    ]
   },
   {
     "id": "axu-09",
@@ -319,7 +499,33 @@
     "conditionsConfirmed": false,
     "price": null,
     "currency": null,
-    "images": []
+    "images": [],
+    "gallery": [
+      {
+        "caption": "Pergamon Acropolis"
+      },
+      {
+        "caption": "Sardis"
+      },
+      {
+        "caption": "Laodicea"
+      },
+      {
+        "caption": "Ephesus Ancient City"
+      },
+      {
+        "caption": "Basilica of St. John"
+      }
+    ],
+    "highlights": [
+      "Biblical heritage",
+      "Multi-day tour",
+      "Private tour",
+      "Ephesus",
+      "Pamukkale",
+      "Pergamon",
+      "Seven Churches route"
+    ]
   },
   {
     "id": "axu-10",
@@ -349,6 +555,29 @@
     "conditionsConfirmed": false,
     "price": null,
     "currency": null,
-    "images": []
+    "images": [],
+    "gallery": [
+      {
+        "caption": "Miletus"
+      },
+      {
+        "caption": "Priene"
+      },
+      {
+        "caption": "Temple of Apollo at Didyma"
+      },
+      {
+        "caption": "Miletus Archaeological Remains"
+      },
+      {
+        "caption": "Priene Archaeological Remains"
+      }
+    ],
+    "highlights": [
+      "Archaeology",
+      "Didyma",
+      "Miletus",
+      "Priene"
+    ]
   }
 ]
