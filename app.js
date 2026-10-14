@@ -1,5 +1,20 @@
 const BASE="/axu-international-pages";
 const main = document.querySelector('#main');
+async function showRelease() {
+ try {
+  const response = await fetch(`${BASE}/version.json`, {cache:'no-store'});
+  if (!response.ok) return;
+  const release = await response.json();
+  if (!/^1\.0\.\d+\+[a-f0-9]{7}$/.test(release.version) || !/^\d{2}\.\d{2}\.\d{4}$/.test(release.updated)) return;
+  const footer = document.querySelector('footer');
+  if (!footer) return;
+  const info = document.createElement('small');
+  info.className = 'release-info';
+  info.textContent = `Version ${release.version} · Updated ${release.updated}`;
+  footer.append(info);
+ } catch { /* Release metadata must not interrupt the tour interface. */ }
+}
+showRelease();
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 let tours = [], preview = true; const hostedTest = true;
 const link = tour => `${BASE}/tours/${encodeURIComponent(tour.slug)}/`;

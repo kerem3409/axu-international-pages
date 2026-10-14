@@ -16,9 +16,10 @@ const formattedDate = new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'long
 async function page(route) {
  const w = new Window({url:`https://kerem3409.github.io/axu-international-pages/${route}`,settings:{disableCSSFileLoading:true,disableJavaScriptFileLoading:true}});
  w.document.write(read(route+'index.html'));
- const requests=[];w.fetch=async url=>{requests.push(url);assert.equal(url,'/axu-international-pages/catalogue.json');return {ok:true,json:async()=>catalogue};};
+ const requests=[];w.fetch=async url=>{if(url==='/axu-international-pages/version.json')return {ok:true,json:async()=>({version:'1.0.7+abcdef0',updated:'14.10.2026'})};requests.push(url);assert.equal(url,'/axu-international-pages/catalogue.json');return {ok:true,json:async()=>catalogue};};
  const opened=[];w.open=(...args)=>{opened.push(args);return null;};
  w.eval(app);await new Promise(resolve=>setTimeout(resolve,30));
+ assert.equal(w.document.querySelector('footer .release-info')?.textContent,'Version 1.0.7+abcdef0 · Updated 14.10.2026');
  return {w,d:w.document,opened,requests};
 }
 function fill(form) {
