@@ -5,6 +5,8 @@ import http from 'node:http';
 import assert from 'node:assert/strict';
 const root=path.resolve(import.meta.dirname,'..',process.env.AXU_SITE_ROOT || '.'),base='/axu-international-pages';
 const catalogue=JSON.parse(fs.readFileSync(path.join(root,'catalogue.json'),'utf8'));
+const app=fs.readFileSync(path.join(root,'app.js'),'utf8');
+assert.equal(app.split('window.location.assign(url)').length,2);assert.ok(!app.includes('window.open('));
 const server=http.createServer((req,res)=>{
  const pathname=decodeURIComponent(new URL(req.url,'http://localhost').pathname);
  if(!pathname.startsWith(base+'/')){res.writeHead(404).end();return;}
@@ -21,15 +23,15 @@ try {
   const mobile=width<=390;
   const page=await browser.newPage({viewport:{width,height:1000},isMobile:mobile,hasTouch:mobile,userAgent:mobile ? (width===390 ? 'Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 Chrome/130.0.0.0 Mobile Safari/537.36' : 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Version/18.0 Mobile/15E148 Safari/604.1') : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130.0.0.0 Safari/537.36'});
   page.on('pageerror',error=>errors.push(error.message));
-  await page.addInitScript(()=>{window.openedWhatsApp=[];window.open=(...args)=>{window.openedWhatsApp.push(args);return null;};});
+  // Isolate the external handoff for form/clipboard checks; real same-tab navigation is tested below.
+  await page.route('**/app.js',route=>route.fulfill({contentType:'text/javascript',body:app.replace('window.location.assign(url)','window.__testNavigate(url)')}));
+  await page.addInitScript(()=>{window.openedWhatsApp=[];window.__testNavigate=url=>window.openedWhatsApp.push([url]);window.open=()=>{throw new Error('Unexpected popup');};});
   return page;
  }
  let page=await createPage();
  function checkDestination(url,mobile) {
-  assert.equal(url.origin+url.pathname,mobile ? 'https://wa.me/905367040944' : 'https://web.whatsapp.com/send');
-  assert.equal(url.searchParams.get('phone'),mobile ? null : '905367040944');
-  assert.equal(url.searchParams.get('type'),mobile ? null : 'phone_number');
-  assert.equal(url.searchParams.get('app_absent'),mobile ? null : '1');
+  assert.equal(url.origin+url.pathname,'https://wa.me/905367040944');
+  assert.deepEqual([...url.searchParams.keys()],['text']);
   assert.ok(!url.href.includes('+'));
  }
  for (const width of (process.env.AXU_FOOTER_ONLY ? [] : [1440,820,390,320])) {
@@ -45,7 +47,7 @@ try {
    assert.equal(await page.locator('#copy-quote').isVisible(),false);
    await page.locator('.td-hero a.button').click();await page.locator('#quote-form').scrollIntoViewIfNeeded();
    assert.equal(new URL(page.url()).hash,'#request-quote');
-   const submit=page.getByRole('button',{name:'Send via WhatsApp'});
+   const submit=page.getByRole('button',{name:'Continue to WhatsApp'});
    await submit.click();assert.equal(await page.evaluate(()=>window.openedWhatsApp.length),0);
    await page.locator('[name="fullName"]').fill('John & Jane Smith');
    await page.locator('[name="tourDate"]').fill('2099-10-20');
@@ -63,6 +65,8 @@ try {
    assert.equal(await page.locator('#quote-form button').count(),1);
    assert.equal(await page.locator('#prepared-message,#quote-recovery,#whatsapp-fallback').count(),0);
    assert.equal(await page.locator('#copy-quote').isVisible(),true);
+   assert.equal(await page.locator('#quote-status').textContent(),'');
+   assert.equal(await page.locator('.form-intro p').textContent(),'Complete the form, then continue to WhatsApp. Tap Send in the AXU TOURS chat to deliver your request.');
    assert.equal(await page.locator('#copy-quote').evaluate(el=>getComputedStyle(el).fontSize),'11px');
    if(tour.id==='axu-01') {
     await page.context().grantPermissions(['clipboard-read','clipboard-write']);
@@ -89,7 +93,7 @@ try {
   await page.goto(origin+'/contact/');await page.locator('#quote-form').waitFor();
   assert.equal(await page.locator('[name="tourId"] option').count(),11);
   await page.locator('[name="fullName"]').fill('John & Jane Smith');await page.locator('[name="tourDate"]').fill('2099-10-20');await page.locator('[name="guests"]').fill('4');
-  for(const tour of catalogue){await page.locator('[name="tourId"]').selectOption(tour.id);await page.getByRole('button',{name:'Send via WhatsApp'}).click();const href=await page.evaluate(()=>window.openedWhatsApp.at(-1)[0]);checkDestination(new URL(href),width<=390);assert.ok(new URL(href).searchParams.get('text').includes(`Tour: ${tour.title}\n`));}
+  for(const tour of catalogue){await page.locator('[name="tourId"]').selectOption(tour.id);await page.getByRole('button',{name:'Continue to WhatsApp'}).click();const href=await page.evaluate(()=>window.openedWhatsApp.at(-1)[0]);checkDestination(new URL(href),width<=390);assert.ok(new URL(href).searchParams.get('text').includes(`Tour: ${tour.title}\n`));}
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  }
  await page.goto(origin+'/tours/');await page.locator('.quote-link').first().click();await page.locator('#quote-form').waitFor();assert.equal(new URL(page.url()).hash,'#request-quote');
@@ -105,5 +109,24 @@ try {
   }
  }
  assert.deepEqual(errors,[]);
+ // Run the unmodified app and intercept only the external destination: no WhatsApp message is sent.
+ for(const width of [1440,390]) {
+  const context=await browser.newContext({viewport:{width,height:1000},isMobile:width===390,hasTouch:width===390});
+  await context.route('https://wa.me/**',route=>route.fulfill({contentType:'text/html',body:'<p>WhatsApp navigation intercepted. No message sent.</p>'}));
+  const real=await context.newPage();
+  for(const route of [`/tours/${catalogue[0].slug}/`,'/contact/']) {
+   await real.goto(origin+route);await real.locator('#quote-form').waitFor();
+   if(route==='/contact/')await real.locator('[name="tourId"]').selectOption(catalogue[0].id);
+   await real.locator('[name="fullName"]').fill('İpek & Çağrı + AXU');
+   await real.locator('[name="tourDate"]').fill('2099-10-20');await real.locator('[name="guests"]').fill('3');
+   await real.locator('[name="shipOrHotel"]').fill('İzmir Otel');await real.locator('[name="notes"]').fill('Türkçe not\nİkinci satır 🌅');
+   await real.getByRole('button',{name:'Continue to WhatsApp'}).click();
+   await real.waitForURL('https://wa.me/**');assert.equal(context.pages().length,1);
+   const url=new URL(real.url());checkDestination(url);
+   const message=url.searchParams.get('text');assert.ok(message.includes(`Tour: ${catalogue[0].title}\nName: İpek & Çağrı + AXU`));
+   assert.ok(message.includes('Guests: 3\nCruise Ship / Hotel: İzmir Otel\nAdditional Notes: Türkçe not\nİkinci satır 🌅'));
+  }
+  await context.close();
+ }
  console.log(process.env.AXU_FOOTER_ONLY ? 'PASS: release footer on home, listing, about, contact, categories and 404 at desktop/mobile widths; no footer overflow or JavaScript errors.' : 'PASS: real Chrome validation, WhatsApp URL/encoding/manual-send fallback, all ten detail/contact tour names at 1440/820/390/320px, accessible field sizes, no overflow or JavaScript errors, quote CTA anchors and lightbox retained. No WhatsApp messages sent.');
 } finally {await browser.close();await new Promise(resolve=>server.close(resolve));}

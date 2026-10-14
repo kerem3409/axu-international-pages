@@ -78,21 +78,19 @@ function setupFilters(path) {
  update();
 }
 function whatsappUrl(message) {
- const mobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
- const text = encodeURIComponent(message);
- return mobile ? `https://wa.me/905367040944?text=${text}` : `https://web.whatsapp.com/send?phone=905367040944&text=${text}&type=phone_number&app_absent=1`;
+ return `https://wa.me/905367040944?text=${encodeURIComponent(message)}`;
 }
 const todayDate = () => { const now = new Date(); return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`; };
 function requestForm(tour) {
  return `<form id="quote-form" class="quote-form" ${tour ? `data-tour-id="${esc(tour.id)}"` : ''}>
- <div class="form-intro"><h2>Request a Quote</h2><p>Prepare your request for AXU TOURS on WhatsApp. You will review the message and send it yourself.</p></div>
+ <div class="form-intro"><h2>Request a Quote</h2><p>Complete the form, then continue to WhatsApp. Tap Send in the AXU TOURS chat to deliver your request.</p></div>
  ${tour ? `<label class="full">Tour Name<textarea name="tourName" rows="3" readonly>${esc(tour.title)}</textarea></label>` : `<label class="full">Tour Name (required)<select name="tourId" required><option value="">Select a tour</option>${tours.map(item=>`<option value="${esc(item.id)}">${esc(item.title)}</option>`).join('')}</select></label>`}
  <label class="full">Full Name (required)<input name="fullName" autocomplete="name" required maxlength="120"></label>
  <label>Tour Date (required)<input name="tourDate" type="date" min="${todayDate()}" required></label>
  <label>Number of Guests (required)<input name="guests" type="number" min="1" step="1" inputmode="numeric" required></label>
  <label class="full">Cruise Ship / Hotel Name (optional)<input name="shipOrHotel" maxlength="200"></label>
  <label class="full">Additional Notes (optional)<textarea name="notes" rows="3" maxlength="1500"></textarea></label>
- <button class="button full whatsapp-button" type="submit"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M21 11.5a9 9 0 0 1-13.3 7.9L3 21l1.6-4.7A9 9 0 1 1 21 11.5Z"/><path d="m8 7 2 3-1 1c1 2 2 3 4 4l1-1 3 2c-1 2-3 2-5 1-3-1-6-4-6-7 0-1 1-2 2-3Z"/></svg>Send via WhatsApp</button>
+ <button class="button full whatsapp-button" type="submit"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M21 11.5a9 9 0 0 1-13.3 7.9L3 21l1.6-4.7A9 9 0 1 1 21 11.5Z"/><path d="m8 7 2 3-1 1c1 2 2 3 4 4l1-1 3 2c-1 2-3 2-5 1-3-1-6-4-6-7 0-1 1-2 2-3Z"/></svg>Continue to WhatsApp</button>
  <p id="quote-status" class="form-status full" role="status" aria-live="polite"></p>
  <a id="copy-quote" class="text-link full" href="#" hidden>WhatsApp didn’t open? Copy message</a>
  </form>`;
@@ -151,7 +149,7 @@ function bindQuoteForm() {
   const values = Object.fromEntries(new FormData(form));
   preparedMessage=whatsappMessage(tour,values);copy.hidden=false;
   const url = whatsappUrl(preparedMessage);
-  try { window.open(url,'_blank','noopener,noreferrer'); }
+  try { window.location.assign(url); }
   catch { /* The small copy link remains available when navigation is blocked. */ }
  });
  form.addEventListener('reset',()=>{clearPreparedMessage();for(const field of [form.elements.fullName,form.elements.guests,form.elements.tourDate])field.setCustomValidity('');});

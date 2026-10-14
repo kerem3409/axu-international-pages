@@ -2,7 +2,7 @@ import {chromium} from '../../.visual-tools.local/node_modules/playwright/index.
 const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});
 try {
  const page=await browser.newPage();
- const url='https://web.whatsapp.com/send?phone=905367040944&text=AXU%20connection%20check%20%28not%20sent%29&type=phone_number&app_absent=1';
+ const url='https://wa.me/905367040944?text=AXU%20connection%20check%20%28not%20sent%29';
  try {
   await page.goto(url,{waitUntil:'domcontentloaded',timeout:30000});
   await page.waitForTimeout(5000);

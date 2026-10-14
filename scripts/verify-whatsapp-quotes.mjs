@@ -10,6 +10,7 @@ assert.equal(catalogue.length,10);
 assert.equal(read('catalogue.json'),cp.execFileSync('git',['show','HEAD:catalogue.json'],{cwd:root,encoding:'utf8'}));
 assert.ok(!app.includes('/api/quote-requests'));
 assert.ok(!app.includes('localStorage') && !app.includes('sessionStorage'));
+assert.ok(!app.includes('window.open('));assert.ok(app.includes('window.location.assign(url)'));
 const future = new Date();future.setDate(future.getDate()+30);
 const date = `${future.getFullYear()}-${String(future.getMonth()+1).padStart(2,'0')}-${String(future.getDate()).padStart(2,'0')}`;
 const formattedDate = new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'long',year:'numeric'}).format(future);
@@ -20,7 +21,7 @@ async function page(route, device = 'desktop') {
  Object.defineProperty(w.navigator,'platform',{value:device==='ipad' ? 'MacIntel' : 'Win32'});
  Object.defineProperty(w.navigator,'maxTouchPoints',{value:device==='ipad' ? 5 : 0});
  const requests=[];w.fetch=async url=>{if(url==='/axu-international-pages/version.json')return {ok:true,json:async()=>({version:'1.0.7+abcdef0',updated:'14.10.2026'})};requests.push(url);assert.equal(url,'/axu-international-pages/catalogue.json');return {ok:true,json:async()=>catalogue};};
- const opened=[];w.open=(...args)=>{opened.push(args);return null;};
+ const opened=[];w.location.assign=url=>opened.push([url]);w.open=()=>{throw new Error('Must navigate in the same tab');};
  w.eval(app);await new Promise(resolve=>setTimeout(resolve,30));
  assert.equal(w.document.querySelector('footer .release-info')?.textContent,'Version 1.0.7+abcdef0 · Updated 14.10.2026');
  return {w,d:w.document,opened,requests};
@@ -32,13 +33,10 @@ function fill(form) {
 }
 function submit(w,form) { form.dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true})); }
 function checkLink(opened,tour,device = 'desktop') {
- const [href,target,features]=opened.at(-1);const url=new URL(href);
- assert.equal(url.origin+url.pathname,device==='desktop' ? 'https://web.whatsapp.com/send' : 'https://wa.me/905367040944');
- assert.equal(url.searchParams.get('phone'),device==='desktop' ? '905367040944' : null);
- assert.equal(url.searchParams.get('type'),device==='desktop' ? 'phone_number' : null);
- assert.equal(url.searchParams.get('app_absent'),device==='desktop' ? '1' : null);
+ const [href]=opened.at(-1);const url=new URL(href);
+ assert.equal(url.origin+url.pathname,'https://wa.me/905367040944');
+ assert.deepEqual([...url.searchParams.keys()],['text']);
  assert.ok(!href.includes('+'),'Spaces must use percent encoding');
- assert.equal(target,'_blank');assert.equal(features,'noopener,noreferrer');
  assert.equal(url.searchParams.get('text'),['Hello AXU TOURS,','','I would like to request a quote.','',`Tour: ${tour.title}`,'Name: John & Jane + Smith',`Date: ${formattedDate}`,'Guests: 4','Cruise Ship / Hotel: MSC Fantasia','Additional Notes: Morning departure, please.\nTürkçe: İzmir & Efes 🌅','','Please send me availability and pricing information.'].join('\n'));
 }
 for (const device of ['desktop','android','iphone','ipad']) {
@@ -57,6 +55,9 @@ for (const tour of catalogue) {
   // Derive the tour title from the catalogue, even if a readonly display is altered.
   form.elements.tourName.value='Different tour';submit(w,form);assert.equal(opened.length,1);checkLink(opened,tour,device);
   assert.equal(form.querySelectorAll('button').length,1);
+  assert.equal(form.querySelector('button').textContent,'Continue to WhatsApp');
+  assert.equal(form.querySelector('.form-intro p').textContent,'Complete the form, then continue to WhatsApp. Tap Send in the AXU TOURS chat to deliver your request.');
+  assert.equal(form.querySelector('#quote-status').textContent,'');
   assert.equal(form.querySelector('#prepared-message,#quote-recovery,#whatsapp-fallback'),null);
   assert.equal(d.querySelector('#copy-quote').hidden,false);
   const message=new URL(opened[0][0]).searchParams.get('text');
@@ -73,7 +74,7 @@ for (const tour of catalogue) {
   form.elements.notes.value='';form.elements.shipOrHotel.value='';submit(w,form);
   const optionalMessage=new URL(opened.at(-1)[0]).searchParams.get('text');assert.ok(!optionalMessage.includes('Additional Notes:')&&!optionalMessage.includes('Cruise Ship / Hotel:'));
   assert.equal(requests.length,1);assert.ok(!form.querySelector('[name="email"],[name="phone"]'));
-  w.open=()=>{throw new Error('popup denied');};submit(w,form);
+  w.location.assign=()=>{throw new Error('navigation denied');};submit(w,form);
   assert.equal(d.querySelector('#copy-quote').hidden,false);
   d.querySelector('#copy-quote').click();await new Promise(resolve=>setTimeout(resolve,0));assert.ok(prompts.at(-1).includes(`Tour: ${tour.title}`));
   form.reset();assert.equal(d.querySelector('#copy-quote').hidden,true);
