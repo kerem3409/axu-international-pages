@@ -56,34 +56,34 @@ for (const tour of catalogue) {
   }
   // Derive the tour title from the catalogue, even if a readonly display is altered.
   form.elements.tourName.value='Different tour';submit(w,form);assert.equal(opened.length,1);checkLink(opened,tour,device);
-  assert.ok(d.querySelector('#quote-status').textContent.includes('Complete sending in WhatsApp'));
-  assert.equal(d.querySelector('#whatsapp-fallback').hidden,false);
-  assert.equal(d.querySelector('#whatsapp-fallback').href,opened[0][0]);
-  const draft=d.querySelector('#prepared-message');
-  assert.equal(d.querySelector('#quote-recovery').hidden,false);
-  assert.equal(draft.value,new URL(opened[0][0]).searchParams.get('text'));
+  assert.equal(form.querySelectorAll('button').length,1);
+  assert.equal(form.querySelector('#prepared-message,#quote-recovery,#whatsapp-fallback'),null);
+  assert.equal(d.querySelector('#copy-quote').hidden,false);
+  const message=new URL(opened[0][0]).searchParams.get('text');
   const copied=[];Object.defineProperty(w.navigator,'clipboard',{value:{writeText:async text=>copied.push(text)},configurable:true});
   d.querySelector('#copy-quote').click();await new Promise(resolve=>setTimeout(resolve,0));
-  assert.deepEqual(copied,[draft.value]);assert.match(d.querySelector('#copy-status').textContent,/Message copied/);
+  assert.deepEqual(copied,[message]);assert.match(d.querySelector('#quote-status').textContent,/Message copied/);
   Object.defineProperty(w.navigator,'clipboard',{value:{writeText:async()=>{throw new Error('denied');}},configurable:true});
+  let legacyMessage;d.execCommand=()=>{legacyMessage=d.activeElement.value;return true;};
+  d.querySelector('#copy-quote').click();await new Promise(resolve=>setTimeout(resolve,0));assert.equal(legacyMessage,message);
+  const prompts=[];w.prompt=(label,value)=>{prompts.push(value);return null;};
   d.execCommand=()=>false;d.querySelector('#copy-quote').click();await new Promise(resolve=>setTimeout(resolve,0));
-  assert.equal(draft.selectionStart,0);assert.equal(draft.selectionEnd,draft.value.length);
-  assert.match(d.querySelector('#copy-status').textContent,/selected/);
-  form.elements.notes.dispatchEvent(new w.Event('input',{bubbles:true}));assert.equal(d.querySelector('#whatsapp-fallback').hidden,true);assert.equal(d.querySelector('#whatsapp-fallback').hasAttribute('href'),false);
+  assert.deepEqual(prompts,[message]);assert.equal(d.querySelectorAll('textarea').length,2);
+  form.elements.notes.dispatchEvent(new w.Event('input',{bubbles:true}));assert.equal(d.querySelector('#copy-quote').hidden,true);
   form.elements.notes.value='';form.elements.shipOrHotel.value='';submit(w,form);
   const optionalMessage=new URL(opened.at(-1)[0]).searchParams.get('text');assert.ok(!optionalMessage.includes('Additional Notes:')&&!optionalMessage.includes('Cruise Ship / Hotel:'));
   assert.equal(requests.length,1);assert.ok(!form.querySelector('[name="email"],[name="phone"]'));
   w.open=()=>{throw new Error('popup denied');};submit(w,form);
-  assert.match(d.querySelector('#quote-status').textContent,/could not open/);
-  assert.ok(draft.value.includes(`Tour: ${tour.title}`));assert.equal(d.querySelector('#whatsapp-fallback').hidden,false);
-  form.reset();assert.equal(d.querySelector('#quote-recovery').hidden,true);assert.equal(draft.value,'');
+  assert.equal(d.querySelector('#copy-quote').hidden,false);
+  d.querySelector('#copy-quote').click();await new Promise(resolve=>setTimeout(resolve,0));assert.ok(prompts.at(-1).includes(`Tour: ${tour.title}`));
+  form.reset();assert.equal(d.querySelector('#copy-quote').hidden,true);
  } finally { await w.happyDOM.close(); }
 }
 const contact=await page('contact/',device);
 try {
  const form=contact.d.querySelector('#quote-form');assert.equal(form.elements.tourId.options.length,11);
  fill(form);submit(contact.w,form);assert.equal(contact.opened.length,0);
- for (const tour of catalogue) {form.elements.tourId.value=tour.id;submit(contact.w,form);checkLink(contact.opened,tour,device);assert.equal(form.querySelector('#whatsapp-fallback').href,contact.opened.at(-1)[0]);}
+ for (const tour of catalogue) {form.elements.tourId.value=tour.id;submit(contact.w,form);checkLink(contact.opened,tour,device);assert.equal(form.querySelector('#copy-quote').hidden,false);}
 } finally {await contact.w.happyDOM.close();}
 }
 const home=await page('');

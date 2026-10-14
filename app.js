@@ -92,16 +92,9 @@ function requestForm(tour) {
  <label>Number of Guests (required)<input name="guests" type="number" min="1" step="1" inputmode="numeric" required></label>
  <label class="full">Cruise Ship / Hotel Name (optional)<input name="shipOrHotel" maxlength="200"></label>
  <label class="full">Additional Notes (optional)<textarea name="notes" rows="3" maxlength="1500"></textarea></label>
- <p class="full quote-privacy">Your details are used only to prepare this WhatsApp message. This website does not save your request. Availability and pricing must be confirmed by AXU TOURS.</p>
  <button class="button full whatsapp-button" type="submit"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M21 11.5a9 9 0 0 1-13.3 7.9L3 21l1.6-4.7A9 9 0 1 1 21 11.5Z"/><path d="m8 7 2 3-1 1c1 2 2 3 4 4l1-1 3 2c-1 2-3 2-5 1-3-1-6-4-6-7 0-1 1-2 2-3Z"/></svg>Send via WhatsApp</button>
  <p id="quote-status" class="form-status full" role="status" aria-live="polite"></p>
- <a id="whatsapp-fallback" class="text-link full" target="_blank" rel="noopener noreferrer" hidden>Open your prepared message in WhatsApp</a>
- <div id="quote-recovery" class="full" hidden>
- <p class="quote-privacy">If WhatsApp shows its home or sign-in screen, finish signing in, then use the link above again. If the message is missing, copy it below and paste it into the chat with +90 536 704 09 44.</p>
- <label>Prepared message<textarea id="prepared-message" rows="8" readonly></textarea></label>
- <button id="copy-quote" class="button full" type="button">Copy prepared message</button>
- <p id="copy-status" class="form-status" role="status" aria-live="polite"></p>
- </div>
+ <a id="copy-quote" class="text-link full" href="#" hidden>WhatsApp didn’t open? Copy message</a>
  </form>`;
 }
 function whatsappMessage(tour, values) {
@@ -113,9 +106,9 @@ function whatsappMessage(tour, values) {
 function bindQuoteForm() {
  const form = document.querySelector('#quote-form');
  if (!form) return;
- const status = form.querySelector('#quote-status'), fallback = form.querySelector('#whatsapp-fallback');
- const recovery = form.querySelector('#quote-recovery'), draft = form.querySelector('#prepared-message'), copyStatus = form.querySelector('#copy-status');
- const clearPreparedMessage = () => { status.textContent='';copyStatus.textContent='';fallback.hidden=true;fallback.removeAttribute('href'); };
+ const status = form.querySelector('#quote-status'), copy = form.querySelector('#copy-quote');
+ let preparedMessage='';
+ const clearPreparedMessage = () => { status.textContent='';copy.hidden=true;preparedMessage=''; };
  const validate = () => {
   form.elements.fullName.setCustomValidity(form.elements.fullName.value.trim() ? '' : 'Please enter your full name.');
   const guests = Number(form.elements.guests.value);
@@ -128,24 +121,26 @@ function bindQuoteForm() {
  };
  const edit = () => {
   clearPreparedMessage();validate();
-  if (!recovery.hidden) {
-   const tour = tours.find(item=>item.id===(form.dataset.tourId || form.elements.tourId?.value));
-   if (tour && form.checkValidity()) draft.value=whatsappMessage(tour,Object.fromEntries(new FormData(form)));
-   status.textContent='Details changed. Send via WhatsApp again to prepare and open your updated request.';
-  }
  };
  form.addEventListener('input',edit);
  form.addEventListener('change',edit);
- form.querySelector('#copy-quote').addEventListener('click',async()=>{
-  const message = draft.value;
+ copy.addEventListener('click',async event=>{
+  event.preventDefault();
+  const message = preparedMessage;
+  if (!message) return;
   try {
    await navigator.clipboard.writeText(message);
-   copyStatus.textContent='Message copied. Paste it into the WhatsApp chat with +90 536 704 09 44, then send it yourself.';
+   status.textContent='Message copied. Paste into the chat with +90 536 704 09 44.';
   } catch {
-   draft.focus();draft.select();draft.setSelectionRange(0,draft.value.length);
+   const previousFocus=document.activeElement, temporary=document.createElement('textarea');
+   temporary.value=message;temporary.style.cssText='position:fixed;left:-9999px;top:0';
+   temporary.setAttribute('aria-hidden','true');document.body.append(temporary);
+   temporary.focus();temporary.select();temporary.setSelectionRange(0,temporary.value.length);
    let copied=false;
-   try { copied=document.execCommand('copy'); } catch { /* Leave the message selected for manual copying. */ }
-   copyStatus.textContent=copied ? 'Message copied. Paste it into WhatsApp and send it yourself.' : 'Automatic copying is unavailable. The message is selected: use Copy, then paste it into WhatsApp.';
+   try { copied=document.execCommand('copy'); } catch { /* Use the browser copy dialog below. */ }
+   finally { temporary.remove();previousFocus?.focus(); }
+   if (!copied) window.prompt('Copy this message for +90 536 704 09 44:',message);
+   status.textContent=copied ? 'Message copied. Paste into WhatsApp.' : 'Copy the message from the dialog and paste into WhatsApp.';
   }
  });
  form.addEventListener('submit',event=>{
@@ -154,14 +149,12 @@ function bindQuoteForm() {
   if (!form.reportValidity()) return;
   if (!tour) { status.textContent='Please select an available tour.';return; }
   const values = Object.fromEntries(new FormData(form));
-  draft.value=whatsappMessage(tour,values);recovery.hidden=false;
-  const url = whatsappUrl(draft.value);
-  fallback.href=url;fallback.hidden=false;
-  status.textContent='Your request is prepared. Complete sending in WhatsApp. If it did not open, use the link below.';
+  preparedMessage=whatsappMessage(tour,values);copy.hidden=false;
+  const url = whatsappUrl(preparedMessage);
   try { window.open(url,'_blank','noopener,noreferrer'); }
-  catch { status.textContent='WhatsApp could not open. Your prepared message is kept below. Use the link or copy the message.'; }
+  catch { /* The small copy link remains available when navigation is blocked. */ }
  });
- form.addEventListener('reset',()=>{clearPreparedMessage();recovery.hidden=true;draft.value='';for(const field of [form.elements.fullName,form.elements.guests,form.elements.tourDate])field.setCustomValidity('');});
+ form.addEventListener('reset',()=>{clearPreparedMessage();for(const field of [form.elements.fullName,form.elements.guests,form.elements.tourDate])field.setCustomValidity('');});
 }
 function tourPhotos(tour) {
  const photos = (tour.gallery?.length ? tour.gallery : tour.images || []).map((photo, i) => ({...tour.images?.[i], ...photo, url: photo.url || tour.images?.[i]?.url, alt: photo.alt || tour.images?.[i]?.alt, caption: photo.caption || photo.alt || `${tour.destinations.join(' / ')} ${i+1}`}));
@@ -208,7 +201,7 @@ function details(tour) {
  <div class="td-columns"><div class="td-content"><section id="tour-itinerary"><p class="eyebrow">THE JOURNEY</p><h2>Detailed Itinerary</h2><p class="td-note">The final programme, inclusions and travel arrangements will be confirmed with your quote.</p>${tour.itinerary.length ? `<ol class="td-itinerary">${tour.itinerary.map(itineraryStop).join('')}</ol>` : '<p>The detailed itinerary will be confirmed with your quote.</p>'}</section>
  <section><h2>Included / Excluded Services</h2><div class="td-inclusions"><div><h3>Included Services</h3>${listContent(tour.included,'Inclusions will be confirmed with your quote.')}</div><div><h3>Excluded Services</h3>${listContent(tour.excluded,'Exclusions will be confirmed with your quote.')}</div></div></section>
  <section><h2>Important Information</h2>${listContent(important,'')}</section></div>
- <aside id="request-quote" class="td-quote"><p class="eyebrow">MAKE IT YOUR JOURNEY</p>${requestForm(tour)}<p class="td-note">Itinerary and price must be confirmed before booking.</p></aside></div>
+ <aside id="request-quote" class="td-quote"><p class="eyebrow">MAKE IT YOUR JOURNEY</p>${requestForm(tour)}</aside></div>
  <section class="td-related"><div class="td-section-heading"><div><p class="eyebrow">KEEP EXPLORING</p><h2>Related Tours</h2></div></div><div class="tour-grid">${tours.filter(t=>t.id!==tour.id).sort((a,b)=>Number(b.destinations.some(d=>tour.destinations.includes(d)))-Number(a.destinations.some(d=>tour.destinations.includes(d)))).slice(0,3).map(card).join('')}</div></section>
  ${photoCredits(photos)}
  <div class="td-overlay" hidden><section class="td-modal" role="dialog" aria-modal="true" aria-label="Tour photo gallery" tabindex="-1"><div class="td-modal-photo"></div><p class="td-modal-caption" aria-live="polite"></p><div class="td-modal-bar"><button type="button" data-gallery-action="prev" aria-label="Previous photo">← Previous</button><span class="td-counter"></span><button type="button" data-gallery-action="next" aria-label="Next photo">Next →</button><button type="button" data-gallery-action="close">Close</button></div></section></div></article>`;

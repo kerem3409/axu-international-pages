@@ -42,6 +42,7 @@ try {
     assert.equal(await page.locator('footer .release-info').evaluate(el=>getComputedStyle(el).fontSize),'11px');
    }
    assert.equal(await page.locator('[name="tourName"]').inputValue(),tour.title);
+   assert.equal(await page.locator('#copy-quote').isVisible(),false);
    await page.locator('.td-hero a.button').click();await page.locator('#quote-form').scrollIntoViewIfNeeded();
    assert.equal(new URL(page.url()).hash,'#request-quote');
    const submit=page.getByRole('button',{name:'Send via WhatsApp'});
@@ -59,35 +60,36 @@ try {
    assert.ok(url.searchParams.get('text').includes(`Tour: ${tour.title}\nName: John & Jane Smith\nDate: 20 October 2099\nGuests: 4`));
    assert.ok(url.searchParams.get('text').includes('Cruise Ship / Hotel: MSC Fantasia\nAdditional Notes: Morning departure.'));
    assert.ok(url.searchParams.get('text').includes('İzmir & Efes 🌅'));
-   assert.equal(await page.locator('#whatsapp-fallback').getAttribute('href'),url.href);
-   assert.equal(await page.locator('#prepared-message').inputValue(),url.searchParams.get('text'));
+   assert.equal(await page.locator('#quote-form button').count(),1);
+   assert.equal(await page.locator('#prepared-message,#quote-recovery,#whatsapp-fallback').count(),0);
+   assert.equal(await page.locator('#copy-quote').isVisible(),true);
+   assert.equal(await page.locator('#copy-quote').evaluate(el=>getComputedStyle(el).fontSize),'11px');
    if(tour.id==='axu-01') {
     await page.context().grantPermissions(['clipboard-read','clipboard-write']);
     await page.locator('#copy-quote').click();
     assert.equal((await page.evaluate(()=>navigator.clipboard.readText())).replace(/\r\n/g,'\n'),url.searchParams.get('text'));
-    await page.evaluate(()=>{navigator.clipboard.writeText=async()=>{throw new Error('denied');};document.execCommand=()=>false;});
-    await page.locator('#copy-quote').click();await page.waitForFunction(()=>document.querySelector('#copy-status').textContent.includes('selected'));
-    assert.equal(await page.locator('#prepared-message').evaluate(el=>el.selectionEnd-el.selectionStart),url.searchParams.get('text').length);
-    let fallbackRequest;
-    await page.context().route('https://**whatsapp.com/**',route=>{fallbackRequest=route.request().url();return route.abort();});
-    await page.context().route('https://wa.me/**',route=>{fallbackRequest=route.request().url();return route.abort();});
-    const popupPromise=page.context().waitForEvent('page');
-    await page.locator('#whatsapp-fallback').click();const popup=await popupPromise;
-    for(let attempt=0;!fallbackRequest&&attempt<20;attempt++)await page.waitForTimeout(50);
-    assert.equal(fallbackRequest,url.href);await popup.close();
-    assert.equal(await page.locator('#prepared-message').inputValue(),url.searchParams.get('text'));
+    await page.evaluate(()=>{navigator.clipboard.writeText=async()=>{throw new Error('denied');};});
+    await page.locator('#copy-quote').click();
+    await page.waitForFunction(()=>document.querySelector('#quote-status').textContent.includes('Message copied'));
+    assert.equal((await page.evaluate(()=>navigator.clipboard.readText())).replace(/\r\n/g,'\n'),url.searchParams.get('text'));
+    await page.evaluate(()=>{document.execCommand=()=>false;});
+    const dialogPromise=page.waitForEvent('dialog');
+    const clickPromise=page.locator('#copy-quote').click();const dialog=await dialogPromise;
+    assert.equal(dialog.type(),'prompt');assert.equal(dialog.defaultValue(),url.searchParams.get('text'));
+    await dialog.dismiss();await clickPromise;
+    assert.equal(await page.locator('#quote-form textarea').count(),2);
+    await submit.click();
    }
-   assert.ok((await page.locator('#quote-status').textContent()).includes('Complete sending in WhatsApp'));
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${tour.id}: overflow at ${width}`);
    assert.ok(await page.locator('#quote-form input, #quote-form select, #quote-form textarea, #quote-form button').evaluateAll(elements=>elements.every(el=>{const box=el.getBoundingClientRect();return box.width>0&&box.x>=0&&box.right<=innerWidth+1&&box.height>=44;})),`${tour.id}: field layout at ${width}`);
    if(tour.id==='axu-01')await page.locator('#quote-form').screenshot({path:path.resolve(import.meta.dirname,`../../.visual-tools.local/whatsapp-form-${width}.png`)});
-   await page.locator('[name="notes"]').fill('Edited notes');assert.equal(await page.locator('#whatsapp-fallback').isVisible(),false);
+   await page.locator('[name="notes"]').fill('Edited notes');assert.equal(await page.locator('#copy-quote').isVisible(),false);
    await page.locator('.td-hero-photo').click();await page.keyboard.press('ArrowRight');assert.equal(await page.locator('.td-counter').textContent(),'2 / 5');await page.keyboard.press('Escape');
   }
   await page.goto(origin+'/contact/');await page.locator('#quote-form').waitFor();
   assert.equal(await page.locator('[name="tourId"] option').count(),11);
   await page.locator('[name="fullName"]').fill('John & Jane Smith');await page.locator('[name="tourDate"]').fill('2099-10-20');await page.locator('[name="guests"]').fill('4');
-  for(const tour of catalogue){await page.locator('[name="tourId"]').selectOption(tour.id);await page.getByRole('button',{name:'Send via WhatsApp'}).click();const href=await page.locator('#whatsapp-fallback').getAttribute('href');checkDestination(new URL(href),width<=390);assert.ok(new URL(href).searchParams.get('text').includes(`Tour: ${tour.title}\n`));}
+  for(const tour of catalogue){await page.locator('[name="tourId"]').selectOption(tour.id);await page.getByRole('button',{name:'Send via WhatsApp'}).click();const href=await page.evaluate(()=>window.openedWhatsApp.at(-1)[0]);checkDestination(new URL(href),width<=390);assert.ok(new URL(href).searchParams.get('text').includes(`Tour: ${tour.title}\n`));}
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  }
  await page.goto(origin+'/tours/');await page.locator('.quote-link').first().click();await page.locator('#quote-form').waitFor();assert.equal(new URL(page.url()).hash,'#request-quote');

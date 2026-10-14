@@ -26,4 +26,4 @@
 
 footer .release-info{grid-column:1/-1;margin-top:-12px;padding-top:0;border-top:0;color:#a8a8a8;font-size:11px;line-height:1.6;letter-spacing:.02em}
 
-.quote-form #quote-recovery{display:grid;gap:15px}.quote-form #prepared-message{width:100%;resize:vertical}.quote-form #copy-quote{width:100%}
+.quote-form #copy-quote{font-size:11px;color:var(--muted);justify-self:start}.quote-form #quote-status:empty{display:none}
