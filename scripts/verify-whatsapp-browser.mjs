@@ -28,6 +28,9 @@ try {
  function checkDestination(url,mobile) {
   assert.equal(url.origin+url.pathname,mobile ? 'https://wa.me/905367040944' : 'https://web.whatsapp.com/send');
   assert.equal(url.searchParams.get('phone'),mobile ? null : '905367040944');
+  assert.equal(url.searchParams.get('type'),mobile ? null : 'phone_number');
+  assert.equal(url.searchParams.get('app_absent'),mobile ? null : '1');
+  assert.ok(!url.href.includes('+'));
  }
  for (const width of (process.env.AXU_FOOTER_ONLY ? [] : [1440,820,390,320])) {
   await page.close();page=await createPage(width);
@@ -57,6 +60,23 @@ try {
    assert.ok(url.searchParams.get('text').includes('Cruise Ship / Hotel: MSC Fantasia\nAdditional Notes: Morning departure.'));
    assert.ok(url.searchParams.get('text').includes('İzmir & Efes 🌅'));
    assert.equal(await page.locator('#whatsapp-fallback').getAttribute('href'),url.href);
+   assert.equal(await page.locator('#prepared-message').inputValue(),url.searchParams.get('text'));
+   if(tour.id==='axu-01') {
+    await page.context().grantPermissions(['clipboard-read','clipboard-write']);
+    await page.locator('#copy-quote').click();
+    assert.equal((await page.evaluate(()=>navigator.clipboard.readText())).replace(/\r\n/g,'\n'),url.searchParams.get('text'));
+    await page.evaluate(()=>{navigator.clipboard.writeText=async()=>{throw new Error('denied');};document.execCommand=()=>false;});
+    await page.locator('#copy-quote').click();await page.waitForFunction(()=>document.querySelector('#copy-status').textContent.includes('selected'));
+    assert.equal(await page.locator('#prepared-message').evaluate(el=>el.selectionEnd-el.selectionStart),url.searchParams.get('text').length);
+    let fallbackRequest;
+    await page.context().route('https://**whatsapp.com/**',route=>{fallbackRequest=route.request().url();return route.abort();});
+    await page.context().route('https://wa.me/**',route=>{fallbackRequest=route.request().url();return route.abort();});
+    const popupPromise=page.context().waitForEvent('page');
+    await page.locator('#whatsapp-fallback').click();const popup=await popupPromise;
+    for(let attempt=0;!fallbackRequest&&attempt<20;attempt++)await page.waitForTimeout(50);
+    assert.equal(fallbackRequest,url.href);await popup.close();
+    assert.equal(await page.locator('#prepared-message').inputValue(),url.searchParams.get('text'));
+   }
    assert.ok((await page.locator('#quote-status').textContent()).includes('Complete sending in WhatsApp'));
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${tour.id}: overflow at ${width}`);
    assert.ok(await page.locator('#quote-form input, #quote-form select, #quote-form textarea, #quote-form button').evaluateAll(elements=>elements.every(el=>{const box=el.getBoundingClientRect();return box.width>0&&box.x>=0&&box.right<=innerWidth+1&&box.height>=44;})),`${tour.id}: field layout at ${width}`);

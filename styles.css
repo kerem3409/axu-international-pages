@@ -25,3 +25,5 @@
 .card-bottom .quote-link{color:var(--orange)}.td-quote .quote-form{display:grid;grid-template-columns:minmax(0,1fr);gap:15px}.td-quote .button{cursor:pointer}.quote-form .quote-privacy{font-size:11px;line-height:1.65;margin:0;color:var(--muted)}.whatsapp-button{gap:10px}.whatsapp-button svg{flex-shrink:0}.quote-form #whatsapp-fallback{font-size:12px;overflow-wrap:anywhere;justify-self:start}.quote-form textarea[readonly]{background:var(--cream);resize:none}.quote-form label{min-width:0}.quote-form select{max-width:100%}.quote-form .form-status{font-size:12px}.td-quote{position:static}@media(max-width:520px){.quote-form{grid-template-columns:minmax(0,1fr)}}
 
 footer .release-info{grid-column:1/-1;margin-top:-12px;padding-top:0;border-top:0;color:#a8a8a8;font-size:11px;line-height:1.6;letter-spacing:.02em}
+
+.quote-form #quote-recovery{display:grid;gap:15px}.quote-form #prepared-message{width:100%;resize:vertical}.quote-form #copy-quote{width:100%}

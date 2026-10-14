@@ -79,10 +79,8 @@ function setupFilters(path) {
 }
 function whatsappUrl(message) {
  const mobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
- const url = new URL(mobile ? 'https://wa.me/905367040944' : 'https://web.whatsapp.com/send');
- if (!mobile) url.searchParams.set('phone','905367040944');
- url.searchParams.set('text',message);
- return url.href;
+ const text = encodeURIComponent(message);
+ return mobile ? `https://wa.me/905367040944?text=${text}` : `https://web.whatsapp.com/send?phone=905367040944&text=${text}&type=phone_number&app_absent=1`;
 }
 const todayDate = () => { const now = new Date(); return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`; };
 function requestForm(tour) {
@@ -98,6 +96,12 @@ function requestForm(tour) {
  <button class="button full whatsapp-button" type="submit"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M21 11.5a9 9 0 0 1-13.3 7.9L3 21l1.6-4.7A9 9 0 1 1 21 11.5Z"/><path d="m8 7 2 3-1 1c1 2 2 3 4 4l1-1 3 2c-1 2-3 2-5 1-3-1-6-4-6-7 0-1 1-2 2-3Z"/></svg>Send via WhatsApp</button>
  <p id="quote-status" class="form-status full" role="status" aria-live="polite"></p>
  <a id="whatsapp-fallback" class="text-link full" target="_blank" rel="noopener noreferrer" hidden>Open your prepared message in WhatsApp</a>
+ <div id="quote-recovery" class="full" hidden>
+ <p class="quote-privacy">If WhatsApp shows its home or sign-in screen, finish signing in, then use the link above again. If the message is missing, copy it below and paste it into the chat with +90 536 704 09 44.</p>
+ <label>Prepared message<textarea id="prepared-message" rows="8" readonly></textarea></label>
+ <button id="copy-quote" class="button full" type="button">Copy prepared message</button>
+ <p id="copy-status" class="form-status" role="status" aria-live="polite"></p>
+ </div>
  </form>`;
 }
 function whatsappMessage(tour, values) {
@@ -110,7 +114,8 @@ function bindQuoteForm() {
  const form = document.querySelector('#quote-form');
  if (!form) return;
  const status = form.querySelector('#quote-status'), fallback = form.querySelector('#whatsapp-fallback');
- const clearPreparedMessage = () => { status.textContent='';fallback.hidden=true;fallback.removeAttribute('href'); };
+ const recovery = form.querySelector('#quote-recovery'), draft = form.querySelector('#prepared-message'), copyStatus = form.querySelector('#copy-status');
+ const clearPreparedMessage = () => { status.textContent='';copyStatus.textContent='';fallback.hidden=true;fallback.removeAttribute('href'); };
  const validate = () => {
   form.elements.fullName.setCustomValidity(form.elements.fullName.value.trim() ? '' : 'Please enter your full name.');
   const guests = Number(form.elements.guests.value);
@@ -121,20 +126,42 @@ function bindQuoteForm() {
   const validDate=/^\d{4}-\d{2}-\d{2}$/.test(dateValue) && date.getFullYear()===year && date.getMonth()+1===month && date.getDate()===day && dateValue>=form.elements.tourDate.min;
   form.elements.tourDate.setCustomValidity(validDate ? '' : 'Please choose today or a future tour date.');
  };
- form.addEventListener('input',()=>{clearPreparedMessage();validate();});
- form.addEventListener('change',()=>{clearPreparedMessage();validate();});
+ const edit = () => {
+  clearPreparedMessage();validate();
+  if (!recovery.hidden) {
+   const tour = tours.find(item=>item.id===(form.dataset.tourId || form.elements.tourId?.value));
+   if (tour && form.checkValidity()) draft.value=whatsappMessage(tour,Object.fromEntries(new FormData(form)));
+   status.textContent='Details changed. Send via WhatsApp again to prepare and open your updated request.';
+  }
+ };
+ form.addEventListener('input',edit);
+ form.addEventListener('change',edit);
+ form.querySelector('#copy-quote').addEventListener('click',async()=>{
+  const message = draft.value;
+  try {
+   await navigator.clipboard.writeText(message);
+   copyStatus.textContent='Message copied. Paste it into the WhatsApp chat with +90 536 704 09 44, then send it yourself.';
+  } catch {
+   draft.focus();draft.select();draft.setSelectionRange(0,draft.value.length);
+   let copied=false;
+   try { copied=document.execCommand('copy'); } catch { /* Leave the message selected for manual copying. */ }
+   copyStatus.textContent=copied ? 'Message copied. Paste it into WhatsApp and send it yourself.' : 'Automatic copying is unavailable. The message is selected: use Copy, then paste it into WhatsApp.';
+  }
+ });
  form.addEventListener('submit',event=>{
   event.preventDefault();clearPreparedMessage();validate();
   const tour = tours.find(item=>item.id===(form.dataset.tourId || form.elements.tourId?.value));
   if (!form.reportValidity()) return;
   if (!tour) { status.textContent='Please select an available tour.';return; }
   const values = Object.fromEntries(new FormData(form));
-  const url = whatsappUrl(whatsappMessage(tour,values));
+  draft.value=whatsappMessage(tour,values);recovery.hidden=false;
+  const url = whatsappUrl(draft.value);
   fallback.href=url;fallback.hidden=false;
   status.textContent='Your request is prepared. Complete sending in WhatsApp. If it did not open, use the link below.';
-  window.open(url,'_blank','noopener,noreferrer');
+  try { window.open(url,'_blank','noopener,noreferrer'); }
+  catch { status.textContent='WhatsApp could not open. Your prepared message is kept below. Use the link or copy the message.'; }
  });
- form.addEventListener('reset',()=>{clearPreparedMessage();for(const field of [form.elements.fullName,form.elements.guests,form.elements.tourDate])field.setCustomValidity('');});
+ form.addEventListener('reset',()=>{clearPreparedMessage();recovery.hidden=true;draft.value='';for(const field of [form.elements.fullName,form.elements.guests,form.elements.tourDate])field.setCustomValidity('');});
 }
 function tourPhotos(tour) {
  const photos = (tour.gallery?.length ? tour.gallery : tour.images || []).map((photo, i) => ({...tour.images?.[i], ...photo, url: photo.url || tour.images?.[i]?.url, alt: photo.alt || tour.images?.[i]?.alt, caption: photo.caption || photo.alt || `${tour.destinations.join(' / ')} ${i+1}`}));
