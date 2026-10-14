@@ -16,10 +16,21 @@ await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
 const origin=`http://127.0.0.1:${server.address().port}${base}`;
 const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});
 try {
- const page=await browser.newPage();const errors=[];page.on('pageerror',error=>errors.push(error.message));
- await page.addInitScript(()=>{window.openedWhatsApp=[];window.open=(...args)=>{window.openedWhatsApp.push(args);return null;};});
+ const errors=[];
+ async function createPage(width=1440) {
+  const mobile=width<=390;
+  const page=await browser.newPage({viewport:{width,height:1000},isMobile:mobile,hasTouch:mobile,userAgent:mobile ? (width===390 ? 'Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 Chrome/130.0.0.0 Mobile Safari/537.36' : 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Version/18.0 Mobile/15E148 Safari/604.1') : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130.0.0.0 Safari/537.36'});
+  page.on('pageerror',error=>errors.push(error.message));
+  await page.addInitScript(()=>{window.openedWhatsApp=[];window.open=(...args)=>{window.openedWhatsApp.push(args);return null;};});
+  return page;
+ }
+ let page=await createPage();
+ function checkDestination(url,mobile) {
+  assert.equal(url.origin+url.pathname,mobile ? 'https://wa.me/905367040944' : 'https://web.whatsapp.com/send');
+  assert.equal(url.searchParams.get('phone'),mobile ? null : '905367040944');
+ }
  for (const width of (process.env.AXU_FOOTER_ONLY ? [] : [1440,820,390,320])) {
-  await page.setViewportSize({width,height:1000});
+  await page.close();page=await createPage(width);
   for (const tour of catalogue) {
    await page.goto(`${origin}/tours/${tour.slug}/`);await page.locator('#quote-form').waitFor();
    if(process.env.AXU_SITE_ROOT) {
@@ -41,8 +52,9 @@ try {
    await page.locator('[name="notes"]').fill('Morning departure.\nİzmir & Efes 🌅');
    await submit.click();
    const opened=await page.evaluate(()=>window.openedWhatsApp);assert.equal(opened.length,1);
-   const url=new URL(opened[0][0]);assert.equal(url.origin+url.pathname,'https://wa.me/905367040944');
+   const url=new URL(opened[0][0]);checkDestination(url,width<=390);
    assert.ok(url.searchParams.get('text').includes(`Tour: ${tour.title}\nName: John & Jane Smith\nDate: 20 October 2099\nGuests: 4`));
+   assert.ok(url.searchParams.get('text').includes('Cruise Ship / Hotel: MSC Fantasia\nAdditional Notes: Morning departure.'));
    assert.ok(url.searchParams.get('text').includes('İzmir & Efes 🌅'));
    assert.equal(await page.locator('#whatsapp-fallback').getAttribute('href'),url.href);
    assert.ok((await page.locator('#quote-status').textContent()).includes('Complete sending in WhatsApp'));
@@ -55,7 +67,7 @@ try {
   await page.goto(origin+'/contact/');await page.locator('#quote-form').waitFor();
   assert.equal(await page.locator('[name="tourId"] option').count(),11);
   await page.locator('[name="fullName"]').fill('John & Jane Smith');await page.locator('[name="tourDate"]').fill('2099-10-20');await page.locator('[name="guests"]').fill('4');
-  for(const tour of catalogue){await page.locator('[name="tourId"]').selectOption(tour.id);await page.getByRole('button',{name:'Send via WhatsApp'}).click();const href=await page.locator('#whatsapp-fallback').getAttribute('href');assert.ok(new URL(href).searchParams.get('text').includes(`Tour: ${tour.title}\n`));}
+  for(const tour of catalogue){await page.locator('[name="tourId"]').selectOption(tour.id);await page.getByRole('button',{name:'Send via WhatsApp'}).click();const href=await page.locator('#whatsapp-fallback').getAttribute('href');checkDestination(new URL(href),width<=390);assert.ok(new URL(href).searchParams.get('text').includes(`Tour: ${tour.title}\n`));}
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  }
  await page.goto(origin+'/tours/');await page.locator('.quote-link').first().click();await page.locator('#quote-form').waitFor();assert.equal(new URL(page.url()).hash,'#request-quote');

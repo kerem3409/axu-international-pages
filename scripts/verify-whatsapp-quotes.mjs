@@ -13,9 +13,12 @@ assert.ok(!app.includes('localStorage') && !app.includes('sessionStorage'));
 const future = new Date();future.setDate(future.getDate()+30);
 const date = `${future.getFullYear()}-${String(future.getMonth()+1).padStart(2,'0')}-${String(future.getDate()).padStart(2,'0')}`;
 const formattedDate = new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'long',year:'numeric'}).format(future);
-async function page(route) {
+async function page(route, device = 'desktop') {
  const w = new Window({url:`https://kerem3409.github.io/axu-international-pages/${route}`,settings:{disableCSSFileLoading:true,disableJavaScriptFileLoading:true}});
  w.document.write(read(route+'index.html'));
+ Object.defineProperty(w.navigator,'userAgent',{value:device==='desktop' ? 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' : device==='android' ? 'Mozilla/5.0 (Linux; Android 14) Mobile' : device==='iphone' ? 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) Mobile' : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15)'});
+ Object.defineProperty(w.navigator,'platform',{value:device==='ipad' ? 'MacIntel' : 'Win32'});
+ Object.defineProperty(w.navigator,'maxTouchPoints',{value:device==='ipad' ? 5 : 0});
  const requests=[];w.fetch=async url=>{if(url==='/axu-international-pages/version.json')return {ok:true,json:async()=>({version:'1.0.7+abcdef0',updated:'14.10.2026'})};requests.push(url);assert.equal(url,'/axu-international-pages/catalogue.json');return {ok:true,json:async()=>catalogue};};
  const opened=[];w.open=(...args)=>{opened.push(args);return null;};
  w.eval(app);await new Promise(resolve=>setTimeout(resolve,30));
@@ -28,13 +31,16 @@ function fill(form) {
  form.elements.notes.value='Morning departure, please.\nTürkçe: İzmir & Efes 🌅';
 }
 function submit(w,form) { form.dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true})); }
-function checkLink(opened,tour) {
+function checkLink(opened,tour,device = 'desktop') {
  const [href,target,features]=opened.at(-1);const url=new URL(href);
- assert.equal(url.origin+url.pathname,'https://wa.me/905367040944');assert.equal(target,'_blank');assert.equal(features,'noopener,noreferrer');
+ assert.equal(url.origin+url.pathname,device==='desktop' ? 'https://web.whatsapp.com/send' : 'https://wa.me/905367040944');
+ assert.equal(url.searchParams.get('phone'),device==='desktop' ? '905367040944' : null);
+ assert.equal(target,'_blank');assert.equal(features,'noopener,noreferrer');
  assert.equal(url.searchParams.get('text'),['Hello AXU TOURS,','','I would like to request a quote.','',`Tour: ${tour.title}`,'Name: John & Jane + Smith',`Date: ${formattedDate}`,'Guests: 4','Cruise Ship / Hotel: MSC Fantasia','Additional Notes: Morning departure, please.\nTürkçe: İzmir & Efes 🌅','','Please send me availability and pricing information.'].join('\n'));
 }
+for (const device of ['desktop','android','iphone','ipad']) {
 for (const tour of catalogue) {
- const {w,d,opened,requests}=await page(`tours/${tour.slug}/`);
+ const {w,d,opened,requests}=await page(`tours/${tour.slug}/`,device);
  try {
   const form=d.querySelector('#quote-form');assert.ok(form);assert.equal(form.elements.tourName.value,tour.title);assert.equal(form.elements.tourName.readOnly,true);
   assert.equal(d.querySelector('.td-hero a.button').getAttribute('href'),'#request-quote');
@@ -46,7 +52,7 @@ for (const tour of catalogue) {
    const previous=form.elements[field].value;form.elements[field].value=value;submit(w,form);assert.equal(opened.length,0,`${tour.id}: invalid ${field}`);form.elements[field].value=previous;
   }
   // Derive the tour title from the catalogue, even if a readonly display is altered.
-  form.elements.tourName.value='Different tour';submit(w,form);assert.equal(opened.length,1);checkLink(opened,tour);
+  form.elements.tourName.value='Different tour';submit(w,form);assert.equal(opened.length,1);checkLink(opened,tour,device);
   assert.ok(d.querySelector('#quote-status').textContent.includes('Complete sending in WhatsApp'));
   assert.equal(d.querySelector('#whatsapp-fallback').hidden,false);
   assert.equal(d.querySelector('#whatsapp-fallback').href,opened[0][0]);
@@ -56,12 +62,13 @@ for (const tour of catalogue) {
   assert.equal(requests.length,1);assert.ok(!form.querySelector('[name="email"],[name="phone"]'));
  } finally { await w.happyDOM.close(); }
 }
-const contact=await page('contact/');
+const contact=await page('contact/',device);
 try {
  const form=contact.d.querySelector('#quote-form');assert.equal(form.elements.tourId.options.length,11);
  fill(form);submit(contact.w,form);assert.equal(contact.opened.length,0);
- for (const tour of catalogue) {form.elements.tourId.value=tour.id;submit(contact.w,form);checkLink(contact.opened,tour);}
+ for (const tour of catalogue) {form.elements.tourId.value=tour.id;submit(contact.w,form);checkLink(contact.opened,tour,device);assert.equal(form.querySelector('#whatsapp-fallback').href,contact.opened.at(-1)[0]);}
 } finally {await contact.w.happyDOM.close();}
+}
 const home=await page('');
 try {assert.ok([...home.d.querySelectorAll('a')].some(a=>a.textContent==='Request a Quote'&&a.href.endsWith('/contact/')));} finally {await home.w.happyDOM.close();}
 const listing=await page('tours/');

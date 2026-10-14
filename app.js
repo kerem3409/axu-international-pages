@@ -77,7 +77,13 @@ function setupFilters(path) {
  form.addEventListener('reset',()=>{setTimeout(update,0);});
  update();
 }
-const WHATSAPP_URL = 'https://wa.me/905367040944';
+function whatsappUrl(message) {
+ const mobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+ const url = new URL(mobile ? 'https://wa.me/905367040944' : 'https://web.whatsapp.com/send');
+ if (!mobile) url.searchParams.set('phone','905367040944');
+ url.searchParams.set('text',message);
+ return url.href;
+}
 const todayDate = () => { const now = new Date(); return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`; };
 function requestForm(tour) {
  return `<form id="quote-form" class="quote-form" ${tour ? `data-tour-id="${esc(tour.id)}"` : ''}>
@@ -123,7 +129,7 @@ function bindQuoteForm() {
   if (!form.reportValidity()) return;
   if (!tour) { status.textContent='Please select an available tour.';return; }
   const values = Object.fromEntries(new FormData(form));
-  const url = `${WHATSAPP_URL}?text=${encodeURIComponent(whatsappMessage(tour,values))}`;
+  const url = whatsappUrl(whatsappMessage(tour,values));
   fallback.href=url;fallback.hidden=false;
   status.textContent='Your request is prepared. Complete sending in WhatsApp. If it did not open, use the link below.';
   window.open(url,'_blank','noopener,noreferrer');
