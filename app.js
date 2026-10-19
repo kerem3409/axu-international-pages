@@ -28,7 +28,8 @@ const visitorWording = item => ({
 }[item] || item);
 
 function cover(tour, large = false) {
- const image = tour.images?.[0];
+ const hasPhoto = photo => typeof photo?.url === 'string' && photo.url.trim().length > 0;
+ const image = tour.images?.find(hasPhoto) || tour.gallery?.find(hasPhoto);
  return `<div class="cover ${large ? 'cover-large' : ''} tone-${Number(tour.id.slice(-2)) % 4}">
   <div class="cover-placeholder"><span class="cover-brand">AXU TOURS</span><span class="cover-title">${esc(tour.title)}</span><span class="cover-caption">${esc(tour.destinations.join(' · '))}</span></div>
   ${image ? `<img src="${esc(image.url)}" alt="${esc(image.alt || tour.title)}" loading="${large ? 'eager' : 'lazy'}">` : ''}
