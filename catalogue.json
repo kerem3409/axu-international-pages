@@ -680,5 +680,307 @@
       "Miletus",
       "Priene"
     ]
+  },
+  {
+    "id": "axu-11",
+    "slug": "ephesus-pamukkale-group-tour-from-istanbul-by-plane",
+    "title": "Ephesus & Pamukkale Group Tour from Istanbul by Plane — 2 Days / 1 Night",
+    "summary": "Add a two-day Aegean journey to your stay in Istanbul. Join fellow travellers to explore the ancient streets of Ephesus, the House of the Virgin Mary and the Temple of Artemis. After an overnight stay, discover Pamukkale’s travertine terraces and the ancient city of Hierapolis.\n\nTravel with a shared tour vehicle and guide on a planned itinerary. Flight, transfer and accommodation arrangements will be detailed in your quotation. Group departures are subject to date availability and sufficient capacity.",
+    "departure": "Istanbul",
+    "duration": "2 days / 1 night",
+    "durationGroup": "Multi-day",
+    "destinations": [
+      "Ephesus",
+      "Pamukkale",
+      "Hierapolis",
+      "Selcuk"
+    ],
+    "types": [
+      "Group tour",
+      "Multi-day tour",
+      "By plane"
+    ],
+    "enquiryVariant": "Group Tour",
+    "pairedTourId": "axu-12",
+    "pairedTourText": "Prefer a vehicle and guide exclusively for your party? Explore our private tour.",
+    "agencyWelcome": "We welcome enquiries from individual travellers, families and travel agencies. Share your preferred dates and number of guests to request a quotation for yourself or your clients.",
+    "itinerary": [
+      {
+        "title": "Day 1 — Istanbul to Izmir & Ephesus",
+        "description": "Transfer from the agreed pickup point in Istanbul to the airport for your flight to Izmir. Meet the local team and begin your guided visits to Ephesus Ancient City, the House of the Virgin Mary and the Temple of Artemis with a shared tour vehicle and guide with fellow travellers. Continue to the confirmed hotel in Kusadasi or Selcuk for one overnight stay."
+      },
+      {
+        "title": "Day 2 — Pamukkale & Hierapolis / Return to Istanbul",
+        "description": "Travel to Pamukkale with a shared tour vehicle and guide with fellow travellers and explore the travertine terraces and Hierapolis Ancient City. Following the visit, transfer to the confirmed departure airport for your flight to Istanbul. The final Istanbul transfer will be arranged as specified in your confirmed package."
+      }
+    ],
+    "included": [
+      "Domestic flights for the confirmed itinerary",
+      "Airport transfers specified in the quotation",
+      "Guided sightseeing on both days",
+      "Tour transportation: shared tour vehicle and guide",
+      "One night of accommodation in Kusadasi or Selcuk"
+    ],
+    "excluded": [
+      "Personal expenses",
+      "Optional activities and services not included in the confirmed quotation"
+    ],
+    "conditions": [
+      "Your quotation will specify flight times and airports, baggage allowance, transfer arrangements, hotel category, room occupancy, guiding language, meals, entrance fees, payment and cancellation terms before booking.",
+      "Group departures are subject to date availability and sufficient capacity. Shared tour transport and a guide follow the confirmed itinerary; no daily departure or fixed group size is guaranteed.",
+      "A quotation request is not a confirmed booking.",
+      "The departure airport for the return flight, pickup arrangements and visit timings depend on the confirmed itinerary."
+    ],
+    "conditionsConfirmed": false,
+    "price": null,
+    "currency": null,
+    "images": [
+      {
+        "caption": "Pamukkale Travertine Terraces",
+        "url": "/axu-international-pages/images/tours/pamukkale/pamukkale-travertines.jpg",
+        "alt": "White travertine terraces at Pamukkale, Denizli",
+        "credit": {
+          "title": "The Travertine terraces of Pamukkale",
+          "author": "Slyronit",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Travertine_terraces_of_Pamukkale.jpg",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "shareAlike": true,
+          "changes": "Original photograph, unmodified. CSS crops previews; the lightbox retains the full frame."
+        }
+      }
+    ],
+    "gallery": [
+      {
+        "caption": "Pamukkale Travertine Terraces",
+        "url": "/axu-international-pages/images/tours/pamukkale/pamukkale-travertines.jpg",
+        "alt": "White travertine terraces at Pamukkale, Denizli",
+        "credit": {
+          "title": "The Travertine terraces of Pamukkale",
+          "author": "Slyronit",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Travertine_terraces_of_Pamukkale.jpg",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "shareAlike": true,
+          "changes": "Original photograph, unmodified. CSS crops previews; the lightbox retains the full frame."
+        }
+      },
+      {
+        "caption": "Ephesus Ancient City",
+        "url": "/axu-international-pages/images/tours/ephesus/ephesus-celsus.jpg",
+        "alt": "Celsus Library",
+        "credit": {
+          "title": "Celsus Library",
+          "author": "Benh LIEU SONG",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ephesus_Celsus_Library_Fa%C3%A7ade.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      },
+      {
+        "caption": "House of the Virgin Mary",
+        "url": "/axu-international-pages/images/tours/ephesus/house-of-virgin-mary.jpg",
+        "alt": "House of the Virgin Mary",
+        "credit": {
+          "title": "House of the Virgin Mary",
+          "author": "Peter C in Toronto Canada",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:House_of_the_Virgin_Mary_in_Ephesus.jpg",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "shareAlike": false,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      },
+      {
+        "caption": "Temple of Artemis",
+        "url": "/axu-international-pages/images/tours/ephesus/temple-of-artemis.jpg",
+        "alt": "Temple of Artemis",
+        "credit": {
+          "title": "Temple of Artemis",
+          "author": "Ronan Reinart",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Site_of_Temple_of_Artemis.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      },
+      {
+        "caption": "Great Theatre",
+        "url": "/axu-international-pages/images/tours/ephesus/ephesus-great-theatre.jpg",
+        "alt": "Great Theatre of Ephesus",
+        "credit": {
+          "title": "Great Theatre of Ephesus",
+          "author": "Austrian Archaeological Institute",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Great_Theatre,_Ephesus.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      }
+    ],
+    "highlights": [
+      "Two Days / One Night",
+      "Shared Tour Vehicle and Guide",
+      "Ephesus, the House of the Virgin Mary and Artemis",
+      "Pamukkale and Hierapolis",
+      "Flights, Transfers and Accommodation Arranged",
+      "Available Group Departures on Request"
+    ],
+    "language": "Guiding language specified in your quotation"
+  },
+  {
+    "id": "axu-12",
+    "slug": "private-ephesus-pamukkale-tour-from-istanbul-by-plane",
+    "title": "Private Ephesus & Pamukkale Tour from Istanbul by Plane — 2 Days / 1 Night",
+    "summary": "Discover Ephesus and Pamukkale from Istanbul with a tour vehicle and guide reserved exclusively for you and your travelling party. Combine visits to Ephesus Ancient City, the House of the Virgin Mary and the Temple of Artemis with an overnight stay and a guided visit to Pamukkale and Hierapolis.\n\nYou will not be combined with other guests during your guided sightseeing. The pace of the tour and time spent at each stop can be adjusted to your interests where flight schedules, opening hours and local conditions allow. Flights operate on scheduled commercial services.",
+    "departure": "Istanbul",
+    "duration": "2 days / 1 night",
+    "durationGroup": "Multi-day",
+    "destinations": [
+      "Ephesus",
+      "Pamukkale",
+      "Hierapolis",
+      "Selcuk"
+    ],
+    "types": [
+      "Private tour",
+      "Multi-day tour",
+      "By plane"
+    ],
+    "enquiryVariant": "Private Tour",
+    "pairedTourId": "axu-11",
+    "pairedTourText": "Prefer to join fellow travellers? Explore our group tour.",
+    "agencyWelcome": "We welcome enquiries from individual travellers, families and travel agencies. Share your preferred dates and number of guests to request a quotation for yourself or your clients.",
+    "itinerary": [
+      {
+        "title": "Day 1 — Istanbul to Izmir & Ephesus",
+        "description": "Transfer from the agreed pickup point in Istanbul to the airport for your flight to Izmir. Meet the local team and begin your guided visits to Ephesus Ancient City, the House of the Virgin Mary and the Temple of Artemis with a private sightseeing vehicle and guide reserved exclusively for your travelling party. Continue to the confirmed hotel in Kusadasi or Selcuk for one overnight stay."
+      },
+      {
+        "title": "Day 2 — Pamukkale & Hierapolis / Return to Istanbul",
+        "description": "Travel to Pamukkale with a private sightseeing vehicle and guide reserved exclusively for your travelling party and explore the travertine terraces and Hierapolis Ancient City. Following the visit, transfer to the confirmed departure airport for your flight to Istanbul. The final Istanbul transfer will be arranged as specified in your confirmed package."
+      }
+    ],
+    "included": [
+      "Domestic flights for the confirmed itinerary",
+      "Airport transfers specified in the quotation",
+      "Guided sightseeing on both days",
+      "Tour transportation: private sightseeing vehicle and guide reserved exclusively for your party",
+      "One night of accommodation in Kusadasi or Selcuk"
+    ],
+    "excluded": [
+      "Personal expenses",
+      "Optional activities and services not included in the confirmed quotation"
+    ],
+    "conditions": [
+      "Your quotation will specify flight times and airports, baggage allowance, transfer arrangements, hotel category, room occupancy, guiding language, meals, entrance fees, payment and cancellation terms before booking.",
+      "The private vehicle and guide are reserved for your guided sightseeing. Flights operate on scheduled commercial services. Airport transfer types will be specified in your quotation; private airport transfers or exclusive hotel accommodation are not implied.",
+      "A quotation request is not a confirmed booking.",
+      "The departure airport for the return flight, pickup arrangements and visit timings depend on the confirmed itinerary."
+    ],
+    "conditionsConfirmed": false,
+    "price": null,
+    "currency": null,
+    "images": [
+      {
+        "caption": "Ephesus Ancient City",
+        "url": "/axu-international-pages/images/tours/ephesus/ephesus-celsus.jpg",
+        "alt": "Celsus Library",
+        "credit": {
+          "title": "Celsus Library",
+          "author": "Benh LIEU SONG",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ephesus_Celsus_Library_Fa%C3%A7ade.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      }
+    ],
+    "gallery": [
+      {
+        "caption": "Ephesus Ancient City",
+        "url": "/axu-international-pages/images/tours/ephesus/ephesus-celsus.jpg",
+        "alt": "Celsus Library",
+        "credit": {
+          "title": "Celsus Library",
+          "author": "Benh LIEU SONG",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ephesus_Celsus_Library_Fa%C3%A7ade.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      },
+      {
+        "caption": "Pamukkale Travertine Terraces",
+        "url": "/axu-international-pages/images/tours/pamukkale/pamukkale-travertines.jpg",
+        "alt": "White travertine terraces at Pamukkale, Denizli",
+        "credit": {
+          "title": "The Travertine terraces of Pamukkale",
+          "author": "Slyronit",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Travertine_terraces_of_Pamukkale.jpg",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "shareAlike": true,
+          "changes": "Original photograph, unmodified. CSS crops previews; the lightbox retains the full frame."
+        }
+      },
+      {
+        "caption": "House of the Virgin Mary",
+        "url": "/axu-international-pages/images/tours/ephesus/house-of-virgin-mary.jpg",
+        "alt": "House of the Virgin Mary",
+        "credit": {
+          "title": "House of the Virgin Mary",
+          "author": "Peter C in Toronto Canada",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:House_of_the_Virgin_Mary_in_Ephesus.jpg",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "shareAlike": false,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      },
+      {
+        "caption": "Temple of Artemis",
+        "url": "/axu-international-pages/images/tours/ephesus/temple-of-artemis.jpg",
+        "alt": "Temple of Artemis",
+        "credit": {
+          "title": "Temple of Artemis",
+          "author": "Ronan Reinart",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Site_of_Temple_of_Artemis.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      },
+      {
+        "caption": "Great Theatre",
+        "url": "/axu-international-pages/images/tours/ephesus/ephesus-great-theatre.jpg",
+        "alt": "Great Theatre of Ephesus",
+        "credit": {
+          "title": "Great Theatre of Ephesus",
+          "author": "Austrian Archaeological Institute",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Great_Theatre,_Ephesus.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      }
+    ],
+    "highlights": [
+      "Two Days / One Night",
+      "Private Tour Vehicle and Guide",
+      "Sightseeing Exclusively for Your Party",
+      "Flexible Pace Within the Confirmed Itinerary",
+      "Ephesus, Pamukkale and Hierapolis",
+      "Flights, Transfers and Accommodation Arranged"
+    ],
+    "language": "Guiding language specified in your quotation"
   }
 ]

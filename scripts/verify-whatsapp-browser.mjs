@@ -59,7 +59,8 @@ try {
    await submit.click();
    const opened=await page.evaluate(()=>window.openedWhatsApp);assert.equal(opened.length,1);
    const url=new URL(opened[0][0]);checkDestination(url,width<=390);
-   assert.ok(url.searchParams.get('text').includes(`Tour: ${tour.title}\nName: John & Jane Smith\nDate: 20 October 2099\nGuests: 4`));
+   assert.ok(url.searchParams.get('text').includes(`Tour: ${tour.title}\n`));
+   assert.ok(url.searchParams.get('text').includes(`Name: John & Jane Smith\n${tour.enquiryVariant?'Preferred Start Date':'Date'}: 20 October 2099\nGuests: 4`));
    assert.ok(url.searchParams.get('text').includes('Cruise Ship / Hotel: MSC Fantasia\nAdditional Notes: Morning departure.'));
    assert.ok(url.searchParams.get('text').includes('İzmir & Efes 🌅'));
    assert.equal(await page.locator('#quote-form button').count(),1);
@@ -85,13 +86,13 @@ try {
     await submit.click();
    }
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${tour.id}: overflow at ${width}`);
-   assert.ok(await page.locator('#quote-form input, #quote-form select, #quote-form textarea, #quote-form button').evaluateAll(elements=>elements.every(el=>{const box=el.getBoundingClientRect();return box.width>0&&box.x>=0&&box.right<=innerWidth+1&&box.height>=44;})),`${tour.id}: field layout at ${width}`);
+   assert.ok(await page.locator('#quote-form input, #quote-form select, #quote-form textarea, #quote-form button').evaluateAll(elements=>elements.filter(el=>el.getClientRects().length>0).every(el=>{const box=el.getBoundingClientRect();return box.width>0&&box.x>=0&&box.right<=innerWidth+1&&box.height>=44;})),`${tour.id}: visible field layout at ${width}`);
    if(tour.id==='axu-01')await page.locator('#quote-form').screenshot({path:path.resolve(import.meta.dirname,`../../.visual-tools.local/whatsapp-form-${width}.png`)});
    await page.locator('[name="notes"]').fill('Edited notes');assert.equal(await page.locator('#copy-quote').isVisible(),false);
    await page.locator('.td-hero-photo').click();await page.keyboard.press('ArrowRight');assert.equal(await page.locator('.td-counter').textContent(),'2 / 5');await page.keyboard.press('Escape');
   }
   await page.goto(origin+'/contact/');await page.locator('#quote-form').waitFor();
-  assert.equal(await page.locator('[name="tourId"] option').count(),10);
+  assert.equal(await page.locator('[name="tourId"] option').count(),12);
   await page.locator('[name="fullName"]').fill('John & Jane Smith');await page.locator('[name="tourDate"]').fill('2099-10-20');await page.locator('[name="guests"]').fill('4');
   for(const tour of catalogue){await page.locator('[name="tourId"]').selectOption(tour.id);await page.getByRole('button',{name:'Continue to WhatsApp'}).click();const href=await page.evaluate(()=>window.openedWhatsApp.at(-1)[0]);checkDestination(new URL(href),width<=390);assert.ok(new URL(href).searchParams.get('text').includes(`Tour: ${tour.title}\n`));}
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
@@ -128,5 +129,5 @@ try {
   }
   await context.close();
  }
- console.log(process.env.AXU_FOOTER_ONLY ? 'PASS: release footer on home, listing, about, contact, categories and 404 at desktop/mobile widths; no footer overflow or JavaScript errors.' : 'PASS: real Chrome validation, WhatsApp URL/encoding/manual-send fallback, all nine detail/contact tour names at 1440/820/390/320px, accessible field sizes, no overflow or JavaScript errors, quote CTA anchors and lightbox retained. No WhatsApp messages sent.');
+ console.log(process.env.AXU_FOOTER_ONLY ? 'PASS: release footer on home, listing, about, contact, categories and 404 at desktop/mobile widths; no footer overflow or JavaScript errors.' : 'PASS: real Chrome validation, WhatsApp URL/encoding/manual-send fallback, all eleven detail/contact tour names at 1440/820/390/320px, accessible field sizes, no overflow or JavaScript errors, quote CTA anchors and lightbox retained. No WhatsApp messages sent.');
 } finally {await browser.close();await new Promise(resolve=>server.close(resolve));}

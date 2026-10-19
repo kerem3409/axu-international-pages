@@ -27,3 +27,5 @@
 footer .release-info{grid-column:1/-1;margin-top:-12px;padding-top:0;border-top:0;color:#a8a8a8;font-size:11px;line-height:1.6;letter-spacing:.02em}
 
 .quote-form #copy-quote{font-size:11px;color:var(--muted);justify-self:start}.quote-form #quote-status:empty{display:none}
+
+.package-enquiry{display:grid;gap:15px}.package-enquiry .quote-privacy{margin:0}.paired-tour{font-size:13px;line-height:1.65}.paired-tour .text-link{font-size:inherit;overflow-wrap:anywhere}.quote-form .package-enquiry input,.quote-form .package-enquiry select{width:100%;min-width:0}

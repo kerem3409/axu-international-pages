@@ -6,9 +6,9 @@ const root = new URL('../', import.meta.url);
 const read = file => fs.readFileSync(new URL(file,root),'utf8');
 const catalogue = JSON.parse(read('catalogue.json'));
 const app = read('app.js');
-assert.equal(catalogue.length,9);
+assert.equal(catalogue.length,11);
 assert.ok(!catalogue.some(t=>t.id==='axu-02'||t.slug==='archeological-ephesus-tour-from-kusadasi'));
-assert.deepEqual(catalogue,JSON.parse(cp.execFileSync('git',['show','HEAD:catalogue.json'],{cwd:root,encoding:'utf8'})).filter(t=>t.id!=='axu-02'));
+assert.deepEqual(catalogue.filter(t=>!t.enquiryVariant),JSON.parse(cp.execFileSync('git',['show','HEAD:catalogue.json'],{cwd:root,encoding:'utf8'})).filter(t=>t.id!=='axu-02'&&!t.enquiryVariant));
 assert.ok(!app.includes('/api/quote-requests'));
 assert.ok(!app.includes('localStorage') && !app.includes('sessionStorage'));
 assert.ok(!app.includes('window.open('));assert.ok(app.includes('window.location.assign(url)'));
@@ -38,7 +38,7 @@ function checkLink(opened,tour,device = 'desktop') {
  assert.equal(url.origin+url.pathname,'https://wa.me/905367040944');
  assert.deepEqual([...url.searchParams.keys()],['text']);
  assert.ok(!href.includes('+'),'Spaces must use percent encoding');
- assert.equal(url.searchParams.get('text'),['Hello AXU TOURS,','','I would like to request a quote.','',`Tour: ${tour.title}`,'Name: John & Jane + Smith',`Date: ${formattedDate}`,'Guests: 4','Cruise Ship / Hotel: MSC Fantasia','Additional Notes: Morning departure, please.\nTürkçe: İzmir & Efes 🌅','','Please send me availability and pricing information.'].join('\n'));
+ assert.equal(url.searchParams.get('text'),['Hello AXU TOURS,','','I would like to request a quote.','',`Tour: ${tour.title}`,...(tour.enquiryVariant?[`Tour Type: ${tour.enquiryVariant}`,'Enquiry Type: Individual Traveller']:[]),'Name: John & Jane + Smith',`${tour.enquiryVariant?'Preferred Start Date':'Date'}: ${formattedDate}`,'Guests: 4','Cruise Ship / Hotel: MSC Fantasia','Additional Notes: Morning departure, please.\nTürkçe: İzmir & Efes 🌅','','Please send me availability and pricing information.'].join('\n'));
 }
 for (const device of ['desktop','android','iphone','ipad']) {
 for (const tour of catalogue) {
@@ -83,13 +83,13 @@ for (const tour of catalogue) {
 }
 const contact=await page('contact/',device);
 try {
- const form=contact.d.querySelector('#quote-form');assert.equal(form.elements.tourId.options.length,10);
+ const form=contact.d.querySelector('#quote-form');assert.equal(form.elements.tourId.options.length,12);
  fill(form);submit(contact.w,form);assert.equal(contact.opened.length,0);
- for (const tour of catalogue) {form.elements.tourId.value=tour.id;submit(contact.w,form);checkLink(contact.opened,tour,device);assert.equal(form.querySelector('#copy-quote').hidden,false);}
+ for (const tour of catalogue) {form.elements.tourId.value=tour.id;form.elements.tourId.dispatchEvent(new contact.w.Event('change',{bubbles:true}));submit(contact.w,form);checkLink(contact.opened,tour,device);assert.equal(form.querySelector('#copy-quote').hidden,false);}
 } finally {await contact.w.happyDOM.close();}
 }
 const home=await page('');
 try {assert.ok([...home.d.querySelectorAll('a')].some(a=>a.textContent==='Request a Quote'&&a.href.endsWith('/contact/')));} finally {await home.w.happyDOM.close();}
 const listing=await page('tours/');
-try {assert.equal(listing.d.querySelectorAll('.quote-link').length,9);for(const a of listing.d.querySelectorAll('.quote-link'))assert.ok(a.href.endsWith('/#request-quote'));} finally {await listing.w.happyDOM.close();}
-console.log('PASS: all nine tour names, required/invalid fields, future date, message encoding, optional fields, manual-send wording, popup fallback, contact tour selection, home/list CTAs and no request storage/submission. Catalogue unchanged.');
+try {assert.equal(listing.d.querySelectorAll('.quote-link').length,11);for(const a of listing.d.querySelectorAll('.quote-link'))assert.ok(a.href.endsWith('/#request-quote'));} finally {await listing.w.happyDOM.close();}
+console.log('PASS: all eleven tour names, required/invalid fields, future date, message encoding, optional fields, manual-send wording, popup fallback, contact tour selection, home/list CTAs and no request storage/submission. Catalogue unchanged.');

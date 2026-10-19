@@ -82,12 +82,20 @@ function whatsappUrl(message) {
  return `https://wa.me/905367040944?text=${encodeURIComponent(message)}`;
 }
 const todayDate = () => { const now = new Date(); return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`; };
+function packageEnquiryFields(tour) {
+ if (!tour?.enquiryVariant) return '';
+ return `<p class="quote-privacy">Tour Type: <strong>${esc(tour.enquiryVariant)}</strong> · Price: On request</p>
+ <label>Enquiry type<select name="enquiryType" required><option value="Individual Traveller">Individual Traveller</option><option value="Travel Agency">Travel Agency</option></select></label>
+ <label id="agency-name-field" hidden>Agency Name (optional)<input name="agencyName" maxlength="200" autocomplete="organization"></label>
+ <p class="quote-privacy">${esc(tour.agencyWelcome)} A quotation request is not a confirmed booking.</p>`;
+}
 function requestForm(tour) {
  return `<form id="quote-form" class="quote-form" ${tour ? `data-tour-id="${esc(tour.id)}"` : ''}>
  <div class="form-intro"><h2>Request a Quote</h2><p>Complete the form, then continue to WhatsApp. Tap Send in the AXU TOURS chat to deliver your request.</p></div>
  ${tour ? `<label class="full">Tour Name<textarea name="tourName" rows="3" readonly>${esc(tour.title)}</textarea></label>` : `<label class="full">Tour Name (required)<select name="tourId" required><option value="">Select a tour</option>${tours.map(item=>`<option value="${esc(item.id)}">${esc(item.title)}</option>`).join('')}</select></label>`}
+ <div id="package-enquiry-fields" class="full package-enquiry" ${tour?.enquiryVariant ? '' : 'hidden'}>${packageEnquiryFields(tour)}</div>
  <label class="full">Full Name (required)<input name="fullName" autocomplete="name" required maxlength="120"></label>
- <label>Tour Date (required)<input name="tourDate" type="date" min="${todayDate()}" required></label>
+ <label><span id="quote-date-label">${tour?.enquiryVariant ? 'Preferred Start Date' : 'Tour Date'} (required)</span><input name="tourDate" type="date" min="${todayDate()}" required></label>
  <label>Number of Guests (required)<input name="guests" type="number" min="1" step="1" inputmode="numeric" required></label>
  <label class="full">Cruise Ship / Hotel Name (optional)<input name="shipOrHotel" maxlength="200"></label>
  <label class="full">Additional Notes (optional)<textarea name="notes" rows="3" maxlength="1500"></textarea></label>
@@ -100,13 +108,22 @@ function whatsappMessage(tour, values) {
  const [year, month, day] = values.tourDate.split('-').map(Number);
  const date = new Date(year, month-1, day, 12);
  const formattedDate = new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'long',year:'numeric'}).format(date);
- return ['Hello AXU TOURS,', '', 'I would like to request a quote.', '', `Tour: ${tour.title}`, `Name: ${values.fullName.trim()}`, `Date: ${formattedDate}`, `Guests: ${values.guests}`, ...(values.shipOrHotel.trim() ? [`Cruise Ship / Hotel: ${values.shipOrHotel.trim()}`] : []), ...(values.notes.trim() ? [`Additional Notes: ${values.notes.trim()}`] : []), '', 'Please send me availability and pricing information.'].join('\n');
+ return ['Hello AXU TOURS,', '', 'I would like to request a quote.', '', `Tour: ${tour.title}`, ...(tour.enquiryVariant ? [`Tour Type: ${tour.enquiryVariant}`,`Enquiry Type: ${values.enquiryType}`, ...(values.enquiryType==='Travel Agency' && values.agencyName?.trim() ? [`Agency Name: ${values.agencyName.trim()}`] : [])] : []), `Name: ${values.fullName.trim()}`, `${tour.enquiryVariant ? 'Preferred Start Date' : 'Date'}: ${formattedDate}`, `Guests: ${values.guests}`, ...(values.shipOrHotel.trim() ? [`Cruise Ship / Hotel: ${values.shipOrHotel.trim()}`] : []), ...(values.notes.trim() ? [`Additional Notes: ${values.notes.trim()}`] : []), '', 'Please send me availability and pricing information.'].join('\n');
 }
 function bindQuoteForm() {
  const form = document.querySelector('#quote-form');
  if (!form) return;
  const status = form.querySelector('#quote-status'), copy = form.querySelector('#copy-quote');
  let preparedMessage='';
+ const selectedTour=()=>tours.find(item=>item.id===(form.dataset.tourId || form.elements.tourId?.value));
+ const syncPackageFields=()=>{
+  const tour=selectedTour(),fields=form.querySelector('#package-enquiry-fields');
+  fields.hidden=!tour?.enquiryVariant;fields.innerHTML=packageEnquiryFields(tour);
+  form.querySelector('#quote-date-label').textContent=`${tour?.enquiryVariant ? 'Preferred Start Date' : 'Tour Date'} (required)`;
+ };
+ form.addEventListener('change',event=>{
+  if(event.target.name==='enquiryType')form.querySelector('#agency-name-field').hidden=event.target.value!=='Travel Agency';
+ });
  const clearPreparedMessage = () => { status.textContent='';copy.hidden=true;preparedMessage=''; };
  const validate = () => {
   form.elements.fullName.setCustomValidity(form.elements.fullName.value.trim() ? '' : 'Please enter your full name.');
@@ -117,8 +134,10 @@ function bindQuoteForm() {
   const [year,month,day]=dateValue.split('-').map(Number);
   const validDate=/^\d{4}-\d{2}-\d{2}$/.test(dateValue) && date.getFullYear()===year && date.getMonth()+1===month && date.getDate()===day && dateValue>=form.elements.tourDate.min;
   form.elements.tourDate.setCustomValidity(validDate ? '' : 'Please choose today or a future tour date.');
+  if(selectedTour()?.enquiryVariant)form.elements.enquiryType.setCustomValidity(['Individual Traveller','Travel Agency'].includes(form.elements.enquiryType.value) ? '' : 'Please choose an enquiry type.');
  };
- const edit = () => {
+ const edit = event => {
+  if(event.target.name==='tourId')syncPackageFields();
   clearPreparedMessage();validate();
  };
  form.addEventListener('input',edit);
@@ -153,7 +172,11 @@ function bindQuoteForm() {
   try { window.location.assign(url); }
   catch { /* The small copy link remains available when navigation is blocked. */ }
  });
- form.addEventListener('reset',()=>{clearPreparedMessage();for(const field of [form.elements.fullName,form.elements.guests,form.elements.tourDate])field.setCustomValidity('');});
+ form.addEventListener('reset',()=>{clearPreparedMessage();for(const field of [form.elements.fullName,form.elements.guests,form.elements.tourDate,form.elements.enquiryType].filter(Boolean))field.setCustomValidity('');setTimeout(syncPackageFields,0);});
+}
+function pairedTourLink(tour) {
+ const other=tours.find(item=>item.id===tour.pairedTourId);
+ return other ? `<p class="paired-tour"><a class="text-link" href="${link(other)}">${esc(tour.pairedTourText)}</a></p>` : '';
 }
 function tourPhotos(tour) {
  const photos = (tour.gallery?.length ? tour.gallery : tour.images || []).map((photo, i) => ({...tour.images?.[i], ...photo, url: photo.url || tour.images?.[i]?.url, alt: photo.alt || tour.images?.[i]?.alt, caption: photo.caption || photo.alt || `${tour.destinations.join(' / ')} ${i+1}`}));
@@ -193,14 +216,14 @@ function details(tour) {
  if (!tour.conditionsConfirmed) important.push('Please request confirmation of cancellation terms, admission arrangements and any accessibility requirements before booking.');
  return `<article class="tour-detail" data-tour-id="${esc(tour.id)}">
  <div class="td-crumb"><a href="/tours">All Tours</a> / ${esc(tour.destinations.join(' / '))}</div>
- <section class="td-hero"><div><p class="eyebrow">${esc(tour.types.join(' · '))} · ${esc(tour.departure)}</p><h1>${esc(tour.title)}</h1>${tour.summary.split('\n\n').map(p=>`<p class="td-intro">${esc(p)}</p>`).join('')}<a class="button" href="#request-quote">Request a Quote</a></div>${tourPhoto(photos[0],0,true)}</section>
+ <section class="td-hero"><div><p class="eyebrow">${esc(tour.types.join(' · '))} · ${esc(tour.departure)}</p><h1>${esc(tour.title)}</h1>${tour.summary.split('\n\n').map(p=>`<p class="td-intro">${esc(p)}</p>`).join('')}${pairedTourLink(tour)}<a class="button" href="#request-quote">Request a Quote</a></div>${tourPhoto(photos[0],0,true)}</section>
  <section class="td-stats" aria-label="Tour information">${[['Departure',tour.departure],['Duration',tour.duration || 'Confirm with your quote'],['Tour Type',tour.types.join(' / ')],['Language',tour.language || 'English; other languages on request']].map(([label,value])=>`<div><small>${label}</small><b>${esc(value)}</b></div>`).join('')}</section>
  <section id="tour-gallery"><div class="td-section-heading"><div><p class="eyebrow">THE EXPERIENCE IN PICTURES</p><h2>Explore the journey</h2></div><span>Click any photo to view gallery</span></div><div class="td-gallery">${tourPhoto(photos[0],0)}<div class="td-gallery-grid">${photos.slice(1,5).map((p,i)=>tourPhoto(p,i+1)).join('')}</div></div>${photos.some(p=>!p.url) ? '<p class="td-note">Labeled placeholders mark photographs to be added. They are not destination photographs.</p>' : ''}</section>
  <section class="td-highlights"><div class="td-section-heading"><h2>Tour Highlights</h2></div><div class="td-features">${(tour.highlights || [...tour.types,...tour.destinations]).map(h=>`<div><b>${esc(h)}</b></div>`).join('')}</div></section>
  <div class="td-columns"><div class="td-content"><section id="tour-itinerary"><p class="eyebrow">THE JOURNEY</p><h2>Detailed Itinerary</h2><p class="td-note">The final programme, inclusions and travel arrangements will be confirmed with your quote.</p>${tour.itinerary.length ? `<ol class="td-itinerary">${tour.itinerary.map(itineraryStop).join('')}</ol>` : '<p>The detailed itinerary will be confirmed with your quote.</p>'}</section>
  <section><h2>Included / Excluded Services</h2><div class="td-inclusions"><div><h3>Included Services</h3>${listContent(tour.included,'Inclusions will be confirmed with your quote.')}</div><div><h3>Excluded Services</h3>${listContent(tour.excluded,'Exclusions will be confirmed with your quote.')}</div></div></section>
  <section><h2>Important Information</h2>${listContent(important,'')}</section></div>
- <aside id="request-quote" class="td-quote"><p class="eyebrow">MAKE IT YOUR JOURNEY</p>${requestForm(tour)}</aside></div>
+ <aside id="request-quote" class="td-quote"><p class="eyebrow">MAKE IT YOUR JOURNEY</p>${pairedTourLink(tour)}${requestForm(tour)}</aside></div>
  <section class="td-related"><div class="td-section-heading"><div><p class="eyebrow">KEEP EXPLORING</p><h2>Related Tours</h2></div></div><div class="tour-grid">${tours.filter(t=>t.id!==tour.id).sort((a,b)=>Number(b.destinations.some(d=>tour.destinations.includes(d)))-Number(a.destinations.some(d=>tour.destinations.includes(d)))).slice(0,3).map(card).join('')}</div></section>
  ${photoCredits(photos)}
  <div class="td-overlay" hidden><section class="td-modal" role="dialog" aria-modal="true" aria-label="Tour photo gallery" tabindex="-1"><div class="td-modal-photo"></div><p class="td-modal-caption" aria-live="polite"></p><div class="td-modal-bar"><button type="button" data-gallery-action="prev" aria-label="Previous photo">← Previous</button><span class="td-counter"></span><button type="button" data-gallery-action="next" aria-label="Next photo">Next →</button><button type="button" data-gallery-action="close">Close</button></div></section></div></article>`;
