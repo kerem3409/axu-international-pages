@@ -822,50 +822,163 @@
   {
     "id": "axu-08",
     "slug": "sirince-wine-tasting-relaxing-and-shopping-tour-c",
-    "title": "Sirince Wine Tasting and Shopping Tour from Izmir",
-    "summary": "Discover Sirince village, its traditional streets and local products, followed by a regional craft visit.",
+    "title": "Private Sirince Village & Local Traditions Tour from Izmir",
+    "summary": "Escape the busy city and discover the charming hillside village of Sirince on a private excursion from Izmir.\n\nWander through narrow cobblestone streets, admire traditional houses, and explore the village's rich cultural heritage and peaceful countryside atmosphere.\n\nDiscover local shops offering regional products, handmade crafts, olive oil and traditional preserves. Enjoy free time to explore at your own pace, relax at a village café or browse the charming streets.\n\nExperience a different side of western Türkiye, where traditional village life, history and local culture come together.",
     "departure": "Izmir",
-    "duration": "5 hours",
-    "durationGroup": "Up to 6 hours",
+    "duration": "To be confirmed with your quote",
+    "durationGroup": null,
     "destinations": [
       "Sirince"
     ],
     "types": [
-      "Wine & local crafts"
+      "Day tour",
+      "Cultural & village life"
     ],
     "itinerary": [
-      "Pickup in Izmir and travel to Sirince; source estimates about one hour.",
-      "Explore village architecture, fruit wines and shops selling products such as soap and olive oil.",
-      "Visit one of the described craft venues: pottery, rug weaving or leather goods/model presentation.",
-      "Return to Izmir hotel or port."
+      {
+        "title": "Departure from Izmir",
+        "description": "Pickup from the location agreed in Izmir and transfer towards Sirince. The exact meeting point, vehicle arrangements and pickup time must be confirmed before booking."
+      },
+      {
+        "title": "Arrival in Sirince Village",
+        "description": "Arrive in Sirince, a picturesque hillside village near Selcuk. Discover its traditional architecture, winding streets and historical character."
+      },
+      {
+        "title": "Historical Village Walk",
+        "description": "Enjoy a guided village walk if guide service is confirmed in your quotation. Learn about Sirince's cultural history, architectural heritage and local traditions."
+      },
+      {
+        "title": "Local Products and Village Shops",
+        "description": "Explore the village's selection of traditional products, including olive oil, preserves, handmade crafts and local souvenirs. Shopping is entirely optional. No compulsory commercial stops."
+      },
+      {
+        "title": "Free Time and Relaxation",
+        "description": "Enjoy free time to explore independently, take photographs or relax at a local café. An optional wine-tasting experience may be discussed for adult guests, subject to availability, applicable regulations and separate confirmation. Wine tasting is not guaranteed or included unless expressly confirmed in your quotation."
+      },
+      {
+        "title": "Return to Izmir",
+        "description": "Return transfer to the drop-off location agreed in Izmir, subject to confirmation of the transfer arrangements in your quotation."
+      }
     ],
     "included": [],
-    "excluded": [],
-    "conditions": [],
+    "excluded": [
+      "Personal shopping expenses.",
+      "Optional wine tasting and other optional activities are not included unless expressly listed in your quotation.",
+      "Food and beverages are not included unless expressly listed in your quotation."
+    ],
+    "conditions": [
+      "The title describes this as a private excursion; availability of a vehicle and guide reserved exclusively for your party must be confirmed in your quotation. Do not assume private transportation or professional guide service is included unless expressly stated.",
+      "The pickup and drop-off locations, meeting point, pickup time and vehicle arrangements in Izmir must be confirmed before booking. İzmir Airport, cruise-port, Kusadasi and other out-of-area transfers are not part of the standard package unless expressly included in your quotation.",
+      "The total duration and road travel time have not been confirmed. They depend on the agreed Izmir pickup point, traffic, the confirmed transport arrangements and time spent in the village; the previous five-hour estimate is not guaranteed.",
+      "Food and beverage inclusion, optional tasting availability, applicable age/regulatory requirements and any related charges must be confirmed in your quotation before booking.",
+      "Village shops and local products are optional browsing opportunities. No compulsory rug, leather, pottery or other commercial venue visit is part of the stated programme.",
+      "The order of visits and access to village areas may vary with traffic, weather and local conditions. Please advise us of mobility or accessibility needs before booking.",
+      "Guide language, payment, cancellation and any additional charges must be confirmed in the quotation."
+    ],
     "conditionsConfirmed": false,
     "price": null,
     "currency": null,
-    "images": [],
+    "images": [
+      {
+        "caption": "Panoramic view of Sirince Village",
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/%C5%9Eirince_panorama.jpg?width=1280",
+        "alt": "Panoramic view across the hillside village of Sirince",
+        "credit": {
+          "title": "Şirince panorama",
+          "author": "Justinianus",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C5%9Eirince_panorama.jpg",
+          "sourceLabel": "Wikimedia Commons",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "shareAlike": true,
+          "changes": "Original photograph linked through Wikimedia Commons Special:Redirect; no image edits."
+        }
+      }
+    ],
     "gallery": [
       {
-        "caption": "Sirince Village"
+        "caption": "Panoramic view of Sirince Village",
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/%C5%9Eirince_panorama.jpg?width=1280",
+        "alt": "Panoramic view across the hillside village of Sirince",
+        "credit": {
+          "title": "Şirince panorama",
+          "author": "Justinianus",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C5%9Eirince_panorama.jpg",
+          "sourceLabel": "Wikimedia Commons",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "shareAlike": true,
+          "changes": "Original photograph linked through Wikimedia Commons Special:Redirect; no image edits."
+        }
       },
       {
-        "caption": "Village Architecture"
+        "caption": "Traditional Ottoman-era houses in Sirince",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Ottoman_Houses%2C_Sirince.jpg/1280px-Ottoman_Houses%2C_Sirince.jpg",
+        "alt": "Traditional houses in the historic hillside village of Sirince",
+        "credit": {
+          "title": "Ottoman Houses, Sirince",
+          "author": "Jocelyn Erskine-Kellie",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ottoman_Houses,_Sirince.jpg",
+          "sourceLabel": "Wikimedia Commons",
+          "license": "CC BY-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "shareAlike": true,
+          "changes": "Original photograph served as a 1280px Wikimedia Commons thumbnail; no image edits."
+        }
       },
       {
-        "caption": "Fruit Wines"
+        "caption": "A historic cobbled street in Sirince",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Street_in_Sirince.jpg/1280px-Street_in_Sirince.jpg",
+        "alt": "Cobbled village street and traditional buildings in Sirince",
+        "credit": {
+          "title": "Street in Sirince",
+          "author": "Jocelyn Erskine-Kellie",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Street_in_Sirince.jpg",
+          "sourceLabel": "Wikimedia Commons",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "shareAlike": true,
+          "changes": "Original photograph served as a 1280px Wikimedia Commons thumbnail; no image edits."
+        }
       },
       {
-        "caption": "Village Shops"
+        "caption": "Sirince village shops and local products",
+        "url": "https://images.pexels.com/photos/37257038/pexels-photo-37257038.jpeg?cs=srgb&dl=pexels-cengiz-37257038.jpg&fm=jpg",
+        "alt": "A local gift and market shop in Sirince village",
+        "credit": {
+          "title": "Sirince Village gift shops",
+          "author": "Cengiz Z",
+          "sourceUrl": "https://www.pexels.com/photo/charming-street-market-in-sirince-turkiye-37257038/",
+          "sourceLabel": "Pexels",
+          "license": "Pexels License",
+          "licenseUrl": "https://www.pexels.com/license/",
+          "shareAlike": false,
+          "changes": "Original photograph linked from Pexels; no image edits."
+        }
       },
       {
-        "caption": "Sirince Streets"
+        "caption": "A village café and traditional street setting",
+        "url": "https://images.pexels.com/photos/33660076/pexels-photo-33660076.jpeg?cs=srgb&dl=pexels-nadiye-odabasi-3668408-33660076.jpg&fm=jpg",
+        "alt": "Colorful traditional restaurant and café entrance in Sirince",
+        "credit": {
+          "title": "Colorful Entrance of Turkish Restaurant in Şirince",
+          "author": "Nadiye Odabaşı",
+          "sourceUrl": "https://www.pexels.com/photo/colorful-entrance-of-turkish-restaurant-in-sirince-33660076/",
+          "sourceLabel": "Pexels",
+          "license": "Pexels License",
+          "licenseUrl": "https://www.pexels.com/license/",
+          "shareAlike": false,
+          "changes": "Original photograph linked from Pexels; no image edits."
+        }
       }
     ],
     "highlights": [
-      "Wine & local crafts",
-      "Sirince"
+      "Sirince's Historic Village Character",
+      "Traditional Hillside Architecture",
+      "Local Culture and Heritage",
+      "Optional Browsing of Regional Products",
+      "Free Time to Explore at Your Own Pace",
+      "Izmir Departure; Pickup and Services Confirmed by Quote"
     ]
   },
   {

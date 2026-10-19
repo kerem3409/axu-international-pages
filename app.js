@@ -236,7 +236,7 @@ function photoCredits(photos) {
  if (!credited.length) return '';
  return `<details class="td-photo-credits"><summary>Photo Credits</summary><ul>${credited.map(photo => {
   const credit = photo.credit;
-  return `<li><strong>${esc(credit.title)}</strong> — ${esc(credit.author)} · <a href="${esc(credit.sourceUrl)}" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a> · <a href="${esc(credit.licenseUrl)}" target="_blank" rel="noopener noreferrer">${esc(credit.license)}</a><p>${esc(credit.changes)}${credit.shareAlike ? ` Adapted photograph distributed under ${esc(credit.license)}.` : ''}</p></li>`;
+  return `<li><strong>${esc(credit.title)}</strong> — ${esc(credit.author)} · <a href="${esc(credit.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(credit.sourceLabel || 'Wikimedia Commons')}</a> · <a href="${esc(credit.licenseUrl)}" target="_blank" rel="noopener noreferrer">${esc(credit.license)}</a><p>${esc(credit.changes)}</p></li>`;
  }).join('')}</ul></details>`;
 }
 function details(tour) {
