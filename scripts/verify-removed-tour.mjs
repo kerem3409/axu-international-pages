@@ -3,7 +3,7 @@ import {chromium} from '../../.visual-tools.local/node_modules/playwright/index.
 import fs from 'node:fs';import path from 'node:path';import http from 'node:http';import assert from 'node:assert/strict';
 const root=path.resolve(import.meta.dirname,'..'),base='/axu-international-pages',removed='archeological-ephesus-tour-from-kusadasi',target='/tours/ephesus-shore-excursion/';
 const read=file=>fs.readFileSync(path.join(root,file),'utf8');
-const catalogue=JSON.parse(read('catalogue.json'));assert.equal(catalogue.length,11);
+const catalogue=JSON.parse(read('catalogue.json'));assert.equal(catalogue.length,12);
 assert.ok(catalogue.some(t=>t.id==='axu-01'&&t.slug==='ephesus-shore-excursion'));
 assert.ok(!catalogue.some(t=>t.id==='axu-02'||t.slug===removed));
 for(const route of ['/','/tours/','/contact/',...catalogue.map(t=>`/tours/${t.slug}/`)]) {
@@ -14,9 +14,9 @@ for(const route of ['/','/tours/','/contact/',...catalogue.map(t=>`/tours/${t.sl
   w.eval(read('app.js'));await new Promise(resolve=>setTimeout(resolve,30));
   assert.ok(![...w.document.querySelectorAll('a')].some(a=>a.href.includes(removed)),route);
   assert.ok(!w.document.body.textContent.includes('Private Archaeological Ephesus Tour from Kusadasi Port'),route);
-  if(route==='/tours/')assert.equal(w.document.querySelectorAll('.tour-card').length,11);
+  if(route==='/tours/')assert.equal(w.document.querySelectorAll('.tour-card').length,12);
   if(route==='/contact/') {
-   const select=w.document.querySelector('[name="tourId"]');assert.equal(select.options.length,12);
+   const select=w.document.querySelector('[name="tourId"]');assert.equal(select.options.length,13);
    assert.ok(![...select.options].some(option=>option.value==='axu-02'));
   }
  } finally {await w.happyDOM.close();}
@@ -45,5 +45,5 @@ try {
  }
  const noJs=await browser.newContext({javaScriptEnabled:false}),page=await noJs.newPage();
  await page.goto(`${origin}/tours/${removed}/`);await page.waitForURL(url=>url.pathname===base+target);await noJs.close();
- console.log('PASS: eleven tours; removed tour absent from lists/related links/contact choices; desktop/mobile redirect with slash, without slash, query/hash, app fallback and no JavaScript; axu-01 quote form retained.');
+ console.log('PASS: twelve tours; removed tour absent from lists/related links/contact choices; desktop/mobile redirect with slash, without slash, query/hash, app fallback and no JavaScript; axu-01 quote form retained.');
 } finally {await browser.close();await new Promise(resolve=>server.close(resolve));}

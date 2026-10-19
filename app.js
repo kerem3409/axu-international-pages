@@ -176,7 +176,8 @@ function bindQuoteForm() {
 }
 function pairedTourLink(tour) {
  const other=tours.find(item=>item.id===tour.pairedTourId);
- return other ? `<p class="paired-tour"><a class="text-link" href="${link(other)}">${esc(tour.pairedTourText)}</a></p>` : '';
+ const extended=tours.find(item=>item.id===tour.extendedTourId);
+ return (other ? `<p class="paired-tour"><a class="text-link" href="${link(other)}">${esc(tour.pairedTourText)}</a></p>` : '') + (extended ? `<p class="paired-tour"><a class="text-link" href="${link(extended)}">${esc(tour.extendedTourText)}</a></p>` : '');
 }
 function tourPhotos(tour) {
  const photos = (tour.gallery?.length ? tour.gallery : tour.images || []).map((photo, i) => ({...tour.images?.[i], ...photo, url: photo.url || tour.images?.[i]?.url, alt: photo.alt || tour.images?.[i]?.alt, caption: photo.caption || photo.alt || `${tour.destinations.join(' / ')} ${i+1}`}));

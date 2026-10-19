@@ -191,61 +191,191 @@
   {
     "id": "axu-04",
     "slug": "ephesus-tour-from-istanbul",
-    "title": "Ephesus Day Tour from Istanbul",
-    "summary": "Travel from Istanbul to the Ephesus region by air, with transfers and a guided visit arranged around the flights.",
+    "title": "Ephesus Group Day Tour from Istanbul by Plane",
+    "summary": "Fly from Istanbul to Izmir and join other guests on a planned day tour with a shared sightseeing vehicle and licensed guide. Visit Ephesus Ancient City, the House of the Virgin Mary and the Temple of Artemis.\n\nThe itinerary includes lunch at a local restaurant and a local handicrafts presentation with time to browse and shop; purchases are entirely optional. Departures and places are subject to date availability and capacity.",
     "departure": "Istanbul",
-    "duration": null,
-    "durationGroup": null,
+    "duration": "Approximately 12–17 hours",
+    "durationGroup": "Full day",
     "destinations": [
-      "Ephesus"
+      "Ephesus",
+      "Selcuk"
     ],
     "types": [
-      "Archaeology",
-      "Day tour"
+      "Group tour",
+      "Day tour",
+      "By plane",
+      "Archaeology"
     ],
+    "enquiryVariant": "Group Tour",
+    "agencyWelcome": "We welcome enquiries from individual travellers, families and travel agencies. Share your preferred dates and number of guests to request a quotation for yourself or your clients.",
+    "pairedTourId": "axu-13",
+    "pairedTourText": "Prefer a sightseeing vehicle and guide exclusively for your party? Explore our private day tour.",
+    "extendedTourId": "axu-11",
+    "extendedTourText": "Have more time? Explore our Ephesus & Pamukkale tour — 2 Days / 1 Night.",
     "itinerary": [
-      "Hotel-to-airport transfer in Istanbul.",
-      "Flight to Izmir; meet guide and private vehicle.",
-      "Visit Ephesus, including Terrace Houses, the Temple of Artemis and Ephesus Museum.",
-      "Source also describes a local hand-weaving visit.",
-      "Return to Izmir Airport, fly to Istanbul and transfer to hotel."
+      {
+        "title": "Istanbul airport transfer",
+        "description": "Transfer from the confirmed pickup point in Istanbul to the airport. Pickup area and transfer arrangements will be specified in your quotation."
+      },
+      {
+        "title": "Scheduled morning flight to Izmir",
+        "description": "Take a suitable morning scheduled commercial flight to Izmir, as confirmed in your quotation. Exact flight times and baggage allowance will be confirmed before booking."
+      },
+      {
+        "title": "Welcome at Izmir Airport",
+        "description": "Meet the local team at Izmir Airport and begin the sightseeing programme with a shared tour vehicle and licensed guide with other guests on the planned itinerary."
+      },
+      {
+        "title": "Ephesus Ancient City",
+        "description": "Explore the ancient streets and monuments of Ephesus with your licensed guide, including the Library of Celsus and Great Theatre, subject to local access conditions."
+      },
+      {
+        "title": "House of the Virgin Mary",
+        "description": "Visit the pilgrimage site traditionally associated with the later life of the Virgin Mary."
+      },
+      {
+        "title": "Temple of Artemis",
+        "description": "Visit the surviving remains of the Temple of Artemis in Selcuk."
+      },
+      {
+        "title": "Lunch at a local restaurant",
+        "description": "Enjoy lunch at a local restaurant as part of the confirmed itinerary. Beverages are excluded."
+      },
+      {
+        "title": "Local handicrafts presentation and free time for shopping.",
+        "description": "Discover local handicrafts and enjoy time to browse and shop. Purchases are entirely optional. The timing of this visit will be arranged around the confirmed return flight."
+      },
+      {
+        "title": "Transfer to Izmir Airport",
+        "description": "Return to Izmir Airport for the confirmed flight to Istanbul. The sightseeing order and shopping visit timing will be arranged around the return flight and local conditions."
+      },
+      {
+        "title": "Return flight to Istanbul and confirmed transfer",
+        "description": "Fly to Istanbul on the confirmed scheduled service and continue with the return transfer specified in your quotation."
+      }
     ],
     "included": [
-      "Return Istanbul–Izmir flights.",
-      "Return Istanbul airport transfers.",
-      "Private vehicle and driver, professional guide.",
-      "Parking and local restaurant lunch."
+      "Confirmed round-trip scheduled flights between Istanbul and Izmir",
+      "Airport transfers specified in the quotation",
+      "Licensed guide during the tour",
+      "Shared sightseeing transportation with other guests",
+      "Lunch at a local restaurant",
+      "Local handicrafts presentation and shopping stop"
     ],
     "excluded": [
-      "Museum and archaeological-site admission.",
-      "Guide/driver gratuities and drinks."
+      "Archaeological-site and museum entrance fees unless otherwise specified in the quotation",
+      "Beverages",
+      "Personal shopping and expenses",
+      "Extra visits",
+      "Guide and driver gratuities"
     ],
-    "conditions": [],
+    "conditions": [
+      "Total duration is approximately 12–17 hours and varies with flights, transfers, traffic, site access and local conditions. Individual visits do not have fixed durations.",
+      "The handicrafts presentation and shopping stop form part of the itinerary. Purchases are entirely optional. Time for this visit is arranged around the confirmed return flight; no unlimited free time is promised.",
+      "Flight times, baggage allowance, guiding language, pickup area, airport transfer types, payment and cancellation terms will be confirmed in your quotation before booking.",
+      "Join other guests with a shared sightseeing vehicle and guide on the confirmed itinerary. Departures and places are subject to availability and sufficient capacity; daily departures and a fixed group size are not guaranteed.",
+      "Terrace Houses, Ephesus Museum and Sirince are not part of the standard itinerary. Any extra visit requires separate confirmation.",
+      "A quotation request is not a confirmed booking."
+    ],
     "conditionsConfirmed": false,
     "price": null,
     "currency": null,
-    "images": [],
+    "language": "Guiding language confirmed in your quotation",
+    "images": [
+      {
+        "caption": "Great Theatre",
+        "url": "/axu-international-pages/images/tours/ephesus/ephesus-great-theatre.jpg",
+        "alt": "Great Theatre of Ephesus",
+        "credit": {
+          "title": "Great Theatre of Ephesus",
+          "author": "Austrian Archaeological Institute",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Great_Theatre,_Ephesus.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      }
+    ],
     "gallery": [
       {
-        "caption": "Ephesus Ancient City"
+        "caption": "Great Theatre",
+        "url": "/axu-international-pages/images/tours/ephesus/ephesus-great-theatre.jpg",
+        "alt": "Great Theatre of Ephesus",
+        "credit": {
+          "title": "Great Theatre of Ephesus",
+          "author": "Austrian Archaeological Institute",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Great_Theatre,_Ephesus.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
       },
       {
-        "caption": "Terrace Houses"
+        "caption": "Ephesus Ancient City",
+        "url": "/axu-international-pages/images/tours/ephesus/ephesus-celsus.jpg",
+        "alt": "Celsus Library",
+        "credit": {
+          "title": "Celsus Library",
+          "author": "Benh LIEU SONG",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ephesus_Celsus_Library_Fa%C3%A7ade.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
       },
       {
-        "caption": "Temple of Artemis"
+        "caption": "House of the Virgin Mary",
+        "url": "/axu-international-pages/images/tours/ephesus/house-of-virgin-mary.jpg",
+        "alt": "House of the Virgin Mary",
+        "credit": {
+          "title": "House of the Virgin Mary",
+          "author": "Peter C in Toronto Canada",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:House_of_the_Virgin_Mary_in_Ephesus.jpg",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "shareAlike": false,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
       },
       {
-        "caption": "Ephesus Museum"
+        "caption": "Temple of Artemis",
+        "url": "/axu-international-pages/images/tours/ephesus/temple-of-artemis.jpg",
+        "alt": "Temple of Artemis",
+        "credit": {
+          "title": "Temple of Artemis",
+          "author": "Ronan Reinart",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Site_of_Temple_of_Artemis.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
       },
       {
-        "caption": "Library of Celsus"
+        "caption": "Curetes Street",
+        "url": "/axu-international-pages/images/tours/ephesus/ephesus-curetes-street.jpg",
+        "alt": "Curetes Street",
+        "credit": {
+          "title": "Curetes Street",
+          "author": "Rita1234",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ephesus_Curetes_street.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
       }
     ],
     "highlights": [
-      "Archaeology",
-      "Day tour",
-      "Ephesus"
+      "Group Tour",
+      "Shared Sightseeing Vehicle and Guide",
+      "Ephesus, the House of the Virgin Mary and Artemis",
+      "Local Restaurant Lunch",
+      "Local Handicrafts and Shopping Stop",
+      "Return Timing Planned Around Confirmed Flights"
     ]
   },
   {
@@ -982,5 +1112,195 @@
       "Flights, Transfers and Accommodation Arranged"
     ],
     "language": "Guiding language specified in your quotation"
+  },
+  {
+    "id": "axu-13",
+    "slug": "private-ephesus-day-tour-from-istanbul-by-plane",
+    "title": "Private Ephesus Day Tour from Istanbul by Plane",
+    "summary": "Explore Ephesus Ancient City, the House of the Virgin Mary and the Temple of Artemis from Istanbul, with a private sightseeing vehicle and licensed guide reserved exclusively for your travelling party. You will not be combined with other guests during guided sightseeing.\n\nEnjoy lunch at a local restaurant and a local handicrafts presentation with time to browse and shop; purchases are entirely optional. The pace can be adjusted where flight schedules, site access and local conditions allow. Flights operate on scheduled commercial services. Airport transfer types will be specified in your quotation.",
+    "departure": "Istanbul",
+    "duration": "Approximately 12–17 hours",
+    "durationGroup": "Full day",
+    "destinations": [
+      "Ephesus",
+      "Selcuk"
+    ],
+    "types": [
+      "Private tour",
+      "Day tour",
+      "By plane",
+      "Archaeology"
+    ],
+    "enquiryVariant": "Private Tour",
+    "agencyWelcome": "We welcome enquiries from individual travellers, families and travel agencies. Share your preferred dates and number of guests to request a quotation for yourself or your clients.",
+    "pairedTourId": "axu-04",
+    "pairedTourText": "Prefer to join fellow travellers? Explore our group day tour.",
+    "extendedTourId": "axu-12",
+    "extendedTourText": "Have more time? Explore our Ephesus & Pamukkale tour — 2 Days / 1 Night.",
+    "itinerary": [
+      {
+        "title": "Istanbul airport transfer",
+        "description": "Transfer from the confirmed pickup point in Istanbul to the airport. Pickup area and transfer arrangements will be specified in your quotation."
+      },
+      {
+        "title": "Scheduled morning flight to Izmir",
+        "description": "Take a suitable morning scheduled commercial flight to Izmir, as confirmed in your quotation. Exact flight times and baggage allowance will be confirmed before booking."
+      },
+      {
+        "title": "Welcome at Izmir Airport",
+        "description": "Meet the local team at Izmir Airport and begin the sightseeing programme with a private sightseeing vehicle and licensed guide reserved exclusively for your travelling party."
+      },
+      {
+        "title": "Ephesus Ancient City",
+        "description": "Explore the ancient streets and monuments of Ephesus with your licensed guide, including the Library of Celsus and Great Theatre, subject to local access conditions."
+      },
+      {
+        "title": "House of the Virgin Mary",
+        "description": "Visit the pilgrimage site traditionally associated with the later life of the Virgin Mary."
+      },
+      {
+        "title": "Temple of Artemis",
+        "description": "Visit the surviving remains of the Temple of Artemis in Selcuk."
+      },
+      {
+        "title": "Lunch at a local restaurant",
+        "description": "Enjoy lunch at a local restaurant as part of the confirmed itinerary. Beverages are excluded."
+      },
+      {
+        "title": "Local handicrafts presentation and free time for shopping.",
+        "description": "Discover local handicrafts and enjoy time to browse and shop. Purchases are entirely optional. The timing of this visit will be arranged around the confirmed return flight."
+      },
+      {
+        "title": "Transfer to Izmir Airport",
+        "description": "Return to Izmir Airport for the confirmed flight to Istanbul. The sightseeing order and shopping visit timing will be arranged around the return flight and local conditions."
+      },
+      {
+        "title": "Return flight to Istanbul and confirmed transfer",
+        "description": "Fly to Istanbul on the confirmed scheduled service and continue with the return transfer specified in your quotation."
+      }
+    ],
+    "included": [
+      "Confirmed round-trip scheduled flights between Istanbul and Izmir",
+      "Airport transfers specified in the quotation",
+      "Licensed guide during the tour",
+      "Private sightseeing transportation reserved exclusively for your travelling party",
+      "Lunch at a local restaurant",
+      "Local handicrafts presentation and shopping stop"
+    ],
+    "excluded": [
+      "Archaeological-site and museum entrance fees unless otherwise specified in the quotation",
+      "Beverages",
+      "Personal shopping and expenses",
+      "Extra visits",
+      "Guide and driver gratuities"
+    ],
+    "conditions": [
+      "Total duration is approximately 12–17 hours and varies with flights, transfers, traffic, site access and local conditions. Individual visits do not have fixed durations.",
+      "The handicrafts presentation and shopping stop form part of the itinerary. Purchases are entirely optional. Time for this visit is arranged around the confirmed return flight; no unlimited free time is promised.",
+      "Flight times, baggage allowance, guiding language, pickup area, airport transfer types, payment and cancellation terms will be confirmed in your quotation before booking.",
+      "The private vehicle and guide are reserved for guided sightseeing exclusively for your party. Flights are scheduled commercial services, not private flights. Airport transfer types will be specified in your quotation. The pace can be adjusted only where flight schedules, visiting conditions and local circumstances allow.",
+      "Terrace Houses, Ephesus Museum and Sirince are not part of the standard itinerary. Any extra visit requires separate confirmation.",
+      "A quotation request is not a confirmed booking."
+    ],
+    "conditionsConfirmed": false,
+    "price": null,
+    "currency": null,
+    "language": "Guiding language confirmed in your quotation",
+    "images": [
+      {
+        "caption": "Curetes Street",
+        "url": "/axu-international-pages/images/tours/ephesus/ephesus-curetes-street.jpg",
+        "alt": "Curetes Street",
+        "credit": {
+          "title": "Curetes Street",
+          "author": "Rita1234",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ephesus_Curetes_street.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      }
+    ],
+    "gallery": [
+      {
+        "caption": "Curetes Street",
+        "url": "/axu-international-pages/images/tours/ephesus/ephesus-curetes-street.jpg",
+        "alt": "Curetes Street",
+        "credit": {
+          "title": "Curetes Street",
+          "author": "Rita1234",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ephesus_Curetes_street.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      },
+      {
+        "caption": "Ephesus Ancient City",
+        "url": "/axu-international-pages/images/tours/ephesus/ephesus-celsus.jpg",
+        "alt": "Celsus Library",
+        "credit": {
+          "title": "Celsus Library",
+          "author": "Benh LIEU SONG",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ephesus_Celsus_Library_Fa%C3%A7ade.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      },
+      {
+        "caption": "House of the Virgin Mary",
+        "url": "/axu-international-pages/images/tours/ephesus/house-of-virgin-mary.jpg",
+        "alt": "House of the Virgin Mary",
+        "credit": {
+          "title": "House of the Virgin Mary",
+          "author": "Peter C in Toronto Canada",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:House_of_the_Virgin_Mary_in_Ephesus.jpg",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "shareAlike": false,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      },
+      {
+        "caption": "Temple of Artemis",
+        "url": "/axu-international-pages/images/tours/ephesus/temple-of-artemis.jpg",
+        "alt": "Temple of Artemis",
+        "credit": {
+          "title": "Temple of Artemis",
+          "author": "Ronan Reinart",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Site_of_Temple_of_Artemis.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      },
+      {
+        "caption": "Great Theatre",
+        "url": "/axu-international-pages/images/tours/ephesus/ephesus-great-theatre.jpg",
+        "alt": "Great Theatre of Ephesus",
+        "credit": {
+          "title": "Great Theatre of Ephesus",
+          "author": "Austrian Archaeological Institute",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Great_Theatre,_Ephesus.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      }
+    ],
+    "highlights": [
+      "Private Tour",
+      "Sightseeing Exclusively for Your Party",
+      "Ephesus, the House of the Virgin Mary and Artemis",
+      "Local Restaurant Lunch",
+      "Local Handicrafts and Shopping Stop",
+      "Return Timing Planned Around Confirmed Flights"
+    ]
   }
 ]
