@@ -129,66 +129,6 @@
     ]
   },
   {
-    "id": "axu-02",
-    "slug": "archeological-ephesus-tour-from-kusadasi",
-    "title": "Private Archaeological Ephesus Tour from Kusadasi Port",
-    "summary": "Discover Ephesus, the House of the Virgin Mary and the remains of the Temple of Artemis on a private excursion.",
-    "departure": "Kusadasi Port / hotels",
-    "duration": null,
-    "durationGroup": null,
-    "destinations": [
-      "Ephesus"
-    ],
-    "types": [
-      "Archaeology",
-      "Private tour",
-      "Shore excursion"
-    ],
-    "itinerary": [
-      "Port or hotel pickup; travel to the House of the Virgin Mary.",
-      "Guided exploration of Ephesus, including its baths, council house, temples, fountains, Celsus Library, Curetes Street and Great Theatre.",
-      "Photo stop at the Temple of Artemis.",
-      "Local lunch and return to Kusadasi."
-    ],
-    "included": [
-      "English-speaking guide; other languages on request.",
-      "Local lunch, itinerary visits and return transfers.",
-      "Air-conditioned, non-smoking transport.",
-      "Priority ticket arrangements."
-    ],
-    "excluded": [
-      "Attraction admission."
-    ],
-    "conditions": [],
-    "conditionsConfirmed": false,
-    "price": null,
-    "currency": null,
-    "images": [],
-    "gallery": [
-      {
-        "caption": "Ephesus Ancient City"
-      },
-      {
-        "caption": "House of the Virgin Mary"
-      },
-      {
-        "caption": "Library of Celsus"
-      },
-      {
-        "caption": "Temple of Artemis"
-      },
-      {
-        "caption": "Great Theatre"
-      }
-    ],
-    "highlights": [
-      "Archaeology",
-      "Private tour",
-      "Shore excursion",
-      "Ephesus"
-    ]
-  },
-  {
     "id": "axu-03",
     "slug": "biblical-ephesus-tour-from-kusadasi",
     "title": "Private Biblical Ephesus Tour from Kusadasi Port with Lunch",
