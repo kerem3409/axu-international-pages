@@ -303,7 +303,7 @@ function bindImages() {
 }
 function render() {
  const path=location.pathname.slice(BASE.length).replace(/\/$/,'')||'/';
- if(path==='/tours/archeological-ephesus-tour-from-kusadasi') {
+ if(['/tours/archeological-ephesus-tour-from-kusadasi','/tours/biblical-ephesus-tour-from-kusadasi'].includes(path)) {
   location.replace(`${BASE}/tours/ephesus-shore-excursion/${location.search}${location.hash}`);
   return;
  }

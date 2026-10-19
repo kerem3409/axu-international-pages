@@ -3,8 +3,8 @@ import {chromium} from '../../.visual-tools.local/node_modules/playwright/index.
 import fs from 'node:fs';import path from 'node:path';import http from 'node:http';import assert from 'node:assert/strict';
 const root=path.resolve(import.meta.dirname,'..'),base='/axu-international-pages';
 const read=file=>fs.readFileSync(path.join(root,file),'utf8'),catalogue=JSON.parse(read('catalogue.json')),app=read('app.js');
-const packages=catalogue.filter(t=>t.enquiryVariant&&!t.pickupEnquiry);assert.equal(packages.length,4);assert.equal(catalogue.length,12);
-assert.equal(new Set(catalogue.map(t=>t.id)).size,12);assert.equal(new Set(catalogue.map(t=>t.slug)).size,12);
+const packages=catalogue.filter(t=>t.enquiryVariant&&!t.pickupEnquiry);assert.equal(packages.length,4);assert.equal(catalogue.length,11);
+ assert.equal(new Set(catalogue.map(t=>t.id)).size,11);assert.equal(new Set(catalogue.map(t=>t.slug)).size,11);
 assert.equal(catalogue.find(t=>t.id==='axu-04').title,'Ephesus Group Day Tour from Istanbul by Plane');
 assert.notEqual(packages[0].images[0].url,packages[1].images[0].url);
 for(const tour of packages) {
@@ -96,9 +96,9 @@ try {
    for(const tour of packages.filter(t=>route==='/tours/'||t.durationGroup==='Multi-day')){const card=page.locator(`.tour-card:has(a[href="${base}/tours/${tour.slug}/"])`).first();await card.scrollIntoViewIfNeeded();assert.equal(await card.locator('.cover img').getAttribute('src'),tour.images[0].url);await page.waitForFunction(src=>[...document.querySelectorAll('.cover img')].some(img=>img.getAttribute('src')===src&&img.naturalWidth>0),tour.images[0].url);assert.equal(await card.locator('.cover img').evaluate(img=>getComputedStyle(img).objectFit),'cover');}
    if(route==='/tours/')for(const type of ['Group tour','Private tour']){await page.locator('[name="type"]').selectOption(type);assert.ok((await page.locator('.tour-card h3').allTextContents()).includes(packages.find(t=>t.enquiryVariant.replace('Tour','tour')===type).title));}
   }
-  await page.goto(origin+'/contact/');await page.locator('[name="tourId"]').waitFor();assert.equal(await page.locator('[name="tourId"] option').count(),13);
+  await page.goto(origin+'/contact/');await page.locator('[name="tourId"]').waitFor();assert.equal(await page.locator('[name="tourId"] option').count(),12);
   for(const tour of packages){await page.locator('[name="tourId"]').selectOption(tour.id);assert.match(await page.locator('#quote-date-label').textContent(),/Preferred Start Date/);await page.locator('[name="enquiryType"]').selectOption('Travel Agency');assert.equal(await page.locator('[name="agencyName"]').isVisible(),true);}
-  await page.locator('[name="tourId"]').selectOption('axu-03');assert.match(await page.locator('#quote-date-label').textContent(),/^Tour Date/);assert.equal(await page.locator('[name="enquiryType"]').count(),0);
+  await page.locator('[name="tourId"]').selectOption('axu-06');assert.match(await page.locator('#quote-date-label').textContent(),/^Tour Date/);assert.equal(await page.locator('[name="enquiryType"]').count(),0);
  }
  assert.deepEqual(errors,[]);console.log('PASS: four Istanbul flight products; day tour shopping text and timing; reciprocal/day-to-two-day links; correct programmes and services; distinct day tour covers; all photos; desktop/mobile cards, galleries and forms; individual/agency WhatsApp fields; contact switching. No message sent.');
 } finally {await browser.close();await new Promise(r=>server.close(r));}
