@@ -519,15 +519,19 @@
     "id": "axu-09",
     "slug": "seven-churches-tour",
     "title": "Private Seven Churches of Revelation Tour",
-    "summary": "Follow the Seven Churches route through the Aegean region, combining biblical heritage, archaeology and overnight stays.",
+    "summary": "Trace the Seven Churches of Revelation on a private five-day journey through western Türkiye. Explore the places associated with Ephesus, Smyrna, Pergamon, Thyatira, Sardis, Philadelphia and Laodicea, with guided visits that connect the ancient landscape to early Christian history.\n\nTravel from Izmir to Bergama and Akhisar, continue through the ancient cities of Lydia to Pamukkale, then discover Ephesus and the Christian heritage of Selcuk. The itinerary also includes the House of the Virgin Mary, the Basilica of St. John and Hierapolis.\n\nWith private transportation, an English-speaking guide, four nights of accommodation and Izmir Airport transfers, this journey brings together biblical heritage and archaeology. Your final itinerary, hotels and service arrangements will be detailed in your quotation.",
     "departure": "Izmir Airport",
     "duration": "5 days / 4 nights",
     "durationGroup": "Multi-day",
     "destinations": [
       "Ephesus",
-      "Pamukkale",
+      "Smyrna / Izmir",
       "Pergamon",
-      "Seven Churches route"
+      "Thyatira",
+      "Sardis",
+      "Philadelphia",
+      "Laodicea",
+      "Pamukkale"
     ],
     "types": [
       "Biblical heritage",
@@ -535,52 +539,154 @@
       "Private tour"
     ],
     "itinerary": [
-      "Day 1: Izmir Airport arrival, hotel transfer and free time.",
-      "Day 2: Pergamon Acropolis, Asklepion, Red Basilica photo stop and Thyatira; panoramic Izmir visit and Clock Tower.",
-      "Day 3: Sardis, Philadelphia, Hierapolis and Laodicea; overnight in Pamukkale.",
-      "Day 4: House of the Virgin Mary, Ephesus and Basilica of St. John; overnight in Kusadasi or Selcuk.",
-      "Day 5: Breakfast and transfer to Izmir Airport."
+      {
+        "title": "Day 1 — Arrival in Izmir",
+        "description": "Meet your representative at Izmir Adnan Menderes Airport and transfer to your hotel. The rest of the day is free to rest after your journey or explore independently. Izmir, ancient Smyrna, is one of the seven cities addressed in Revelation and provides the starting point for your journey. No guided sightseeing is scheduled on arrival day. Overnight in Izmir."
+      },
+      {
+        "title": "Day 2 — Pergamon, Thyatira and Smyrna",
+        "description": "Travel to Bergama to explore Pergamon Acropolis and the Asklepion. Stop for an exterior photograph of the Red Basilica before continuing to Akhisar, ancient Thyatira, to discover the surviving archaeological remains and learn about its early Christian community. Return to Izmir for a panoramic introduction to ancient Smyrna and the modern city, including the Clock Tower area. The Smyrna element is a city introduction; entry to a specific church or the Agora is not included unless expressly confirmed in your quotation. Overnight in Izmir."
+      },
+      {
+        "title": "Day 3 — Sardis, Philadelphia, Laodicea and Hierapolis",
+        "description": "Depart Izmir for Sardis, the ancient Lydian capital, and continue to Alasehir, ancient Philadelphia, to see the surviving remains associated with the city's Christian heritage. Travel onward to Laodicea near Denizli to explore its archaeological landscape and discuss the community addressed in Revelation. Continue to Hierapolis in the Pamukkale area. This is a full sightseeing day with substantial road travel; the visit order and time at each site will be planned around opening hours and local conditions. Overnight in Pamukkale."
+      },
+      {
+        "title": "Day 4 — Ephesus and the Christian Heritage of Selcuk",
+        "description": "Travel from Pamukkale to the Selcuk area. Visit the House of the Virgin Mary, traditionally associated with Mary's later life, and explore Ephesus with your guide, including the Celsus Library, Curetes Street and Great Theatre. Learn about the early Christian community of Ephesus before visiting the Basilica of St. John. These later pilgrimage landmarks complement the Seven Churches story and are distinct from the original congregations addressed in Revelation. Overnight in Kusadasi or Selcuk, as confirmed in your quotation."
+      },
+      {
+        "title": "Day 5 — Departure from Izmir",
+        "description": "After breakfast, check out and transfer to Izmir Adnan Menderes Airport for your onward flight. Pickup time will be arranged according to your confirmed flight and hotel location. Flights are not included in the tour."
+      }
     ],
     "included": [
-      "English-speaking guide; other languages on request.",
-      "Private air-conditioned, non-smoking transport and itinerary visits.",
-      "Four hotel nights: four-star in Izmir/Pamukkale, boutique in Kusadasi.",
-      "Three lunches and one dinner."
+      "English-speaking tour guide for the scheduled sightseeing programme; other languages on request.",
+      "Private air-conditioned, non-smoking transportation for the stated itinerary.",
+      "Arrival and departure transfers at Izmir Adnan Menderes Airport.",
+      "Four hotel nights: two in Izmir, one in Pamukkale and one in Kusadasi or Selcuk. Four-star accommodation in Izmir/Pamukkale and boutique accommodation in Kusadasi; the final hotel, location and room arrangement will be stated in your quotation.",
+      "Three lunches and one dinner during the programme; the specific days and menus will be stated in your quotation.",
+      "Departure-day breakfast, as listed in the itinerary. The breakfast arrangements for other days will be stated in your quotation."
     ],
     "excluded": [
-      "Attraction admission."
+      "Admission fees for archaeological sites, museums and other attractions unless expressly included in your quotation.",
+      "International and domestic flights.",
+      "Meals and beverages other than those expressly listed as included.",
+      "Personal expenses and optional activities.",
+      "Any services outside the confirmed itinerary; request confirmation of gratuities, insurance and any additional transfer or accommodation charges in your quotation."
     ],
-    "conditions": [],
+    "conditions": [
+      "The Seven Churches refer to early Christian communities in seven ancient cities, rather than seven intact church buildings. Surviving remains and visitor access differ between destinations.",
+      "The Smyrna component consists of a panoramic introduction to Izmir. Entry to the Agora or a specific church requires separate confirmation.",
+      "This is a private five-day itinerary with four hotel nights. Days 2–4 include substantial driving and walking; Day 3 is particularly full.",
+      "Archaeological visits may involve uneven paving, steps, slopes and exposed areas. Tell us about mobility or accessibility requirements before booking.",
+      "Arrival and departure flight details are required to arrange Izmir Airport transfers. Very early arrivals, late departures and extra nights must be confirmed in the quotation.",
+      "Hotel names, room occupancy, bed arrangements, meal allocation and any supplements will be stated in the quotation before booking.",
+      "Site order and visit times may change because of opening hours, weather, traffic or local access restrictions. The final sightseeing programme will be confirmed before booking.",
+      "Bring comfortable walking shoes, sun protection and drinking water; dress respectfully at places of worship.",
+      "Admission fees are excluded unless expressly included in your quotation. Special-entry arrangements and optional experiences are not guaranteed.",
+      "Deposit, payment, cancellation and refund terms will be provided with the quotation and must be confirmed before booking."
+    ],
     "conditionsConfirmed": false,
     "price": null,
     "currency": null,
-    "images": [],
+    "images": [
+      {
+        "caption": "Ephesus Ancient City",
+        "url": "/axu-international-pages/images/tours/ephesus/ephesus-celsus.jpg",
+        "alt": "Celsus Library",
+        "credit": {
+          "title": "Celsus Library",
+          "author": "Benh LIEU SONG",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ephesus_Celsus_Library_Fa%C3%A7ade.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      }
+    ],
     "gallery": [
       {
-        "caption": "Pergamon Acropolis"
+        "caption": "Ephesus Ancient City",
+        "url": "/axu-international-pages/images/tours/ephesus/ephesus-celsus.jpg",
+        "alt": "Celsus Library",
+        "credit": {
+          "title": "Celsus Library",
+          "author": "Benh LIEU SONG",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ephesus_Celsus_Library_Fa%C3%A7ade.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
       },
       {
-        "caption": "Sardis"
+        "caption": "Pergamon Acropolis",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/3e/The_Temple_of_Trajan_%28Trajaneum%29%2C_Upper_Acropolis%2C_Pergamon%2C_Turkey_%285918905252%29.jpg",
+        "alt": "Temple of Trajan on the Acropolis of Pergamon",
+        "credit": {
+          "title": "The Temple of Trajan (Trajaneum), Upper Acropolis, Pergamon, Turkey",
+          "author": "Carole Raddato",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Temple_of_Trajan_(Trajaneum),_Upper_Acropolis,_Pergamon,_Turkey_(5918905252).jpg",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "shareAlike": false,
+          "changes": "Original photograph linked without file modification. Site CSS crops gallery previews; the lightbox shows the full frame."
+        }
       },
       {
-        "caption": "Laodicea"
+        "caption": "Sardis — Temple of Artemis",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/84/Temple_of_Artemis_in_Sardis.jpg",
+        "alt": "Temple of Artemis and surrounding landscape at Sardis",
+        "credit": {
+          "title": "Temple of Artemis in Sardis",
+          "author": "Quintucket",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Temple_of_Artemis_in_Sardis.jpg",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "shareAlike": true,
+          "changes": "Original photograph linked without file modification. Site CSS crops gallery previews; the lightbox shows the full frame."
+        }
       },
       {
-        "caption": "Ephesus Ancient City"
+        "caption": "Laodicea Ancient City",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Panoramic_view_of_Laodicea_on_the_Lycus.jpg",
+        "alt": "Panoramic view of archaeological remains at Laodicea on the Lycus",
+        "credit": {
+          "title": "Panoramic view of Laodicea on the Lycus",
+          "author": "Balkanique",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Panoramic_view_of_Laodicea_on_the_Lycus.jpg",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "shareAlike": true,
+          "changes": "Original photograph linked without file modification. Site CSS crops gallery previews; the lightbox shows the full frame."
+        }
       },
       {
-        "caption": "Basilica of St. John"
+        "caption": "House of the Virgin Mary",
+        "url": "/axu-international-pages/images/tours/ephesus/house-of-virgin-mary.jpg",
+        "alt": "House of the Virgin Mary",
+        "credit": {
+          "title": "House of the Virgin Mary",
+          "author": "Peter C in Toronto Canada",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:House_of_the_Virgin_Mary_in_Ephesus.jpg",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "shareAlike": false,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
       }
     ],
     "highlights": [
-      "Biblical heritage",
-      "Multi-day tour",
-      "Private tour",
-      "Ephesus",
-      "Pamukkale",
-      "Pergamon",
-      "Seven Churches route"
-    ]
+      "Seven Biblical Cities in One Journey",
+      "Private Vehicle and Guided Sightseeing",
+      "Five Days / Four Nights",
+      "Pergamon, Sardis and Laodicea",
+      "Ephesus and the Christian Heritage of Selcuk",
+      "Izmir Airport Arrival and Departure Transfers"
+    ],
+    "language": "English; other languages on request"
   },
   {
     "id": "axu-10",
