@@ -87,7 +87,17 @@ function packageEnquiryFields(tour) {
  return `<p class="quote-privacy">Tour Type: <strong>${esc(tour.enquiryVariant)}</strong> · Price: On request</p>
  <label>Enquiry type<select name="enquiryType" required><option value="Individual Traveller">Individual Traveller</option><option value="Travel Agency">Travel Agency</option></select></label>
  <label id="agency-name-field" hidden>Agency Name (optional)<input name="agencyName" maxlength="200" autocomplete="organization"></label>
- <p class="quote-privacy">${esc(tour.agencyWelcome)} A quotation request is not a confirmed booking.</p>`;
+ <p class="quote-privacy">${esc(tour.agencyWelcome)} ${tour.pickupEnquiry ? 'A quotation request is not a confirmed booking or approval of cruise suitability.' : 'A quotation request is not a confirmed booking.'}</p>`;
+}
+function pickupEnquiryFields(tour) {
+ if (!tour?.pickupEnquiry) return '';
+ return `<label>Pickup type (required)<select name="pickupType" required><option value="">Select pickup type</option><option value="Cruise Port">Cruise Port</option><option value="Hotel">Hotel</option></select></label>
+ <div id="cruise-pickup-fields" class="package-enquiry" hidden>
+ <label>Ship Name (required)<input name="shipName" maxlength="200" disabled></label>
+ <label>Arrival Time (required)<input name="arrivalTime" type="time" disabled></label>
+ <label>All-Aboard Time (required)<input name="allAboardTime" type="time" disabled></label>
+ <p class="quote-privacy">Enter times in local port time on the tour date. All-aboard is the final boarding deadline, not the ship's sailing time. Cruise suitability must be confirmed before booking.</p></div>
+ <label id="hotel-pickup-field" hidden>Hotel Name (optional)<input name="hotelName" maxlength="200" autocomplete="organization" disabled></label>`;
 }
 function requestForm(tour) {
  return `<form id="quote-form" class="quote-form" ${tour ? `data-tour-id="${esc(tour.id)}"` : ''}>
@@ -95,9 +105,10 @@ function requestForm(tour) {
  ${tour ? `<label class="full">Tour Name<textarea name="tourName" rows="3" readonly>${esc(tour.title)}</textarea></label>` : `<label class="full">Tour Name (required)<select name="tourId" required><option value="">Select a tour</option>${tours.map(item=>`<option value="${esc(item.id)}">${esc(item.title)}</option>`).join('')}</select></label>`}
  <div id="package-enquiry-fields" class="full package-enquiry" ${tour?.enquiryVariant ? '' : 'hidden'}>${packageEnquiryFields(tour)}</div>
  <label class="full">Full Name (required)<input name="fullName" autocomplete="name" required maxlength="120"></label>
- <label><span id="quote-date-label">${tour?.enquiryVariant ? 'Preferred Start Date' : 'Tour Date'} (required)</span><input name="tourDate" type="date" min="${todayDate()}" required></label>
+ <label><span id="quote-date-label">${tour?.enquiryVariant&&!tour?.pickupEnquiry ? 'Preferred Start Date' : 'Tour Date'} (required)</span><input name="tourDate" type="date" min="${todayDate()}" required></label>
  <label>Number of Guests (required)<input name="guests" type="number" min="1" step="1" inputmode="numeric" required></label>
- <label class="full">Cruise Ship / Hotel Name (optional)<input name="shipOrHotel" maxlength="200"></label>
+ <div id="pickup-enquiry-fields" class="full package-enquiry" ${tour?.pickupEnquiry ? '' : 'hidden'}>${pickupEnquiryFields(tour)}</div>
+ <label id="legacy-pickup-field" class="full" ${tour?.pickupEnquiry ? 'hidden' : ''}>Cruise Ship / Hotel Name (optional)<input name="shipOrHotel" maxlength="200" ${tour?.pickupEnquiry ? 'disabled' : ''}></label>
  <label class="full">Additional Notes (optional)<textarea name="notes" rows="3" maxlength="1500"></textarea></label>
  <button class="button full whatsapp-button" type="submit"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M21 11.5a9 9 0 0 1-13.3 7.9L3 21l1.6-4.7A9 9 0 1 1 21 11.5Z"/><path d="m8 7 2 3-1 1c1 2 2 3 4 4l1-1 3 2c-1 2-3 2-5 1-3-1-6-4-6-7 0-1 1-2 2-3Z"/></svg>Continue to WhatsApp</button>
  <p id="quote-status" class="form-status full" role="status" aria-live="polite"></p>
@@ -108,7 +119,8 @@ function whatsappMessage(tour, values) {
  const [year, month, day] = values.tourDate.split('-').map(Number);
  const date = new Date(year, month-1, day, 12);
  const formattedDate = new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'long',year:'numeric'}).format(date);
- return ['Hello AXU TOURS,', '', 'I would like to request a quote.', '', `Tour: ${tour.title}`, ...(tour.enquiryVariant ? [`Tour Type: ${tour.enquiryVariant}`,`Enquiry Type: ${values.enquiryType}`, ...(values.enquiryType==='Travel Agency' && values.agencyName?.trim() ? [`Agency Name: ${values.agencyName.trim()}`] : [])] : []), `Name: ${values.fullName.trim()}`, `${tour.enquiryVariant ? 'Preferred Start Date' : 'Date'}: ${formattedDate}`, `Guests: ${values.guests}`, ...(values.shipOrHotel.trim() ? [`Cruise Ship / Hotel: ${values.shipOrHotel.trim()}`] : []), ...(values.notes.trim() ? [`Additional Notes: ${values.notes.trim()}`] : []), '', 'Please send me availability and pricing information.'].join('\n');
+ const pickup = tour.pickupEnquiry ? [`Pickup Type: ${values.pickupType}`, ...(values.pickupType==='Cruise Port' ? [`Ship Name: ${values.shipName.trim()}`,`Arrival Time: ${values.arrivalTime}`,`All-Aboard Time: ${values.allAboardTime}`,'Ship times are local port time on the tour date.'] : values.hotelName?.trim() ? [`Hotel Name: ${values.hotelName.trim()}`] : [])] : values.shipOrHotel?.trim() ? [`Cruise Ship / Hotel: ${values.shipOrHotel.trim()}`] : [];
+ return ['Hello AXU TOURS,', '', 'I would like to request a quote.', '', `Tour: ${tour.title}`, ...(tour.enquiryVariant ? [`Tour Type: ${tour.enquiryVariant}`,`Enquiry Type: ${values.enquiryType}`, ...(values.enquiryType==='Travel Agency' && values.agencyName?.trim() ? [`Agency Name: ${values.agencyName.trim()}`] : [])] : []), `Name: ${values.fullName.trim()}`, `${tour.enquiryVariant&&!tour.pickupEnquiry ? 'Preferred Start Date' : 'Date'}: ${formattedDate}`, `Guests: ${values.guests}`, ...pickup, ...(values.notes.trim() ? [`Additional Notes: ${values.notes.trim()}`] : []), '', 'Please send me availability and pricing information.'].join('\n');
 }
 function bindQuoteForm() {
  const form = document.querySelector('#quote-form');
@@ -116,10 +128,19 @@ function bindQuoteForm() {
  const status = form.querySelector('#quote-status'), copy = form.querySelector('#copy-quote');
  let preparedMessage='';
  const selectedTour=()=>tours.find(item=>item.id===(form.dataset.tourId || form.elements.tourId?.value));
+ const syncPickupState=()=>{
+  if(!selectedTour()?.pickupEnquiry)return;
+  const cruise=form.elements.pickupType.value==='Cruise Port',hotel=form.elements.pickupType.value==='Hotel';
+  form.querySelector('#cruise-pickup-fields').hidden=!cruise;
+  for(const name of ['shipName','arrivalTime','allAboardTime']){form.elements[name].disabled=!cruise;form.elements[name].required=cruise;if(!cruise)form.elements[name].setCustomValidity('');}
+  form.querySelector('#hotel-pickup-field').hidden=!hotel;form.elements.hotelName.disabled=!hotel;
+ };
  const syncPackageFields=()=>{
   const tour=selectedTour(),fields=form.querySelector('#package-enquiry-fields');
   fields.hidden=!tour?.enquiryVariant;fields.innerHTML=packageEnquiryFields(tour);
-  form.querySelector('#quote-date-label').textContent=`${tour?.enquiryVariant ? 'Preferred Start Date' : 'Tour Date'} (required)`;
+  form.querySelector('#quote-date-label').textContent=`${tour?.enquiryVariant&&!tour?.pickupEnquiry ? 'Preferred Start Date' : 'Tour Date'} (required)`;
+  const pickup=form.querySelector('#pickup-enquiry-fields');pickup.hidden=!tour?.pickupEnquiry;pickup.innerHTML=pickupEnquiryFields(tour);
+  form.querySelector('#legacy-pickup-field').hidden=!!tour?.pickupEnquiry;form.elements.shipOrHotel.disabled=!!tour?.pickupEnquiry;syncPickupState();
  };
  form.addEventListener('change',event=>{
   if(event.target.name==='enquiryType')form.querySelector('#agency-name-field').hidden=event.target.value!=='Travel Agency';
@@ -135,9 +156,17 @@ function bindQuoteForm() {
   const validDate=/^\d{4}-\d{2}-\d{2}$/.test(dateValue) && date.getFullYear()===year && date.getMonth()+1===month && date.getDate()===day && dateValue>=form.elements.tourDate.min;
   form.elements.tourDate.setCustomValidity(validDate ? '' : 'Please choose today or a future tour date.');
   if(selectedTour()?.enquiryVariant)form.elements.enquiryType.setCustomValidity(['Individual Traveller','Travel Agency'].includes(form.elements.enquiryType.value) ? '' : 'Please choose an enquiry type.');
+  if(selectedTour()?.pickupEnquiry){
+   form.elements.pickupType.setCustomValidity(['Cruise Port','Hotel'].includes(form.elements.pickupType.value)?'':'Please choose a pickup type.');
+   if(form.elements.pickupType.value==='Cruise Port'){
+    form.elements.shipName.setCustomValidity(form.elements.shipName.value.trim()?'':'Please enter your ship name.');
+    for(const name of ['arrivalTime','allAboardTime'])form.elements[name].setCustomValidity(/^([01]\d|2[0-3]):[0-5]\d$/.test(form.elements[name].value)?'':'Please enter a valid local port time.');
+   }
+  }
  };
  const edit = event => {
   if(event.target.name==='tourId')syncPackageFields();
+  if(event.target.name==='pickupType')syncPickupState();
   clearPreparedMessage();validate();
  };
  form.addEventListener('input',edit);
@@ -172,7 +201,7 @@ function bindQuoteForm() {
   try { window.location.assign(url); }
   catch { /* The small copy link remains available when navigation is blocked. */ }
  });
- form.addEventListener('reset',()=>{clearPreparedMessage();for(const field of [form.elements.fullName,form.elements.guests,form.elements.tourDate,form.elements.enquiryType].filter(Boolean))field.setCustomValidity('');setTimeout(syncPackageFields,0);});
+ form.addEventListener('reset',()=>{clearPreparedMessage();for(const name of ['fullName','guests','tourDate','enquiryType','pickupType','shipName','arrivalTime','allAboardTime'])form.elements[name]?.setCustomValidity('');setTimeout(syncPackageFields,0);});
 }
 function pairedTourLink(tour) {
  const other=tours.find(item=>item.id===tour.pairedTourId);

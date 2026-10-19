@@ -381,46 +381,180 @@
   {
     "id": "axu-05",
     "slug": "pamukkale-tour-from-kusadasi",
-    "title": "Private Pamukkale Tour from Kusadasi",
-    "summary": "Private Pamukkale tour departing from Kusadasi.",
-    "departure": "Kusadasi",
-    "duration": null,
-    "durationGroup": null,
+    "title": "Private Pamukkale & Hierapolis Tour from Kusadasi Port or Hotels",
+    "summary": "Discover Pamukkale’s white travertine terraces and the ancient city of Hierapolis on a private day tour from Kusadasi. Travel with a sightseeing vehicle and licensed guide reserved exclusively for your party, with pickup and return at the agreed cruise-port meeting point or hotel.\n\nExplore the natural landscape and archaeological remains, enjoy a local lunch and discover regional craftsmanship during a local handicrafts presentation and shopping stop.\n\nFor cruise guests, availability and the itinerary are confirmed only after reviewing the ship’s arrival and all-aboard times.",
+    "departure": "Kusadasi Cruise Port / Kusadasi hotels",
+    "duration": "Approximately 9–11 hours, including road travel",
+    "durationGroup": "Full day",
     "destinations": [
-      "Pamukkale"
+      "Pamukkale",
+      "Hierapolis"
     ],
     "types": [
-      "Private tour"
+      "Private tour",
+      "Day tour",
+      "Shore excursion"
     ],
-    "itinerary": [],
-    "included": [],
-    "excluded": [],
-    "conditions": [],
+    "itinerary": [
+      {
+        "title": "Kusadasi Port or Hotel Pickup",
+        "description": "Meet the local team at the confirmed cruise-port meeting point or hotel and depart in your private air-conditioned vehicle."
+      },
+      {
+        "title": "Journey to Pamukkale",
+        "description": "Travel inland towards Pamukkale. This is a long-distance day trip; rest stops and departure arrangements will be planned around the confirmed itinerary."
+      },
+      {
+        "title": "Pamukkale Travertine Terraces",
+        "description": "Discover the white travertine formations and enjoy time for photographs and walking in the areas open to visitors. Access to individual terraces depends on site management and local conditions."
+      },
+      {
+        "title": "Hierapolis Ancient City",
+        "description": "Explore the archaeological remains with your guide and learn about the ancient city’s history. The walking route will be arranged according to available time and the group’s mobility."
+      },
+      {
+        "title": "Local Lunch",
+        "description": "Enjoy lunch at a local restaurant. Drinks are not included unless specified in the quotation."
+      },
+      {
+        "title": "Local Handicrafts and Shopping",
+        "description": "Discover local stone craftsmanship and enjoy time to browse and shop. Purchases are entirely optional. For cruise guests, this stop takes place only if the confirmed return plan allows."
+      },
+      {
+        "title": "Return to Kusadasi",
+        "description": "Return to the agreed hotel or cruise-port meeting point. For cruise guests, departure from Pamukkale will be planned around the confirmed all-aboard time."
+      }
+    ],
+    "included": [
+      "Private air-conditioned sightseeing vehicle and driver",
+      "Licensed guide for the sightseeing programme",
+      "Pickup and return at the confirmed Kusadasi port meeting point or hotel",
+      "Lunch at a local restaurant",
+      "Itinerary planning for your party"
+    ],
+    "excluded": [
+      "Archaeological-site, museum and attraction admission fees unless expressly included in the quotation",
+      "Any additional antique-pool admission or swimming charges, if available and requested",
+      "Drinks unless specified",
+      "Personal purchases and expenses",
+      "Optional activities",
+      "Guide and driver gratuities"
+    ],
+    "conditions": [
+      "This tour is available to cruise guests only when the ship’s port schedule allows sufficient time for the journey, sightseeing and a return buffer. Please provide your ship name, arrival time and all-aboard time when requesting a quotation. Suitability must be confirmed before booking.",
+      "Total duration is approximately 9–11 hours, including road travel. The journey can take approximately three hours each way, depending on traffic, road conditions and pickup arrangements.",
+      "This long-distance excursion is not suitable for every ship’s port schedule. Suitability requires operational confirmation; no fixed minimum port-stay duration or unconditional return guarantee is offered.",
+      "For cruise guests, all-aboard means the final boarding deadline, not the ship’s sailing time. Enter arrival and all-aboard times in local port time on the tour date.",
+      "Visit order, rest stops and time at each site may change with traffic, site access, weather and the confirmed itinerary. Individual stops do not have fixed durations.",
+      "The local stone handicrafts presentation and shopping visit is part of the itinerary. Purchases are optional. For cruise guests, this stop is included only when the confirmed return plan allows; no specific shop or workshop is promised.",
+      "Hierapolis Archaeology Museum: subject to opening, available time and confirmation.",
+      "Cleopatra Antique Pool: not part of the standard package. Access, opening status and any swimming arrangements require separate confirmation.",
+      "Guiding language, hotel pickup area, any additional transfer charges, admission arrangements, payment and cancellation terms will be specified in your quotation before booking.",
+      "A quotation request is not a confirmed booking or approval of cruise suitability."
+    ],
     "conditionsConfirmed": false,
     "price": null,
     "currency": null,
-    "images": [],
+    "images": [
+      {
+        "caption": "Pamukkale Travertine Terraces",
+        "alt": "White travertine terraces and turquoise pools at Pamukkale",
+        "url": "/axu-international-pages/images/tours/pamukkale-hierapolis/pamukkale-pools-overview.jpg",
+        "credit": {
+          "title": "The travertines of Pamukkale 3",
+          "author": "Slyronit",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_travertines_of_Pamukkale_3.jpg",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "shareAlike": true,
+          "changes": "Resized to a maximum of 1920 pixels without upscaling or cropping; JPEG quality 86, metadata removed. CSS crops previews; the lightbox displays the full frame."
+        }
+      }
+    ],
     "gallery": [
       {
-        "caption": "Pamukkale"
+        "caption": "Pamukkale Travertine Terraces",
+        "alt": "White travertine terraces and turquoise pools at Pamukkale",
+        "url": "/axu-international-pages/images/tours/pamukkale-hierapolis/pamukkale-pools-overview.jpg",
+        "credit": {
+          "title": "The travertines of Pamukkale 3",
+          "author": "Slyronit",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_travertines_of_Pamukkale_3.jpg",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "shareAlike": true,
+          "changes": "Resized to a maximum of 1920 pixels without upscaling or cropping; JPEG quality 86, metadata removed. CSS crops previews; the lightbox displays the full frame."
+        }
       },
       {
-        "caption": "Pamukkale Terrace Views"
+        "caption": "Hierapolis Ancient Theatre",
+        "alt": "Stone seating and archaeological remains of the theatre at Hierapolis",
+        "url": "/axu-international-pages/images/tours/pamukkale-hierapolis/hierapolis-theatre.jpg",
+        "credit": {
+          "title": "The Theatre of Hierapolis, Pamukkale",
+          "author": "Slyronit",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Theatre_of_Hierapolis%2C_Pamukkale.jpg",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "shareAlike": true,
+          "changes": "Resized to a maximum of 1920 pixels without upscaling or cropping; JPEG quality 86, metadata removed. CSS crops previews; the lightbox displays the full frame."
+        }
       },
       {
-        "caption": "Pamukkale Landscape"
+        "caption": "Travertine Pools — Close View",
+        "url": "/axu-international-pages/images/tours/pamukkale/pamukkale-travertines.jpg",
+        "alt": "Turquoise water beside white travertine formations at Pamukkale",
+        "credit": {
+          "title": "The Travertine terraces of Pamukkale",
+          "author": "Slyronit",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Travertine_terraces_of_Pamukkale.jpg",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "shareAlike": true,
+          "changes": "Original photograph, unmodified. CSS crops previews; the lightbox retains the full frame."
+        }
       },
       {
-        "caption": "Pamukkale Details"
+        "caption": "Hierapolis Monumental Ruins",
+        "alt": "Ancient stone arches at Hierapolis",
+        "url": "/axu-international-pages/images/tours/pamukkale-hierapolis/hierapolis-ruins.jpg",
+        "credit": {
+          "title": "Hierapolis, Pamukkale",
+          "author": "Slyronit",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hierapolis%2C_Pamukkale.jpg",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "shareAlike": true,
+          "changes": "Resized to a maximum of 1920 pixels without upscaling or cropping; JPEG quality 86, metadata removed. CSS crops previews; the lightbox displays the full frame."
+        }
       },
       {
-        "caption": "Pamukkale Panorama"
+        "caption": "Pamukkale Landscape",
+        "alt": "Lake and landscape below the Pamukkale travertines",
+        "url": "/axu-international-pages/images/tours/pamukkale-hierapolis/pamukkale-landscape.jpg",
+        "credit": {
+          "title": "Lake of Pamukkale seen from the travertines",
+          "author": "Slyronit",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_of_Pamukkale_seen_from_the_travertines.jpg",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "shareAlike": true,
+          "changes": "Resized to a maximum of 1920 pixels without upscaling or cropping; JPEG quality 86, metadata removed. CSS crops previews; the lightbox displays the full frame."
+        }
       }
     ],
     "highlights": [
-      "Private tour",
-      "Pamukkale"
-    ]
+      "Private Vehicle and Licensed Guide",
+      "Kusadasi Port or Hotel Pickup",
+      "Pamukkale’s White Travertine Terraces",
+      "Guided Exploration of Hierapolis",
+      "Local Lunch and Regional Craftsmanship",
+      "Cruise-Schedule Review Before Confirmation"
+    ],
+    "enquiryVariant": "Private Tour",
+    "pickupEnquiry": true,
+    "agencyWelcome": "We welcome enquiries from individual travellers, families and travel agencies. Share your preferred date and number of guests to request a quotation for yourself or your clients.",
+    "language": "Guiding language specified in your quotation"
   },
   {
     "id": "axu-06",

@@ -1,0 +1,55 @@
+{
+  "verifiedOn": "2026-10-19",
+  "author": "Slyronit",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "commercialUse": true,
+  "changes": "Resized to at most 1920 pixels; JPEG quality 86; no cropping; metadata removed.",
+  "photos": [
+    {
+      "file": "pamukkale-pools-overview.jpg",
+      "sourceTitle": "The travertines of Pamukkale 3.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/68/The_travertines_of_Pamukkale_3.jpg",
+      "originalSha256": "3dc9b126a7e5b0c8313a1dbe51646877239a8abdf9a14122c05ec280805d7622",
+      "sha256": "c635d4dd4a16841f7815bdd20e462f52c0111ef2b122498494bf7e8f39349c64",
+      "width": 1920,
+      "height": 1440,
+      "bytes": 445798,
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_travertines_of_Pamukkale_3.jpg"
+    },
+    {
+      "file": "hierapolis-theatre.jpg",
+      "sourceTitle": "The Theatre of Hierapolis, Pamukkale.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1b/The_Theatre_of_Hierapolis%2C_Pamukkale.jpg",
+      "originalSha256": "581de186b84ab42ef1d6da2cd3cbf8e3df11478cf039501125a1d057bcf39d72",
+      "sha256": "3d6326f323c902ffdb728b6c26c923c306908aab9f97d86233641c99f84a0c05",
+      "width": 1920,
+      "height": 1440,
+      "bytes": 537008,
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Theatre_of_Hierapolis%2C_Pamukkale.jpg"
+    },
+    {
+      "file": "hierapolis-ruins.jpg",
+      "sourceTitle": "Hierapolis, Pamukkale.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/96/Hierapolis%2C_Pamukkale.jpg",
+      "originalSha256": "5b8f97a4507607e16cb96a1216fd60ec6fdf99be1dd679fc57ec2d3568a285af",
+      "sha256": "5e7bbd988565fd5e6af4b73aeec67e6084cca28188865987a7a4388baffb8338",
+      "width": 1920,
+      "height": 1440,
+      "bytes": 563885,
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hierapolis%2C_Pamukkale.jpg"
+    },
+    {
+      "file": "pamukkale-landscape.jpg",
+      "sourceTitle": "Lake of Pamukkale seen from the travertines.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Lake_of_Pamukkale_seen_from_the_travertines.jpg",
+      "originalSha256": "e36ee547bc987b3c6ec96eef185ae0e5fb56dc29a567f53ac50a9f9bd2414fb5",
+      "sha256": "5f7a0d455dc910de0ad6c0d0f2e4f61e6b76472bad32eec0515f45f8b50cdcbe",
+      "width": 1920,
+      "height": 1440,
+      "bytes": 286144,
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_of_Pamukkale_seen_from_the_travertines.jpg"
+    }
+  ],
+  "reusedCloseView": "/axu-international-pages/images/tours/pamukkale/pamukkale-travertines.jpg"
+}

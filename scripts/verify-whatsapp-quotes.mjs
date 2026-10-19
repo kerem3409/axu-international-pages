@@ -8,7 +8,7 @@ const catalogue = JSON.parse(read('catalogue.json'));
 const app = read('app.js');
 assert.equal(catalogue.length,12);
 assert.ok(!catalogue.some(t=>t.id==='axu-02'||t.slug==='archeological-ephesus-tour-from-kusadasi'));
-assert.deepEqual(catalogue.filter(t=>!t.enquiryVariant),JSON.parse(cp.execFileSync('git',['show','HEAD:catalogue.json'],{cwd:root,encoding:'utf8'})).filter(t=>!['axu-02','axu-04'].includes(t.id)&&!t.enquiryVariant));
+assert.deepEqual(catalogue.filter(t=>!t.enquiryVariant),JSON.parse(cp.execFileSync('git',['show','HEAD:catalogue.json'],{cwd:root,encoding:'utf8'})).filter(t=>!['axu-02','axu-04','axu-05'].includes(t.id)&&!t.enquiryVariant));
 assert.ok(!app.includes('/api/quote-requests'));
 assert.ok(!app.includes('localStorage') && !app.includes('sessionStorage'));
 assert.ok(!app.includes('window.open('));assert.ok(app.includes('window.location.assign(url)'));
@@ -32,13 +32,17 @@ function fill(form) {
  form.elements.guests.value='4';form.elements.shipOrHotel.value='MSC Fantasia';
  form.elements.notes.value='Morning departure, please.\nTürkçe: İzmir & Efes 🌅';
 }
+function fillPickup(w,form,tour) {
+ if(!tour.pickupEnquiry)return;
+ form.elements.pickupType.value='Hotel';form.elements.pickupType.dispatchEvent(new w.Event('change',{bubbles:true}));form.elements.hotelName.value='MSC Fantasia';
+}
 function submit(w,form) { form.dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true})); }
 function checkLink(opened,tour,device = 'desktop') {
  const [href]=opened.at(-1);const url=new URL(href);
  assert.equal(url.origin+url.pathname,'https://wa.me/905367040944');
  assert.deepEqual([...url.searchParams.keys()],['text']);
  assert.ok(!href.includes('+'),'Spaces must use percent encoding');
- assert.equal(url.searchParams.get('text'),['Hello AXU TOURS,','','I would like to request a quote.','',`Tour: ${tour.title}`,...(tour.enquiryVariant?[`Tour Type: ${tour.enquiryVariant}`,'Enquiry Type: Individual Traveller']:[]),'Name: John & Jane + Smith',`${tour.enquiryVariant?'Preferred Start Date':'Date'}: ${formattedDate}`,'Guests: 4','Cruise Ship / Hotel: MSC Fantasia','Additional Notes: Morning departure, please.\nTürkçe: İzmir & Efes 🌅','','Please send me availability and pricing information.'].join('\n'));
+ assert.equal(url.searchParams.get('text'),['Hello AXU TOURS,','','I would like to request a quote.','',`Tour: ${tour.title}`,...(tour.enquiryVariant?[`Tour Type: ${tour.enquiryVariant}`,'Enquiry Type: Individual Traveller']:[]),'Name: John & Jane + Smith',`${tour.enquiryVariant&&!tour.pickupEnquiry?'Preferred Start Date':'Date'}: ${formattedDate}`,'Guests: 4',...(tour.pickupEnquiry?['Pickup Type: Hotel','Hotel Name: MSC Fantasia']:['Cruise Ship / Hotel: MSC Fantasia']),'Additional Notes: Morning departure, please.\nTürkçe: İzmir & Efes 🌅','','Please send me availability and pricing information.'].join('\n'));
 }
 for (const device of ['desktop','android','iphone','ipad']) {
 for (const tour of catalogue) {
@@ -49,7 +53,7 @@ for (const tour of catalogue) {
   assert.equal(d.querySelectorAll('.td-gallery [data-photo]').length,5);
   assert.equal(d.querySelector('h1').textContent,tour.title);
   submit(w,form);assert.equal(opened.length,0);
-  fill(form);
+  fill(form);fillPickup(w,form,tour);
   for (const [field,value] of [['fullName','   '],['guests','0'],['guests','1.5'],['guests','-2'],['tourDate','2020-01-01'],['tourDate','']]) {
    const previous=form.elements[field].value;form.elements[field].value=value;submit(w,form);assert.equal(opened.length,0,`${tour.id}: invalid ${field}`);form.elements[field].value=previous;
   }
@@ -85,7 +89,7 @@ const contact=await page('contact/',device);
 try {
  const form=contact.d.querySelector('#quote-form');assert.equal(form.elements.tourId.options.length,13);
  fill(form);submit(contact.w,form);assert.equal(contact.opened.length,0);
- for (const tour of catalogue) {form.elements.tourId.value=tour.id;form.elements.tourId.dispatchEvent(new contact.w.Event('change',{bubbles:true}));submit(contact.w,form);checkLink(contact.opened,tour,device);assert.equal(form.querySelector('#copy-quote').hidden,false);}
+ for (const tour of catalogue) {form.elements.tourId.value=tour.id;form.elements.tourId.dispatchEvent(new contact.w.Event('change',{bubbles:true}));fillPickup(contact.w,form,tour);submit(contact.w,form);checkLink(contact.opened,tour,device);assert.equal(form.querySelector('#copy-quote').hidden,false);}
 } finally {await contact.w.happyDOM.close();}
 }
 const home=await page('');
