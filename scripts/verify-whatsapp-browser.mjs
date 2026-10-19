@@ -54,14 +54,14 @@ try {
    await page.locator('[name="guests"]').fill('1.5');await submit.click();
    assert.equal(await page.evaluate(()=>window.openedWhatsApp.length),0);
    await page.locator('[name="guests"]').fill('4');
-   if(tour.pickupEnquiry){await page.locator('[name="pickupType"]').selectOption('Hotel');await page.locator('[name="hotelName"]').fill('MSC Fantasia');}else await page.locator('[name="shipOrHotel"]').fill('MSC Fantasia');
+   if(tour.pickupEnquiry||tour.cruiseDetailsEnquiry){await page.locator('[name="pickupType"]').selectOption('Hotel');await page.locator('[name="hotelName"]').fill('MSC Fantasia');}else await page.locator('[name="shipOrHotel"]').fill('MSC Fantasia');
    await page.locator('[name="notes"]').fill('Morning departure.\nİzmir & Efes 🌅');
    await submit.click();
    const opened=await page.evaluate(()=>window.openedWhatsApp);assert.equal(opened.length,1);
    const url=new URL(opened[0][0]);checkDestination(url,width<=390);
    assert.ok(url.searchParams.get('text').includes(`Tour: ${tour.title}\n`));
    assert.ok(url.searchParams.get('text').includes(`Name: John & Jane Smith\n${tour.enquiryVariant&&!tour.pickupEnquiry?'Preferred Start Date':'Date'}: 20 October 2099\nGuests: 4`));
-   assert.ok(url.searchParams.get('text').includes((tour.pickupEnquiry?'Pickup Type: Hotel\nHotel Name: MSC Fantasia':'Cruise Ship / Hotel: MSC Fantasia')+'\nAdditional Notes: Morning departure.'));
+   assert.ok(url.searchParams.get('text').includes((tour.pickupEnquiry||tour.cruiseDetailsEnquiry?'Pickup Type: Hotel\nHotel Name: MSC Fantasia':'Cruise Ship / Hotel: MSC Fantasia')+'\nAdditional Notes: Morning departure.'));
    assert.ok(url.searchParams.get('text').includes('İzmir & Efes 🌅'));
    assert.equal(await page.locator('#quote-form button').count(),1);
    assert.equal(await page.locator('#prepared-message,#quote-recovery,#whatsapp-fallback').count(),0);
@@ -94,7 +94,7 @@ try {
   await page.goto(origin+'/contact/');await page.locator('#quote-form').waitFor();
   assert.equal(await page.locator('[name="tourId"] option').count(),13);
   await page.locator('[name="fullName"]').fill('John & Jane Smith');await page.locator('[name="tourDate"]').fill('2099-10-20');await page.locator('[name="guests"]').fill('4');
-  for(const tour of catalogue){await page.locator('[name="tourId"]').selectOption(tour.id);if(tour.pickupEnquiry)await page.locator('[name="pickupType"]').selectOption('Hotel');await page.getByRole('button',{name:'Continue to WhatsApp'}).click();const href=await page.evaluate(()=>window.openedWhatsApp.at(-1)[0]);checkDestination(new URL(href),width<=390);assert.ok(new URL(href).searchParams.get('text').includes(`Tour: ${tour.title}\n`));}
+  for(const tour of catalogue){await page.locator('[name="tourId"]').selectOption(tour.id);if(tour.pickupEnquiry||tour.cruiseDetailsEnquiry)await page.locator('[name="pickupType"]').selectOption('Hotel');await page.getByRole('button',{name:'Continue to WhatsApp'}).click();const href=await page.evaluate(()=>window.openedWhatsApp.at(-1)[0]);checkDestination(new URL(href),width<=390);assert.ok(new URL(href).searchParams.get('text').includes(`Tour: ${tour.title}\n`));}
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  }
  await page.goto(origin+'/tours/');await page.locator('.quote-link').first().click();await page.locator('#quote-form').waitFor();assert.equal(new URL(page.url()).hash,'#request-quote');

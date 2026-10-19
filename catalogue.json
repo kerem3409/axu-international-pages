@@ -615,60 +615,169 @@
   {
     "id": "axu-07",
     "slug": "didyma-priene-miletos-tour-from-kusadasi",
-    "title": "Didyma, Priene and Miletus Tour from Kusadasi",
-    "summary": "Explore three ancient sites associated with the history and intellectual life of Ionia.",
-    "departure": "Kusadasi",
-    "duration": "8 hours",
+    "title": "Priene, Miletus & Didyma Tour from Kusadasi",
+    "summary": "Discover three remarkable archaeological sites on a full-day journey from Kusadasi. Explore Priene’s ancient streets and the remains of its Temple of Athena, discover the theatre and archaeological landscape of Miletus, and visit the monumental Temple of Apollo at Didyma.\n\nTravel with a licensed guide and air-conditioned transportation, with a local restaurant lunch and return transfers included.",
+    "departure": "Kusadasi hotels / cruise-port pickup on request",
+    "duration": "Approximately 8 hours, including transfers",
     "durationGroup": "Full day",
     "destinations": [
-      "Didyma",
+      "Priene",
       "Miletus",
-      "Priene"
+      "Didyma"
     ],
     "types": [
-      "Archaeology"
+      "Archaeology",
+      "Day tour",
+      "Shore excursion"
     ],
     "itinerary": [
-      "Visit Miletus.",
-      "Explore Priene.",
-      "Visit the Temple of Apollo at Didyma."
+      {
+        "title": "Kusadasi Pickup",
+        "description": "Pickup at the agreed hotel or meeting point and departure towards Priene. Cruise-port pickup is available on request, subject to confirmation of your ship’s arrival and all-aboard times."
+      },
+      {
+        "title": "Priene Ancient City",
+        "description": "Discover the city’s grid-planned streets, theatre and remains of the Temple of Athena. The route includes uphill walking, steps and uneven ancient surfaces."
+      },
+      {
+        "title": "Miletus Ancient City",
+        "description": "Explore the ancient theatre and surrounding archaeological remains. Learn about Miletus as an ancient port city and its place in the history of Ionian thought."
+      },
+      {
+        "title": "Local Lunch",
+        "description": "Enjoy lunch at a local restaurant. The lunch stop will be arranged according to the day’s route."
+      },
+      {
+        "title": "Temple of Apollo at Didyma",
+        "description": "Visit the monumental sanctuary of Apollo, known for its ancient oracle and impressive surviving architectural remains."
+      },
+      {
+        "title": "Return to Kusadasi",
+        "description": "Return to the agreed pickup area."
+      }
     ],
     "included": [
-      "English-speaking guide; other languages on request.",
-      "Local restaurant lunch and listed sightseeing.",
-      "Air-conditioned, non-smoking transport.",
-      "Site entrance tickets.",
-      "Pickup/return transfer is listed."
+      "English-speaking licensed guide; other languages on request",
+      "Air-conditioned, non-smoking transportation",
+      "Local restaurant lunch",
+      "Entrance tickets to Priene, Miletus and the Temple of Apollo at Didyma",
+      "Pickup and return transfers within the confirmed Kusadasi area"
     ],
-    "excluded": [],
-    "conditions": [],
+    "excluded": [
+      "Drinks",
+      "Personal expenses",
+      "Optional visits and services outside the confirmed programme",
+      "Guide and driver gratuities"
+    ],
+    "conditions": [
+      "The approximate duration is 8 hours, including transfers. Visit order may change according to traffic, site access and local conditions. No fixed stop times are promised.",
+      "Priene includes uphill walking, steps and uneven ancient surfaces. Comfortable walking shoes, sun protection and water are recommended. Guests with limited mobility should let us know in advance.",
+      "Access to archaeological areas and routes depends on current visitor conditions.",
+      "Cruise-port pickup is available on request, subject to confirmation of your ship’s arrival and all-aboard times. Please share your ship name, arrival time and all-aboard time when requesting a quote. Port pickup and itinerary suitability must be confirmed before booking; no unconditional ship-return guarantee is offered.",
+      "The tour type and departure arrangements will be confirmed in your quotation; this listing does not specify a private or group departure.",
+      "The listed entrance tickets are included. Pickup coverage, restaurant and menu details, any other unlisted charges, cancellation terms and final arrangements will be specified in your quotation.",
+      "A quotation request is not a confirmed booking."
+    ],
     "conditionsConfirmed": false,
     "price": null,
     "currency": null,
-    "images": [],
+    "images": [
+      {
+        "caption": "Temple of Apollo at Didyma",
+        "alt": "The monumental Temple of Apollo at Didyma",
+        "url": "/axu-international-pages/images/tours/priene-miletus-didyma/didyma-apollo-temple.jpg",
+        "credit": {
+          "title": "Temple of Apollo, Didyma.jpg",
+          "author": "Carole Raddato",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Temple%20of%20Apollo%2C%20Didyma.jpg",
+          "license": "CC BY-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "shareAlike": true,
+          "changes": "Resized to a maximum of 1920 pixels without upscaling or cropping; JPEG quality 86, metadata removed. CSS crops previews; the lightbox shows the full frame."
+        }
+      }
+    ],
     "gallery": [
       {
-        "caption": "Miletus"
+        "caption": "Temple of Apollo at Didyma",
+        "alt": "The monumental Temple of Apollo at Didyma",
+        "url": "/axu-international-pages/images/tours/priene-miletus-didyma/didyma-apollo-temple.jpg",
+        "credit": {
+          "title": "Temple of Apollo, Didyma.jpg",
+          "author": "Carole Raddato",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Temple%20of%20Apollo%2C%20Didyma.jpg",
+          "license": "CC BY-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "shareAlike": true,
+          "changes": "Resized to a maximum of 1920 pixels without upscaling or cropping; JPEG quality 86, metadata removed. CSS crops previews; the lightbox shows the full frame."
+        }
       },
       {
-        "caption": "Priene"
+        "caption": "Temple of Athena at Priene",
+        "alt": "Ruins of the Temple of Athena at Priene",
+        "url": "/axu-international-pages/images/tours/priene-miletus-didyma/priene-athena-temple.jpg",
+        "credit": {
+          "title": "Temple of Athena at Priene.jpg",
+          "author": "Ken Fairfax / Ken and Nyetta",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Temple%20of%20Athena%20at%20Priene.jpg",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "shareAlike": false,
+          "changes": "Resized to a maximum of 1920 pixels without upscaling or cropping; JPEG quality 86, metadata removed. CSS crops previews; the lightbox shows the full frame."
+        }
       },
       {
-        "caption": "Temple of Apollo at Didyma"
+        "caption": "Priene Ancient Theatre",
+        "alt": "The ancient theatre at Priene",
+        "url": "/axu-international-pages/images/tours/priene-miletus-didyma/priene-ancient-theatre.jpg",
+        "credit": {
+          "title": "Theater of Priene.jpg",
+          "author": "Ken and Nyetta",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Theater%20of%20Priene.jpg",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "shareAlike": false,
+          "changes": "Resized to a maximum of 1920 pixels without upscaling or cropping; JPEG quality 86, metadata removed. CSS crops previews; the lightbox shows the full frame."
+        }
       },
       {
-        "caption": "Miletus Archaeological Remains"
+        "caption": "Miletus Ancient Theatre",
+        "alt": "The ancient theatre at Miletus",
+        "url": "/axu-international-pages/images/tours/priene-miletus-didyma/miletus-ancient-theatre.jpg",
+        "credit": {
+          "title": "Miletus - Ancient Greek theatre 01.jpg",
+          "author": "Bernard Gagnon",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Miletus%20-%20Ancient%20Greek%20theatre%2001.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resized to a maximum of 1920 pixels without upscaling or cropping; JPEG quality 86, metadata removed. CSS crops previews; the lightbox shows the full frame."
+        }
       },
       {
-        "caption": "Priene Archaeological Remains"
+        "caption": "Temple of Apollo Adyton",
+        "alt": "Architectural remains inside the Temple of Apollo at Didyma",
+        "url": "/axu-international-pages/images/tours/priene-miletus-didyma/didyma-apollo-adyton.jpg",
+        "credit": {
+          "title": "Temple of Apollo, Didyma - Adyton.jpg",
+          "author": "Bernard Gagnon",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Temple%20of%20Apollo%2C%20Didyma%20-%20Adyton.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resized to a maximum of 1920 pixels without upscaling or cropping; JPEG quality 86, metadata removed. CSS crops previews; the lightbox shows the full frame."
+        }
       }
     ],
     "highlights": [
-      "Archaeology",
-      "Didyma",
-      "Miletus",
-      "Priene"
-    ]
+      "Priene’s Grid-Planned Ancient Streets",
+      "Temple of Athena at Priene",
+      "Miletus Ancient Theatre",
+      "Temple of Apollo at Didyma",
+      "Licensed Guide, Lunch and Return Transfers",
+      "Cruise-Port Pickup on Request, Subject to Confirmation"
+    ],
+    "cruiseDetailsEnquiry": true
   },
   {
     "id": "axu-08",

@@ -8,7 +8,7 @@ const catalogue = JSON.parse(read('catalogue.json'));
 const app = read('app.js');
 assert.equal(catalogue.length,12);
 assert.ok(!catalogue.some(t=>t.id==='axu-02'||t.slug==='archeological-ephesus-tour-from-kusadasi'));
-assert.deepEqual(catalogue.filter(t=>!t.enquiryVariant),JSON.parse(cp.execFileSync('git',['show','HEAD:catalogue.json'],{cwd:root,encoding:'utf8'})).filter(t=>!['axu-02','axu-04','axu-05'].includes(t.id)&&!t.enquiryVariant));
+assert.deepEqual(catalogue.filter(t=>t.id!=='axu-07'&&!t.enquiryVariant),JSON.parse(cp.execFileSync('git',['show','HEAD:catalogue.json'],{cwd:root,encoding:'utf8'})).filter(t=>!['axu-02','axu-04','axu-05','axu-07'].includes(t.id)&&!t.enquiryVariant));
 assert.ok(!app.includes('/api/quote-requests'));
 assert.ok(!app.includes('localStorage') && !app.includes('sessionStorage'));
 assert.ok(!app.includes('window.open('));assert.ok(app.includes('window.location.assign(url)'));
@@ -33,7 +33,7 @@ function fill(form) {
  form.elements.notes.value='Morning departure, please.\nTürkçe: İzmir & Efes 🌅';
 }
 function fillPickup(w,form,tour) {
- if(!tour.pickupEnquiry)return;
+ if(!tour.pickupEnquiry&&!tour.cruiseDetailsEnquiry)return;
  form.elements.pickupType.value='Hotel';form.elements.pickupType.dispatchEvent(new w.Event('change',{bubbles:true}));form.elements.hotelName.value='MSC Fantasia';
 }
 function submit(w,form) { form.dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true})); }
@@ -42,7 +42,7 @@ function checkLink(opened,tour,device = 'desktop') {
  assert.equal(url.origin+url.pathname,'https://wa.me/905367040944');
  assert.deepEqual([...url.searchParams.keys()],['text']);
  assert.ok(!href.includes('+'),'Spaces must use percent encoding');
- assert.equal(url.searchParams.get('text'),['Hello AXU TOURS,','','I would like to request a quote.','',`Tour: ${tour.title}`,...(tour.enquiryVariant?[`Tour Type: ${tour.enquiryVariant}`,'Enquiry Type: Individual Traveller']:[]),'Name: John & Jane + Smith',`${tour.enquiryVariant&&!tour.pickupEnquiry?'Preferred Start Date':'Date'}: ${formattedDate}`,'Guests: 4',...(tour.pickupEnquiry?['Pickup Type: Hotel','Hotel Name: MSC Fantasia']:['Cruise Ship / Hotel: MSC Fantasia']),'Additional Notes: Morning departure, please.\nTürkçe: İzmir & Efes 🌅','','Please send me availability and pricing information.'].join('\n'));
+ assert.equal(url.searchParams.get('text'),['Hello AXU TOURS,','','I would like to request a quote.','',`Tour: ${tour.title}`,...(tour.enquiryVariant?[`Tour Type: ${tour.enquiryVariant}`,'Enquiry Type: Individual Traveller']:[]),'Name: John & Jane + Smith',`${tour.enquiryVariant&&!tour.pickupEnquiry?'Preferred Start Date':'Date'}: ${formattedDate}`,'Guests: 4',...(tour.pickupEnquiry||tour.cruiseDetailsEnquiry?['Pickup Type: Hotel','Hotel Name: MSC Fantasia']:['Cruise Ship / Hotel: MSC Fantasia']),'Additional Notes: Morning departure, please.\nTürkçe: İzmir & Efes 🌅','','Please send me availability and pricing information.'].join('\n'));
 }
 for (const device of ['desktop','android','iphone','ipad']) {
 for (const tour of catalogue) {

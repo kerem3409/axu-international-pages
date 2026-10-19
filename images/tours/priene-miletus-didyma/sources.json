@@ -1,0 +1,77 @@
+{
+  "verifiedOn": "2026-10-19",
+  "verification": "Wikimedia Commons source pages and stated licenses reviewed before download; unmodified authors and license links retained in photo credits.",
+  "transformation": "Resized to max 1920px, JPEG quality 86; EXIF orientation corrected, no cropping, metadata removed.",
+  "photos": [
+    {
+      "file": "didyma-apollo-temple.jpg",
+      "sourceTitle": "Temple of Apollo, Didyma.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Temple%20of%20Apollo%2C%20Didyma.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Temple_of_Apollo%2C_Didyma.jpg",
+      "author": "Carole Raddato",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "originalSha256": "cd7cff785011eaf0ea5fdd40359b6f10b0f90ff9ec92f2e740fc9f0d0dc95fb8",
+      "sha256": "28eae8f76c69621a648dd2c9b2be9af7cff1c7c1bc6bf9ca195f294077fb94d8",
+      "width": 1920,
+      "height": 1441,
+      "bytes": 503043
+    },
+    {
+      "file": "priene-athena-temple.jpg",
+      "sourceTitle": "Temple of Athena at Priene.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Temple%20of%20Athena%20at%20Priene.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Temple_of_Athena_at_Priene.jpg",
+      "author": "Ken Fairfax / Ken and Nyetta",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSha256": "e277c38a8d1b0d56e9395d25dea9d8a8b86fe18d47557b00e4acf686a1ed93ff",
+      "sha256": "7cab3ad41d3a0d87ea3d40df04c5599179b3830f98449fee6f72f011297fdadb",
+      "width": 1920,
+      "height": 1275,
+      "bytes": 628677
+    },
+    {
+      "file": "priene-ancient-theatre.jpg",
+      "sourceTitle": "Theater of Priene.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Theater%20of%20Priene.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Theater_of_Priene.jpg",
+      "author": "Ken and Nyetta",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSha256": "5b3ee61f55e9614102289ea341055e57c28f9f72b085bf9c26f79b1a51867edb",
+      "sha256": "35df03785faaa27f2930c34aa90a2c3246812e98910a03c0fa36482e391bb9a0",
+      "width": 1920,
+      "height": 429,
+      "bytes": 266653
+    },
+    {
+      "file": "miletus-ancient-theatre.jpg",
+      "sourceTitle": "Miletus - Ancient Greek theatre 01.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Miletus%20-%20Ancient%20Greek%20theatre%2001.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Miletus_-_Ancient_Greek_theatre_01.jpg",
+      "author": "Bernard Gagnon",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "originalSha256": "ab519b91ddd95a7eb46c13eec417aad86f06f6e5ae42271faf40f7a0f3eebde3",
+      "sha256": "7ed1d6613f2ba60b3944028a3ecad656c817b446d134f94c6a4e90d457f4af6f",
+      "width": 1920,
+      "height": 590,
+      "bytes": 355393
+    },
+    {
+      "file": "didyma-apollo-adyton.jpg",
+      "sourceTitle": "Temple of Apollo, Didyma - Adyton.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Temple%20of%20Apollo%2C%20Didyma%20-%20Adyton.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Temple_of_Apollo%2C_Didyma_-_Adyton.jpg",
+      "author": "Bernard Gagnon",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "originalSha256": "3ff829d0ce204afb99bd42ab23d538ee7138cb2fabd2af8ca850d01340ffd4a2",
+      "sha256": "1ba1ba762ed71283f5c9532b203170d4a2586143c8989bbd0726b043d5ab987d",
+      "width": 1920,
+      "height": 1269,
+      "bytes": 579266
+    }
+  ]
+}
