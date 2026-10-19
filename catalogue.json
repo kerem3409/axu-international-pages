@@ -512,44 +512,144 @@
       "Private tour"
     ],
     "itinerary": [
-      "Explore Pergamon: theatre, Trajan and Athena temples, library remains, ancient water systems and the altar area.",
-      "Visit Asklepion.",
-      "Lunch at a local restaurant."
+      {
+        "title": "Departure from Izmir",
+        "description": "Begin the private day tour from Izmir and travel towards Bergama according to the arrangements confirmed in your quotation. The agreed pickup or meeting point, transfer type and any airport transfer must be specified before booking."
+      },
+      {
+        "title": "Pergamon Acropolis",
+        "description": "Explore the Acropolis and its archaeological remains, including the steep hillside theatre, the sanctuary of Athena, the Trajaneum and other monumental remains. Access and the walking route depend on site conditions."
+      },
+      {
+        "title": "Great Altar Foundations",
+        "description": "See the foundations and archaeological setting associated with Pergamon's Great Altar. The Great Altar itself is not at the ancient site; it is held at the Pergamonmuseum in Berlin."
+      },
+      {
+        "title": "Asklepion",
+        "description": "Continue to the Asklepion, the ancient healing sanctuary outside the Acropolis. Learn about its historical medical traditions and Pergamon-born physician Galen; this is a historical visit, not a health or treatment service."
+      },
+      {
+        "title": "Lunch Stop",
+        "description": "A lunch break can be scheduled during the day. Whether lunch is included, and the restaurant and meal arrangements, must be stated in your quotation."
+      },
+      {
+        "title": "Return to Izmir",
+        "description": "Return towards Izmir and the drop-off point specified in the confirmed package. Airport and port transfers, their type and any extra charges require explicit confirmation."
+      }
     ],
     "included": [
-      "English-speaking guide; other languages on request.",
-      "Lunch and listed visits.",
-      "Pickup/transfer from central Izmir hotels or airport; source also offers Dikili Port and Kusadasi."
+      "English-speaking guide; other guiding languages on request."
     ],
     "excluded": [
-      "Attraction admission."
+      "Admission fees for Pergamon Acropolis and Asklepion unless expressly listed as included in your quotation.",
+      "Lunch unless expressly included in your quotation.",
+      "Airport or port transfers unless their inclusion is expressly stated in your quotation."
     ],
-    "conditions": [],
+    "conditions": [
+      "The sightseeing vehicle, pickup point and transfer arrangements must be specified in the quotation.",
+      "Izmir Airport transfers are not part of the standard package unless expressly confirmed in the quotation. Kusadasi and Dikili port transfers are not included unless specifically quoted.",
+      "Lunch inclusion, restaurant and meal arrangements are unconfirmed and must be detailed in the quotation before booking.",
+      "Admission tickets are excluded unless the quotation expressly lists them as included.",
+      "Only the foundations and site of the Great Altar remain at the Acropolis; the Great Altar itself is held at the Pergamonmuseum in Berlin.",
+      "The Acropolis includes steep terrain and uneven archaeological surfaces. The route is subject to current site access and local conditions."
+    ],
     "conditionsConfirmed": false,
     "price": null,
     "currency": null,
-    "images": [],
+    "images": [
+      {
+        "caption": "Pergamon Acropolis from the Asklepion",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Pergamon_Acropolis.jpg/1280px-Pergamon_Acropolis.jpg",
+        "alt": "Panoramic view of the Pergamon Acropolis from the Asklepion",
+        "credit": {
+          "title": "Pergamon Acropolis.jpg",
+          "author": "Ingo Mehling",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pergamon_Acropolis.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Wikimedia Commons 1280px thumbnail; the photograph is unmodified."
+        }
+      }
+    ],
     "gallery": [
       {
-        "caption": "Pergamon Acropolis"
+        "caption": "Pergamon Acropolis from the Asklepion",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Pergamon_Acropolis.jpg/1280px-Pergamon_Acropolis.jpg",
+        "alt": "Panoramic view of the Pergamon Acropolis from the Asklepion",
+        "credit": {
+          "title": "Pergamon Acropolis.jpg",
+          "author": "Ingo Mehling",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pergamon_Acropolis.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Wikimedia Commons 1280px thumbnail; the photograph is unmodified."
+        }
       },
       {
-        "caption": "Pergamon Theatre"
+        "caption": "Pergamon Ancient Theatre",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Pergamon_Theatre_060.jpg/1280px-Pergamon_Theatre_060.jpg",
+        "alt": "The steeply sloped ancient theatre at Pergamon",
+        "credit": {
+          "title": "Pergamon Theatre 060.jpg",
+          "author": "Dosseman",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pergamon_Theatre_060.jpg",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "shareAlike": true,
+          "changes": "Wikimedia Commons 1280px thumbnail; the photograph is unmodified."
+        }
       },
       {
-        "caption": "Temple of Trajan"
+        "caption": "Trajaneum on the Acropolis",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/The_Temple_of_Trajan_%28Trajaneum%29%2C_Upper_Acropolis%2C_Pergamon%2C_Turkey_%285918905252%29.jpg/1280px-The_Temple_of_Trajan_%28Trajaneum%29%2C_Upper_Acropolis%2C_Pergamon%2C_Turkey_%285918905252%29.jpg",
+        "alt": "Trajaneum, the Temple of Trajan on Pergamon Acropolis",
+        "credit": {
+          "title": "The Temple of Trajan (Trajaneum), Upper Acropolis, Pergamon, Turkey",
+          "author": "Carole Raddato",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Temple_of_Trajan_(Trajaneum),_Upper_Acropolis,_Pergamon,_Turkey_(5918905252).jpg",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "shareAlike": false,
+          "changes": "Wikimedia Commons 1280px thumbnail; the photograph is unmodified."
+        }
       },
       {
-        "caption": "Asklepion"
+        "caption": "Asklepion Sanctuary",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Pergamon_Asclepion.jpg/1280px-Pergamon_Asclepion.jpg",
+        "alt": "Archaeological remains of the Pergamon Asklepion sanctuary",
+        "credit": {
+          "title": "Pergamon Asclepion.jpg",
+          "author": "Ayratayrat",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pergamon_Asclepion.jpg",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "shareAlike": true,
+          "changes": "Wikimedia Commons 1280px thumbnail; the photograph is unmodified."
+        }
       },
       {
-        "caption": "Pergamon Library Remains"
+        "caption": "Foundations of the Great Altar of Zeus",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/The_foundations_of_the_Zeus_Altar%2C_Acropolis%2C_Pergamon%2C_Turkey_%288417204426%29.jpg/1280px-The_foundations_of_the_Zeus_Altar%2C_Acropolis%2C_Pergamon%2C_Turkey_%288417204426%29.jpg",
+        "alt": "Foundations at the site of the Great Altar on Pergamon Acropolis",
+        "credit": {
+          "title": "The foundations of the Zeus Altar, Acropolis, Pergamon, Turkey (8417204426).jpg",
+          "author": "Carole Raddato",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_foundations_of_the_Zeus_Altar,_Acropolis,_Pergamon,_Turkey_(8417204426).jpg",
+          "license": "CC BY-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "shareAlike": true,
+          "changes": "Wikimedia Commons 1280px thumbnail; the photograph is unmodified."
+        }
       }
     ],
     "highlights": [
-      "Archaeology",
-      "Private tour",
-      "Pergamon"
+      "Private Tour from Izmir",
+      "Pergamon Acropolis and Ancient Theatre",
+      "Trajaneum (Temple of Trajan)",
+      "Asklepion Healing Sanctuary",
+      "Foundations of the Great Altar"
     ]
   },
   {
