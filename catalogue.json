@@ -592,17 +592,17 @@
     "currency": null,
     "images": [
       {
-        "caption": "Ephesus Ancient City",
-        "url": "/axu-international-pages/images/tours/ephesus/ephesus-celsus.jpg",
-        "alt": "Celsus Library",
+        "caption": "Pergamon Acropolis",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/3e/The_Temple_of_Trajan_%28Trajaneum%29%2C_Upper_Acropolis%2C_Pergamon%2C_Turkey_%285918905252%29.jpg",
+        "alt": "Temple of Trajan on the Acropolis of Pergamon",
         "credit": {
-          "title": "Celsus Library",
-          "author": "Benh LIEU SONG",
-          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ephesus_Celsus_Library_Fa%C3%A7ade.jpg",
-          "license": "CC BY-SA 3.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
-          "shareAlike": true,
-          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+          "title": "The Temple of Trajan (Trajaneum), Upper Acropolis, Pergamon, Turkey",
+          "author": "Carole Raddato",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Temple_of_Trajan_(Trajaneum),_Upper_Acropolis,_Pergamon,_Turkey_(5918905252).jpg",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "shareAlike": false,
+          "changes": "Original photograph linked without file modification. Site CSS crops gallery previews; the lightbox shows the full frame."
         }
       }
     ],
