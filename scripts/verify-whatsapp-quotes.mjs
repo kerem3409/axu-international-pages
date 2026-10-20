@@ -10,7 +10,7 @@ assert.equal(catalogue.length,10);
 assert.ok(!catalogue.some(t=>['axu-02','axu-03'].includes(t.id)||['archeological-ephesus-tour-from-kusadasi','biblical-ephesus-tour-from-kusadasi'].includes(t.slug)));
 const baseline=JSON.parse(cp.execFileSync('git',['show','HEAD:catalogue.json'],{cwd:root,encoding:'utf8'}));
 assert.equal(catalogue.length,baseline.length);
-for(const tour of catalogue){const {images,gallery,...content}=tour;const {images:oldImages,gallery:oldGallery,...oldContent}=baseline.find(item=>item.id===tour.id);assert.deepEqual(content,oldContent);}
+for(const tour of catalogue){const {images,gallery,cardSummary,...content}=tour;const {images:oldImages,gallery:oldGallery,...oldContent}=baseline.find(item=>item.id===tour.id);assert.deepEqual(content,oldContent);}
 assert.ok(!app.includes('/api/quote-requests'));
 assert.ok(!app.includes('localStorage') && !app.includes('sessionStorage'));
 assert.ok(!app.includes('window.open('));assert.ok(app.includes('window.location.assign(url)'));
@@ -95,7 +95,7 @@ try {
 } finally {await contact.w.happyDOM.close();}
 }
 const home=await page('');
-try {assert.ok([...home.d.querySelectorAll('a')].some(a=>a.textContent==='Request a Quote'&&a.href.endsWith('/contact/')));} finally {await home.w.happyDOM.close();}
+try {assert.ok([...home.d.querySelectorAll('a')].some(a=>a.textContent==='Request a Quote'&&a.href.endsWith('/contact/')));assert.equal(home.d.querySelectorAll('.tour-card').length,10);assert.deepEqual([...home.d.querySelectorAll('.tour-card h3')].map(h=>h.textContent),catalogue.map(t=>t.title));} finally {await home.w.happyDOM.close();}
 const listing=await page('tours/');
 try {assert.equal(listing.d.querySelectorAll('.quote-link').length,10);for(const a of listing.d.querySelectorAll('.quote-link'))assert.ok(a.href.endsWith('/#request-quote'));} finally {await listing.w.happyDOM.close();}
 console.log('PASS: all ten remaining tour names, required/invalid fields, future date, message encoding, optional fields, manual-send wording, popup fallback, contact tour selection, home/list CTAs and no request storage/submission.');

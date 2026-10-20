@@ -1,0 +1,90 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import http from 'node:http';
+import path from 'node:path';
+import {chromium} from '../../.visual-tools.local/node_modules/playwright/index.mjs';
+
+const root = path.resolve(import.meta.dirname, '..');
+const base = '/axu-international-pages';
+const catalogue = JSON.parse(fs.readFileSync(path.join(root, 'catalogue.json'), 'utf8'));
+assert.equal(catalogue.length, 10);
+
+const server = http.createServer((request, response) => {
+  const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
+  const fileRoot = path.resolve(root, `.${pathname.slice(base.length)}`);
+  if (!pathname.startsWith(`${base}/`) || (fileRoot !== root && !fileRoot.startsWith(root + path.sep))) {
+    response.writeHead(404).end();
+    return;
+  }
+  let file = fileRoot;
+  try {
+    if (fs.statSync(file).isDirectory()) file = path.join(file, 'index.html');
+    response.setHeader('Content-Type', ({'.js':'text/javascript','.json':'application/json','.css':'text/css','.jpg':'image/jpeg','.svg':'image/svg+xml'})[path.extname(file)] || 'text/html');
+    response.end(fs.readFileSync(file));
+  } catch {
+    response.writeHead(404).end();
+  }
+});
+await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+const origin = `http://127.0.0.1:${server.address().port}${base}`;
+const browser = await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe', headless:true});
+try {
+  for (const [width, columns] of [[1440,3],[768,2],[390,1]]) {
+    const page = await browser.newPage({viewport:{width,height:1100},isMobile:width<400,hasTouch:width<400});
+    const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    await page.goto(origin + '/');
+    const homeCards = page.locator('main .tour-card');
+    await homeCards.first().waitFor();
+    assert.equal(await homeCards.count(), 10, `Homepage count at ${width}px`);
+    assert.deepEqual(await homeCards.locator('h3').allTextContents(), catalogue.map(tour => tour.title));
+    const grid = page.locator('main .tour-grid').first();
+    assert.equal(await grid.evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length), columns, `Homepage grid columns at ${width}px`);
+    for (let i=0; i<catalogue.length; i++) {
+      const card = homeCards.nth(i);
+      const paragraphs = card.locator('.card-summary p');
+      assert.equal(await paragraphs.count(), catalogue[i].cardSummary.length, `${catalogue[i].id}: paragraph count`);
+      const text = await paragraphs.allTextContents();
+      assert.deepEqual(text, catalogue[i].cardSummary);
+      assert.ok(text.every(paragraph => /[.!?]$/u.test(paragraph)), `${catalogue[i].id}: complete sentences`);
+      const paragraphLayout = await paragraphs.evaluateAll(elements => elements.map(element => {
+        const style = getComputedStyle(element);
+        return {fits:element.scrollHeight <= element.clientHeight + 1,lineHeight:style.lineHeight,fontSize:style.fontSize,marginBottom:style.marginBottom};
+      }));
+      assert.ok(paragraphLayout.every((item,index) => item.fits && Math.abs(parseFloat(item.lineHeight)/parseFloat(item.fontSize)-1.6) < .02 && parseFloat(item.marginBottom) === (index === paragraphLayout.length-1 ? 0 : 14)), `${catalogue[i].id}: readable, unclipped paragraph styling ${JSON.stringify(paragraphLayout)}`);
+      assert.ok(await card.locator('.cover img').count(), `${catalogue[i].id}: cover image remains present`);
+      assert.equal(await card.locator('.cover img').getAttribute('src'), catalogue[i].images?.find(photo => photo.url)?.url || catalogue[i].gallery?.find(photo => photo.url)?.url);
+      assert.equal(await card.locator('.cover img').evaluate(image => getComputedStyle(image).objectFit), 'cover');
+      assert.ok(await card.locator('.quote-link').isVisible());
+      assert.ok(await card.locator('a[href$="#request-quote"]').count());
+    }
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Homepage horizontal overflow at ${width}px`);
+
+    const rowButtons = await page.locator('main .tour-card').evaluateAll(cards => cards.map(card => {
+      const box = card.querySelector('.card-bottom').getBoundingClientRect();
+      return {top:Math.round(box.top),bottom:Math.round(box.bottom)};
+    }));
+    for (let start=0; start<rowButtons.length; start+=columns) {
+      const row = rowButtons.slice(start,start+columns);
+      if (row.length>1) assert.ok(Math.max(...row.map(item=>item.top))-Math.min(...row.map(item=>item.top))<=2, `Card links align in row at ${width}px`);
+    }
+    await page.goto(origin + '/tours/');
+    assert.equal(await page.locator('main .tour-card').count(), 10, `Tours page count at ${width}px`);
+    assert.equal(await page.locator('main .tour-grid').evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length), columns, `Tours grid columns at ${width}px`);
+    assert.deepEqual(errors, []);
+    if (width === 1440) {
+      const futurePage = await browser.newPage({viewport:{width,height:1100}});
+      const futureTour = {...catalogue[0],id:'axu-99',slug:'future-catalogue-tour',title:'Future Catalogue Tour',cardSummary:['A new catalogue entry appears automatically in the homepage collection.']};
+      await futurePage.route('**/catalogue.json', route => route.fulfill({contentType:'application/json',body:JSON.stringify([...catalogue,futureTour])}));
+      await futurePage.goto(origin + '/');
+      assert.equal(await futurePage.locator('main .tour-card').count(), 11);
+      assert.equal(await futurePage.locator('main .tour-card h3').last().textContent(), 'Future Catalogue Tour');
+      await futurePage.close();
+    }
+    await page.close();
+    console.log(`PASS: ${width}px homepage and Tours cards, all ten in catalogue order, ${columns} columns, full summaries, aligned links and preserved cover URLs.`);
+  }
+} finally {
+  await browser.close();
+  await new Promise(resolve => server.close(resolve));
+}

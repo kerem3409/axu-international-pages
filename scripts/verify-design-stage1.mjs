@@ -31,17 +31,24 @@ assert.match(logo, /<text[^>]*>TOURS<\/text>/);
 assert.doesNotMatch(logo, /<rect[^>]+fill=/i, 'Logo background must remain transparent');
 
 const app = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
-const summaryBlock = app.match(/const cardSummaries = \{([\s\S]*?)\n\};/);
-assert.ok(summaryBlock, 'Card-specific summaries should exist');
-const summaryEntries = [...summaryBlock[1].matchAll(/^\s*'([^']+)': '([^']*)',?$/gm)];
 const catalogue = JSON.parse(fs.readFileSync(path.join(root, 'catalogue.json'), 'utf8'));
-assert.equal(summaryEntries.length, catalogue.length);
-assert.deepEqual(new Set(summaryEntries.map(([, id]) => id)), new Set(catalogue.map(tour => tour.id)));
-for (const [, id, summary] of summaryEntries) {
-  const words = summary.trim().split(/\s+/).length;
-  assert.ok(words >= 40 && words <= 60, `${id} card summary has ${words} words`);
+assert.equal(catalogue.length, 10, 'The active catalogue should retain ten tours');
+for (const tour of catalogue) {
+  assert.ok(Array.isArray(tour.cardSummary) && tour.cardSummary.length <= 2 && tour.cardSummary.length > 0, `${tour.id} needs one or two card summary paragraphs`);
+  const words = tour.cardSummary.join(' ').trim().split(/\s+/).length;
+  assert.ok(words >= 35 && words <= 50, `${tour.id} Turkish card summary has ${words} words`);
+  for (const paragraph of tour.cardSummary) assert.match(paragraph, /[.!?]$/u, `${tour.id} paragraph should end with a complete sentence`);
 }
-assert.match(app, /cardSummaries\[tour\.id\] \|\| tour\.summary/);
-assert.match(fs.readFileSync(path.join(root, 'styles.css'), 'utf8'), /\.card-summary\{[^}]*line-height:1\.65[^}]*-webkit-line-clamp:6/);
+assert.match(app, /tours\.map\(card\)\.join\(''\)/, 'Homepage should render every catalogue tour in order');
+const homeBlock = app.match(/function home\(\) \{([\s\S]*?)\n\}/)?.[1] || '';
+assert.doesNotMatch(homeBlock, /featured|slice\(0,\s*\d+\)/, 'Homepage must not use a fixed tour subset');
+assert.match(app, /tour\.cardSummary/);
+const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
+assert.match(css, /\.card-summary\{[^}]*line-height:1\.6/);
+assert.match(css, /\.card-summary p\{[^}]*margin:[^}]*14px/);
+assert.doesNotMatch(css.match(/\.card-summary\{[^}]*\}/)?.[0] || '', /line-clamp|overflow:hidden|min-height/);
+assert.match(css, /\.tour-grid\{[^}]*repeat\(3,minmax\(0,1fr\)\)/);
+assert.match(css, /@media\(max-width:800px\)[\s\S]*?\.tour-grid\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
+assert.match(css, /@media\(max-width:520px\)[\s\S]*?\.tour-grid\{grid-template-columns:1fr/);
 
-console.log(`PASS: ${pages.length} HTML pages have no test banner and use the linked SVG brand; all ${catalogue.length} catalogue tours have 40–60 word card-only summaries; card text styling is bounded and readable.`);
+console.log(`PASS: ${pages.length} HTML pages have no test banner and use the linked SVG brand; all ${catalogue.length} tours have complete 35–50 word Turkish card summaries and responsive, unclipped card text.`);

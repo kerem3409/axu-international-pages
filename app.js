@@ -35,30 +35,22 @@ function cover(tour, large = false) {
   ${image ? `<img src="${esc(image.url)}" alt="${esc(image.alt || tour.title)}" loading="${large ? 'eager' : 'lazy'}">` : ''}
  </div>`;
 }
-const cardSummaries = {
- 'axu-01': 'Explore Ephesus on a private shore excursion from Kusadasi. Walk the ancient city with a licensed guide, visit the House of the Virgin Mary and see the Temple of Artemis. Private sightseeing transport and port pickup are arranged around your confirmed cruise schedule; the itinerary is reviewed before booking.',
- 'axu-04': 'Fly from Istanbul to Izmir for a planned group visit to Ephesus, the House of the Virgin Mary and the Temple of Artemis. A shared sightseeing vehicle and licensed guide accompany the route. Lunch and an optional shopping opportunity are included in the itinerary; departures depend on date availability and capacity.',
- 'axu-05': 'Travel from Kusadasi to Pamukkale’s travertine terraces and the archaeological remains of Hierapolis. Explore with a licensed guide and sightseeing vehicle, with a local lunch and regional handicrafts stop along the way. Hotel and cruise-port requests are reviewed against the day’s long drive and, for cruise guests, the ship schedule.',
- 'axu-06': 'Discover Pergamon’s Acropolis, ancient theatre and monumental remains before continuing to the Asklepion, the celebrated sanctuary associated with ancient healing. This Izmir day tour combines archaeological sites with a professional guide. Pickup, transport, lunch and admission arrangements are confirmed in the quotation before booking.',
- 'axu-07': 'Visit three ancient Ionian sites on a full-day route from Kusadasi: Priene and its Temple of Athena, the theatre and remains of Miletus, and the Temple of Apollo at Didyma. A licensed guide, air-conditioned transport, local lunch and return transfers are listed for the confirmed programme; port pickup requires schedule review.',
- 'axu-08': 'Leave Izmir for the hillside village of Sirince and explore its traditional houses, cobbled lanes and local culture. Browse village shops at your own pace, with purchases optional, or pause at a café. Pickup details, transport, guiding, duration and any optional tasting are confirmed with your quotation.',
- 'axu-09': 'Trace the Seven Churches of Revelation across western Türkiye on a private five-day archaeological and biblical heritage journey. The route links Ephesus, Smyrna, Pergamon, Thyatira, Sardis, Philadelphia and Laodicea, with visits to selected nearby heritage sites. Private transport, an English-speaking guide, four hotel nights and Izmir airport transfers are arranged through your quotation.',
- 'axu-11': 'Spend two days exploring Ephesus and Pamukkale from Istanbul, with one overnight stay in Kusadasi or Selcuk. Visit Ephesus, the House of the Virgin Mary and the Temple of Artemis, then discover Pamukkale and Hierapolis. Shared sightseeing, flights, transfers and accommodation are arranged for the confirmed itinerary; group departures depend on availability and capacity.',
- 'axu-12': 'Combine Ephesus, the House of the Virgin Mary and the Temple of Artemis with Pamukkale and Hierapolis on a two-day journey from Istanbul. Your sightseeing vehicle and guide are reserved for your party, with one overnight stay. Scheduled flights, transfer types, hotel details and timings are confirmed in the quotation.',
- 'axu-13': 'Fly from Istanbul to Izmir for a day exploring Ephesus, the House of the Virgin Mary and the Temple of Artemis with a private sightseeing vehicle and licensed guide. Enjoy local restaurant lunch and an optional-to-purchase handicrafts stop. Flight schedule, transfer arrangements, pickup area and availability are confirmed before booking.'
-};
+function cardSummaryParagraphs(tour) {
+ const summary = tour.cardSummary ?? tour.summary;
+ return (Array.isArray(summary) ? summary : String(summary).split(/\n\s*\n/).slice(0, 2)).filter(Boolean);
+}
 function card(tour) {
+ const summary = cardSummaryParagraphs(tour).map(paragraph => `<p>${esc(paragraph)}</p>`).join('');
  return `<article class="tour-card"><a class="cover-link" href="${link(tour)}" aria-label="Explore ${esc(tour.title)}">${cover(tour)}</a>
  <div class="card-body"><p class="eyebrow">${esc(tour.destinations.join(' / '))}</p><h3><a href="${link(tour)}">${esc(tour.title)}</a></h3>
- <p class="card-summary">${esc(cardSummaries[tour.id] || tour.summary)}</p><div class="card-meta"><span>From ${esc(tour.departure)}</span>${tour.duration ? `<span>${esc(tour.duration)}</span>` : ''}</div>
+ <div class="card-summary">${summary}</div><div class="card-meta"><span>From ${esc(tour.departure)}</span>${tour.duration ? `<span>${esc(tour.duration)}</span>` : ''}</div>
  <div class="card-bottom"><a class="quote-link" href="${link(tour)}#request-quote">Request a Quote</a><a href="${link(tour)}">View tour</a></div></div></article>`;
 }
 const heading = (kicker, title, copy) => `<div class="page-heading"><p class="eyebrow">${kicker}</p><h1>${title}</h1><p>${copy}</p></div>`;
 function home() {
- const featured = ['axu-01','axu-08','axu-09'].map(id => tours.find(t=>t.id===id)).filter(Boolean);
  return `<section class="hero"><div class="hero-copy"><p class="eyebrow">TÜRKIYE · THE AEGEAN COLLECTION</p><h1>Ancient places.<br>New perspectives.</h1><p>From the streets of Ephesus to the villages of the Aegean, find a journey that speaks to you.</p><div class="hero-actions"><a class="button" href="/tours">Explore our tours</a><a class="text-link" href="/shore-excursions">Visiting by cruise?</a></div><div class="hero-footnote"><span>01 /</span> A place to begin your next journey</div></div>
  <div class="hero-art">${tours[0] ? `<a href="${link(tours[0])}">${cover(tours[0],true)}</a>` : '<div class="empty">Tour collection coming soon.</div>'}<div class="hero-art-label"><span>THE AEGEAN, AT YOUR OWN PACE</span><span>AXU / 01</span></div></div></section>
- <section class="section"><div class="section-heading"><div><p class="eyebrow">FIND YOUR INSPIRATION</p><h2>A few journeys to begin with</h2></div><a class="text-link" href="/tours">View all tours</a></div><div class="tour-grid">${featured.map(card).join('')}</div></section>
+ <section class="section"><div class="section-heading"><div><p class="eyebrow">FIND YOUR INSPIRATION</p><h2>Explore our tours</h2></div><a class="text-link" href="/tours">View all tours</a></div><div class="tour-grid">${tours.map(card).join('')}</div></section>
  <section class="destinations section"><div class="section-heading"><div><p class="eyebrow">PLACES WITH A STORY</p><h2>Explore the Aegean</h2></div></div><div class="destination-grid">${['Ephesus','Pamukkale','Pergamon','Sirince'].map((d,i)=>`<a href="/tours?destination=${encodeURIComponent(d)}"><span class="destination-index">0${i+1}</span><h3>${d}</h3><span>Explore tours</span></a>`).join('')}</div></section>
  <section class="about-strip section"><div><p class="eyebrow">ABOUT AXU TOURS</p><h2>Your journey starts<br>with a conversation.</h2></div><div><p>Explore our collection of archaeological visits, shore excursions and multi-day itineraries. Tell us where you would like to go, and request a quote for your plans.</p><a class="text-link" href="/about">Meet AXU TOURS</a></div></section>
  <section class="contact-strip"><div><p class="eyebrow">MAKE IT YOUR JOURNEY</p><h2>What would you like to discover?</h2><p>Choose a tour and tell us about your visit.</p></div><a class="button light" href="/contact">Request a Quote</a></section>`;

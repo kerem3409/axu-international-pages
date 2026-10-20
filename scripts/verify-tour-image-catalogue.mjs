@@ -16,7 +16,7 @@ const allCovers = [];
 for (const tour of catalogue) {
   const previous = before.find(item => item.id === tour.id);
   const {images:oldImages, gallery:oldGallery, ...oldNonVisual} = previous;
-  const {images, gallery, ...nonVisual} = tour;
+  const {images, gallery, cardSummary, ...nonVisual} = tour;
   assert.deepEqual(nonVisual, oldNonVisual, `${tour.id}: non-image tour data must remain unchanged`);
   assert.ok(Array.isArray(images) && images.length > 0, `${tour.id}: missing cover image record`);
   assert.ok(Array.isArray(gallery) && gallery.length >= 5, `${tour.id}: expected five gallery photos`);
