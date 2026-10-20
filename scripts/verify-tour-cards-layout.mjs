@@ -34,6 +34,16 @@ try {
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(origin + '/');
+    assert.deepEqual(await page.locator('#home-about-title,#home-tours-title,#home-why-title,.home-contact h2').allTextContents(), [
+      'Discover the Aegean with AXU TOURS','Explore Our Tours','Why Travel with AXU TOURS?','Plan Your Journey with AXU TOURS'
+    ]);
+    assert.match(await page.locator('.home-about').textContent(),/Discover the history, culture and landscapes of western Türkiye/);
+    assert.match(await page.locator('.reason-grid').textContent(),/TÜRSAB Belge No: 14169/);
+    assert.ok((await page.getByRole('link',{name:'Request a Quote'}).last().getAttribute('href')).endsWith('/contact/'));
+    assert.ok((await page.locator('header .brand img').getAttribute('src')).endsWith('/images/axu-tours-logo.svg'));
+    assert.ok((await page.locator('footer .brand img').getAttribute('src')).endsWith('/images/axu-tours-logo.svg'));
+    assert.equal(await page.locator('.cover-large img').getAttribute('src'),catalogue[0].images[0].url);
+    assert.ok((await page.getByRole('link',{name:'Explore our tours'}).getAttribute('href')).endsWith('/tours/'));
     const homeCards = page.locator('main .tour-card');
     await homeCards.first().waitFor();
     assert.equal(await homeCards.count(), 10, `Homepage count at ${width}px`);
@@ -59,6 +69,7 @@ try {
       assert.ok(await card.locator('a[href$="#request-quote"]').count());
     }
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Homepage horizontal overflow at ${width}px`);
+    if (width === 1440 || width === 390) await page.screenshot({path:path.resolve(import.meta.dirname,'../../.visual-tools.local',`axu-home-stage4-${width}.png`),fullPage:true});
 
     const rowButtons = await page.locator('main .tour-card').evaluateAll(cards => cards.map(card => {
       const box = card.querySelector('.card-bottom').getBoundingClientRect();
@@ -71,6 +82,8 @@ try {
     await page.goto(origin + '/tours/');
     assert.equal(await page.locator('main .tour-card').count(), 10, `Tours page count at ${width}px`);
     assert.equal(await page.locator('main .tour-grid').evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length), columns, `Tours grid columns at ${width}px`);
+    assert.equal(await page.locator('#filters select').count(), 4, 'The catalogue keeps its destination, departure, duration and type filters');
+    assert.equal(await page.locator('.home-about,.home-why,.home-contact').count(), 0, 'Corporate homepage sections stay off the tours catalogue');
     assert.deepEqual(errors, []);
     if (width === 1440) {
       const futurePage = await browser.newPage({viewport:{width,height:1100}});

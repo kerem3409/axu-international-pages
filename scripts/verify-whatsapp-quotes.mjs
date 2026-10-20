@@ -10,7 +10,7 @@ assert.equal(catalogue.length,10);
 assert.ok(!catalogue.some(t=>['axu-02','axu-03'].includes(t.id)||['archeological-ephesus-tour-from-kusadasi','biblical-ephesus-tour-from-kusadasi'].includes(t.slug)));
 const baseline=JSON.parse(cp.execFileSync('git',['show','HEAD:catalogue.json'],{cwd:root,encoding:'utf8'}));
 assert.equal(catalogue.length,baseline.length);
-for(const tour of catalogue){const {images,gallery,cardSummary,...content}=tour;const {images:oldImages,gallery:oldGallery,...oldContent}=baseline.find(item=>item.id===tour.id);assert.deepEqual(content,oldContent);}
+for(const tour of catalogue){const {images,gallery,cardSummary,...content}=tour;const {images:oldImages,gallery:oldGallery,cardSummary:oldCardSummary,...oldContent}=baseline.find(item=>item.id===tour.id);assert.deepEqual(content,oldContent);}
 assert.ok(!app.includes('/api/quote-requests'));
 assert.ok(!app.includes('localStorage') && !app.includes('sessionStorage'));
 assert.ok(!app.includes('window.open('));assert.ok(app.includes('window.location.assign(url)'));

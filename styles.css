@@ -31,3 +31,22 @@ footer .release-info{grid-column:1/-1;margin-top:-12px;padding-top:0;border-top:
 .package-enquiry{display:grid;gap:15px}.package-enquiry .quote-privacy{margin:0}.paired-tour{font-size:13px;line-height:1.65}.paired-tour .text-link{font-size:inherit;overflow-wrap:anywhere}.quote-form .package-enquiry input,.quote-form .package-enquiry select{width:100%;min-width:0}
 
 .brand{display:flex;align-items:center;flex-shrink:0;line-height:1}.brand img{display:block;width:126px;height:auto}footer .brand img{width:112px}@media(max-width:800px){.brand img{width:116px}footer .brand img{width:108px}}@media(max-width:520px){.brand img{width:108px}footer .brand img{width:100px}}
+
+/* Homepage sections: an introduction, the full tour collection, and clear agency credentials. */
+.home-about.section{padding-top:48px;padding-bottom:42px;border-top:1px solid var(--line)}
+.home-about>div{max-width:900px}
+.home-about h2{font-size:clamp(2rem,3vw,2.65rem);margin-bottom:18px}
+.home-about p:last-child{max-width:850px;font-size:1.03rem;margin-bottom:0}
+.home-tours.section{padding-top:38px}
+.home-why.section{padding-top:48px;padding-bottom:58px;border-top:1px solid var(--line)}
+.reason-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.reason-item{padding:25px 28px 0 0;border-right:1px solid var(--line);min-width:0}
+.reason-item+.reason-item{padding-left:28px}
+.reason-item:last-child{padding-right:0;border-right:0}
+.reason-item .eyebrow{font-size:.65rem;margin-bottom:13px}
+.reason-item h3{font-size:1.4rem;line-height:1.3;margin-bottom:10px}
+.reason-item>p:last-child{font-size:.9rem;margin:0}
+.reason-item .reason-detail{color:var(--brown);font-size:.95rem;font-weight:500}
+.home-contact h2{font-size:clamp(1.9rem,3vw,2.5rem)}
+@media(max-width:800px){.home-about.section{padding-top:40px;padding-bottom:36px}.home-tours.section{padding-top:32px}.home-why.section{padding-top:40px;padding-bottom:45px}}
+@media(max-width:520px){.home-about h2{font-size:2rem}.home-about p:last-child{font-size:.98rem}.reason-grid{grid-template-columns:1fr}.reason-item,.reason-item+.reason-item{padding:20px 0;border-right:0;border-bottom:1px solid var(--line)}.reason-item:last-child{padding-bottom:0;border-bottom:0}.reason-item h3{font-size:1.35rem}}
