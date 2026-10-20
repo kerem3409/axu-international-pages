@@ -34,16 +34,25 @@ try {
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(origin + '/');
-    assert.deepEqual(await page.locator('#home-about-title,#home-tours-title,#home-why-title,.home-contact h2').allTextContents(), [
-      'Discover the Aegean with AXU TOURS','Explore Our Tours','Why Travel with AXU TOURS?','Plan Your Journey with AXU TOURS'
+    assert.deepEqual(await page.locator('#home-experiences-title,#home-tours-title,#home-trust-title,.home-cta h2').allTextContents(), [
+      'Our Experiences','Explore Our Tours','Why Travel with AXU TOURS?','Let the Aegean Surprise You.'
     ]);
-    assert.match(await page.locator('.home-about').textContent(),/Discover the history, culture and landscapes of western Türkiye/);
-    assert.match(await page.locator('.reason-grid').textContent(),/TÜRSAB License No: 14169/);
-    assert.ok((await page.getByRole('link',{name:'Request a Quote'}).last().getAttribute('href')).endsWith('/contact/'));
+    assert.equal(await page.locator('#home-title').textContent(),'Your Gateway to the Aegean.');
+    assert.match(await page.locator('.home-trust').textContent(),/TÜRSAB License No: 14169/);
+    assert.ok((await page.locator('.home-cta a').getAttribute('href')).endsWith('/contact/'));
     assert.ok((await page.locator('header .brand img').getAttribute('src')).endsWith('/images/axu-tours-logo.svg'));
     assert.ok((await page.locator('footer .brand img').getAttribute('src')).endsWith('/images/axu-tours-logo.svg'));
-    assert.equal(await page.locator('.cover-large img').getAttribute('src'),catalogue[0].images[0].url);
-    assert.ok((await page.getByRole('link',{name:'Explore our tours'}).getAttribute('href')).endsWith('/tours/'));
+    assert.ok((await page.locator('.home-highlights-map').getAttribute('src')).endsWith('/images/home/aegean-highlights.png'));
+    assert.ok((await page.locator('.home-discovery img').getAttribute('src')).endsWith('/images/home/aegean-discovery-map.png'));
+    for (const selector of ['.home-highlights-map','.home-discovery img']) {
+      await page.waitForFunction(sel=>{const img=document.querySelector(sel);return img?.complete&&img.naturalWidth>0;},selector);
+    }
+    assert.ok((await page.locator('.home-hero-actions a').first().getAttribute('href')).endsWith('/tours/'));
+    assert.equal((await page.locator('header nav a').allTextContents()).join('|'),'Home|Experiences|Tours|About AXU|Contact');
+    assert.equal(await page.locator('.home-experience-card').count(),4);
+    assert.deepEqual(await page.locator('.home-experience-card').evaluateAll(cards=>cards.map(card=>card.getAttribute('href'))),[
+      `${base}/shore-excursions/`,`${base}/tours/?type=Private%20tour`,`${base}/tours/?type=Group%20tour`,`${base}/multi-day-tours/`
+    ]);
     const homeCards = page.locator('main .tour-card');
     await homeCards.first().waitFor();
     assert.equal(await homeCards.count(), 10, `Homepage count at ${width}px`);
@@ -79,12 +88,17 @@ try {
       const row = rowButtons.slice(start,start+columns);
       if (row.length>1) assert.ok(Math.max(...row.map(item=>item.top))-Math.min(...row.map(item=>item.top))<=2, `Card links align in row at ${width}px`);
     }
+    if (width<400) {
+      const menu=page.locator('.menu-toggle');await menu.click();assert.equal(await menu.getAttribute('aria-expanded'),'true');
+      await page.locator('#navigation a[href="#experiences"]').click();
+      assert.equal(await menu.getAttribute('aria-expanded'),'false');assert.ok((await page.evaluate(()=>location.hash))==='#experiences');
+    }
     await page.goto(origin + '/tours/');
     await page.locator('main .tour-card').first().waitFor();
     assert.equal(await page.locator('main .tour-card').count(), 10, `Tours page count at ${width}px`);
     assert.equal(await page.locator('main .tour-grid').evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length), columns, `Tours grid columns at ${width}px`);
     assert.equal(await page.locator('#filters select').count(), 4, 'The catalogue keeps its destination, departure, duration and type filters');
-    assert.equal(await page.locator('.home-about,.home-why,.home-contact').count(), 0, 'Corporate homepage sections stay off the tours catalogue');
+    assert.equal(await page.locator('.home-experiences,.home-trust,.home-cta').count(), 0, 'Homepage-only sections stay off the tours catalogue');
     assert.deepEqual(errors, []);
     if (width === 1440) {
       const futurePage = await browser.newPage({viewport:{width,height:1100}});
