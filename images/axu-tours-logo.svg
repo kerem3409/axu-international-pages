@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150" role="img" aria-labelledby="title desc">
+  <title id="title">AXU TOURS</title>
+  <desc id="desc">AXU in an elegant serif above the widely spaced word TOURS.</desc>
+  <g fill="#34271f" text-anchor="middle">
+    <text x="150" y="91" font-family="Bodoni 72, Didot, 'Times New Roman', serif" font-size="94" font-weight="400" letter-spacing="-5">AXU</text>
+    <text x="150" y="132" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" letter-spacing="12">TOURS</text>
+  </g>
+</svg>

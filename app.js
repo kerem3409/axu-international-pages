@@ -16,7 +16,7 @@ async function showRelease() {
 }
 showRelease();
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
-let tours = [], preview = true; const hostedTest = true;
+let tours = [];
 const link = tour => `${BASE}/tours/${encodeURIComponent(tour.slug)}/`;
 const visitorWording = item => ({
  'Terrace Houses are listed in the source itinerary.': 'Terrace Houses visit, subject to confirmation.',
@@ -35,10 +35,22 @@ function cover(tour, large = false) {
   ${image ? `<img src="${esc(image.url)}" alt="${esc(image.alt || tour.title)}" loading="${large ? 'eager' : 'lazy'}">` : ''}
  </div>`;
 }
+const cardSummaries = {
+ 'axu-01': 'Explore Ephesus on a private shore excursion from Kusadasi. Walk the ancient city with a licensed guide, visit the House of the Virgin Mary and see the Temple of Artemis. Private sightseeing transport and port pickup are arranged around your confirmed cruise schedule; the itinerary is reviewed before booking.',
+ 'axu-04': 'Fly from Istanbul to Izmir for a planned group visit to Ephesus, the House of the Virgin Mary and the Temple of Artemis. A shared sightseeing vehicle and licensed guide accompany the route. Lunch and an optional shopping opportunity are included in the itinerary; departures depend on date availability and capacity.',
+ 'axu-05': 'Travel from Kusadasi to Pamukkale’s travertine terraces and the archaeological remains of Hierapolis. Explore with a licensed guide and sightseeing vehicle, with a local lunch and regional handicrafts stop along the way. Hotel and cruise-port requests are reviewed against the day’s long drive and, for cruise guests, the ship schedule.',
+ 'axu-06': 'Discover Pergamon’s Acropolis, ancient theatre and monumental remains before continuing to the Asklepion, the celebrated sanctuary associated with ancient healing. This Izmir day tour combines archaeological sites with a professional guide. Pickup, transport, lunch and admission arrangements are confirmed in the quotation before booking.',
+ 'axu-07': 'Visit three ancient Ionian sites on a full-day route from Kusadasi: Priene and its Temple of Athena, the theatre and remains of Miletus, and the Temple of Apollo at Didyma. A licensed guide, air-conditioned transport, local lunch and return transfers are listed for the confirmed programme; port pickup requires schedule review.',
+ 'axu-08': 'Leave Izmir for the hillside village of Sirince and explore its traditional houses, cobbled lanes and local culture. Browse village shops at your own pace, with purchases optional, or pause at a café. Pickup details, transport, guiding, duration and any optional tasting are confirmed with your quotation.',
+ 'axu-09': 'Trace the Seven Churches of Revelation across western Türkiye on a private five-day archaeological and biblical heritage journey. The route links Ephesus, Smyrna, Pergamon, Thyatira, Sardis, Philadelphia and Laodicea, with visits to selected nearby heritage sites. Private transport, an English-speaking guide, four hotel nights and Izmir airport transfers are arranged through your quotation.',
+ 'axu-11': 'Spend two days exploring Ephesus and Pamukkale from Istanbul, with one overnight stay in Kusadasi or Selcuk. Visit Ephesus, the House of the Virgin Mary and the Temple of Artemis, then discover Pamukkale and Hierapolis. Shared sightseeing, flights, transfers and accommodation are arranged for the confirmed itinerary; group departures depend on availability and capacity.',
+ 'axu-12': 'Combine Ephesus, the House of the Virgin Mary and the Temple of Artemis with Pamukkale and Hierapolis on a two-day journey from Istanbul. Your sightseeing vehicle and guide are reserved for your party, with one overnight stay. Scheduled flights, transfer types, hotel details and timings are confirmed in the quotation.',
+ 'axu-13': 'Fly from Istanbul to Izmir for a day exploring Ephesus, the House of the Virgin Mary and the Temple of Artemis with a private sightseeing vehicle and licensed guide. Enjoy local restaurant lunch and an optional-to-purchase handicrafts stop. Flight schedule, transfer arrangements, pickup area and availability are confirmed before booking.'
+};
 function card(tour) {
  return `<article class="tour-card"><a class="cover-link" href="${link(tour)}" aria-label="Explore ${esc(tour.title)}">${cover(tour)}</a>
  <div class="card-body"><p class="eyebrow">${esc(tour.destinations.join(' / '))}</p><h3><a href="${link(tour)}">${esc(tour.title)}</a></h3>
- <p class="card-summary">${esc(tour.summary)}</p><div class="card-meta"><span>From ${esc(tour.departure)}</span>${tour.duration ? `<span>${esc(tour.duration)}</span>` : ''}</div>
+ <p class="card-summary">${esc(cardSummaries[tour.id] || tour.summary)}</p><div class="card-meta"><span>From ${esc(tour.departure)}</span>${tour.duration ? `<span>${esc(tour.duration)}</span>` : ''}</div>
  <div class="card-bottom"><a class="quote-link" href="${link(tour)}#request-quote">Request a Quote</a><a href="${link(tour)}">View tour</a></div></div></article>`;
 }
 const heading = (kicker, title, copy) => `<div class="page-heading"><p class="eyebrow">${kicker}</p><h1>${title}</h1><p>${copy}</p></div>`;
@@ -331,8 +343,6 @@ async function start() {
  try {
   const response=await fetch(`${BASE}/catalogue.json`);if(!response.ok)throw new Error('Tours could not be loaded.');
   const data=await response.json();tours=data;
-  const bar=document.querySelector('#preview-bar');bar.hidden=!preview;
-  if(hostedTest)bar.innerHTML='TEST VERSION <span>Draft itineraries · Quotes via WhatsApp</span>';
   render();
  } catch(error) {main.innerHTML=`<section class="section empty"><h1>We couldn’t load the tours.</h1><p>Please try again in a moment.</p><button class="button" id="retry">Try again</button></section>`;document.querySelector('#retry').addEventListener('click',start);}
 }
