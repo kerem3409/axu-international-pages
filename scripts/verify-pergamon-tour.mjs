@@ -19,7 +19,7 @@ assert.ok(tour.conditions.some(x=>/Lunch inclusion.*unconfirmed/.test(x)));
 assert.equal(tour.gallery.length,5);assert.equal(new Set(tour.gallery.map(x=>x.url)).size,5);
 assert.equal(tour.images[0].url,tour.gallery[0].url);
 for(const photo of tour.gallery){assert.ok(photo.url.startsWith('https://thumb.wikimedia.org/wikipedia/commons/thumb/'));assert.ok(photo.credit?.author&&photo.credit?.licenseUrl&&photo.credit?.sourceUrl);assert.equal(photo.credit.shareAlike,photo.credit.license.includes('SA'));}
-for(const t of catalogue.filter(t=>t.id!=='axu-06'))assert.deepEqual(t,before.find(oldTour=>oldTour.id===t.id));
+for(const t of catalogue.filter(t=>t.id!=='axu-06')){const {images,gallery,...content}=t;const {images:oldImages,gallery:oldGallery,...oldContent}=before.find(oldTour=>oldTour.id===t.id);assert.deepEqual(content,oldContent);}
 const w=new Window({url:`https://kerem3409.github.io/axu-international-pages/tours/${tour.slug}/`,settings:{disableJavaScriptFileLoading:true,disableCSSFileLoading:true}});
 try {
  w.document.write(read(`tours/${tour.slug}/index.html`));

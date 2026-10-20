@@ -10,8 +10,9 @@ const sources = JSON.parse(read('images/tours/ephesus/sources.json'));
 assert.equal(sources.photos.length, 5);
 for (const tour of catalogue) {
  const previous = baseline.find(item => item.id === tour.id);
- if (tour.id !== 'axu-01') assert.deepEqual(tour, previous);
- else { const {gallery, ...content} = tour; const {gallery:oldGallery, ...oldContent} = previous; assert.deepEqual(content, oldContent); assert.equal(gallery.length,5); }
+ const {gallery, images, ...content} = tour; const {gallery:oldGallery, images:oldImages, ...oldContent} = previous;
+ assert.deepEqual(content, oldContent);
+ if (tour.id === 'axu-01') { assert.equal(gallery.length,5); assert.equal(images.length,1); }
 }
 const ephesus = catalogue.find(tour => tour.id === 'axu-01');
 const installed = ephesus.gallery.every(photo => photo.url);

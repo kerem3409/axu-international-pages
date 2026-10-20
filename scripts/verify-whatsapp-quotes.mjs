@@ -8,7 +8,9 @@ const catalogue = JSON.parse(read('catalogue.json'));
 const app = read('app.js');
 assert.equal(catalogue.length,10);
 assert.ok(!catalogue.some(t=>['axu-02','axu-03'].includes(t.id)||['archeological-ephesus-tour-from-kusadasi','biblical-ephesus-tour-from-kusadasi'].includes(t.slug)));
-assert.deepEqual(catalogue.filter(t=>!['axu-06','axu-07','axu-08','axu-10'].includes(t.id)&&!t.enquiryVariant),JSON.parse(cp.execFileSync('git',['show','HEAD:catalogue.json'],{cwd:root,encoding:'utf8'})).filter(t=>!['axu-02','axu-03','axu-04','axu-05','axu-06','axu-07','axu-08','axu-10'].includes(t.id)&&!t.enquiryVariant));
+const baseline=JSON.parse(cp.execFileSync('git',['show','HEAD:catalogue.json'],{cwd:root,encoding:'utf8'}));
+assert.equal(catalogue.length,baseline.length);
+for(const tour of catalogue){const {images,gallery,...content}=tour;const {images:oldImages,gallery:oldGallery,...oldContent}=baseline.find(item=>item.id===tour.id);assert.deepEqual(content,oldContent);}
 assert.ok(!app.includes('/api/quote-requests'));
 assert.ok(!app.includes('localStorage') && !app.includes('sessionStorage'));
 assert.ok(!app.includes('window.open('));assert.ok(app.includes('window.location.assign(url)'));

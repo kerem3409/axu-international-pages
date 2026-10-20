@@ -46,78 +46,93 @@
     "conditionsConfirmed": false,
     "price": null,
     "currency": null,
-    "images": [],
-    "gallery": [
-        {
-            "caption":  "Ephesus Ancient City",
-            "url":  "/axu-international-pages/images/tours/ephesus/ephesus-celsus.jpg",
-            "alt":  "Celsus Library",
-            "credit":  {
-                           "title":  "Celsus Library",
-                           "author":  "Benh LIEU SONG",
-                           "sourceUrl":  "https://commons.wikimedia.org/wiki/File:Ephesus_Celsus_Library_Fa%C3%A7ade.jpg",
-                           "license":  "CC BY-SA 3.0",
-                           "licenseUrl":  "https://creativecommons.org/licenses/by-sa/3.0/",
-                           "shareAlike":  true,
-                           "changes":  "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
-                       }
-        },
-        {
-            "caption":  "House of the Virgin Mary",
-            "url":  "/axu-international-pages/images/tours/ephesus/house-of-virgin-mary.jpg",
-            "alt":  "House of the Virgin Mary",
-            "credit":  {
-                           "title":  "House of the Virgin Mary",
-                           "author":  "Peter C in Toronto Canada",
-                           "sourceUrl":  "https://commons.wikimedia.org/wiki/File:House_of_the_Virgin_Mary_in_Ephesus.jpg",
-                           "license":  "CC BY 2.0",
-                           "licenseUrl":  "https://creativecommons.org/licenses/by/2.0/",
-                           "shareAlike":  false,
-                           "changes":  "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
-                       }
-        },
-        {
-            "caption":  "Great Theatre",
-            "url":  "/axu-international-pages/images/tours/ephesus/ephesus-great-theatre.jpg",
-            "alt":  "Great Theatre of Ephesus",
-            "credit":  {
-                           "title":  "Great Theatre of Ephesus",
-                           "author":  "Austrian Archaeological Institute",
-                           "sourceUrl":  "https://commons.wikimedia.org/wiki/File:Great_Theatre,_Ephesus.jpg",
-                           "license":  "CC BY-SA 3.0",
-                           "licenseUrl":  "https://creativecommons.org/licenses/by-sa/3.0/",
-                           "shareAlike":  true,
-                           "changes":  "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
-                       }
-        },
-        {
-            "caption":  "Temple of Artemis",
-            "url":  "/axu-international-pages/images/tours/ephesus/temple-of-artemis.jpg",
-            "alt":  "Temple of Artemis",
-            "credit":  {
-                           "title":  "Temple of Artemis",
-                           "author":  "Ronan Reinart",
-                           "sourceUrl":  "https://commons.wikimedia.org/wiki/File:Site_of_Temple_of_Artemis.jpg",
-                           "license":  "CC BY-SA 3.0",
-                           "licenseUrl":  "https://creativecommons.org/licenses/by-sa/3.0/",
-                           "shareAlike":  true,
-                           "changes":  "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
-                       }
-        },
-        {
-            "caption":  "Curetes Street",
-            "url":  "/axu-international-pages/images/tours/ephesus/ephesus-curetes-street.jpg",
-            "alt":  "Curetes Street",
-            "credit":  {
-                           "title":  "Curetes Street",
-                           "author":  "Rita1234",
-                           "sourceUrl":  "https://commons.wikimedia.org/wiki/File:Ephesus_Curetes_street.jpg",
-                           "license":  "CC BY-SA 3.0",
-                           "licenseUrl":  "https://creativecommons.org/licenses/by-sa/3.0/",
-                           "shareAlike":  true,
-                           "changes":  "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
-                       }
+    "images": [
+      {
+        "caption": "Ephesus Ancient City",
+        "url": "/axu-international-pages/images/tours/ephesus/ephesus-celsus.jpg",
+        "alt": "Celsus Library",
+        "credit": {
+          "title": "Celsus Library",
+          "author": "Benh LIEU SONG",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ephesus_Celsus_Library_Fa%C3%A7ade.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
         }
+      }
+    ],
+    "gallery": [
+      {
+        "caption": "Ephesus Ancient City",
+        "url": "/axu-international-pages/images/tours/ephesus/ephesus-celsus.jpg",
+        "alt": "Celsus Library",
+        "credit": {
+          "title": "Celsus Library",
+          "author": "Benh LIEU SONG",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ephesus_Celsus_Library_Fa%C3%A7ade.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      },
+      {
+        "caption": "House of the Virgin Mary",
+        "url": "/axu-international-pages/images/tours/ephesus/house-of-virgin-mary.jpg",
+        "alt": "House of the Virgin Mary",
+        "credit": {
+          "title": "House of the Virgin Mary",
+          "author": "Peter C in Toronto Canada",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:House_of_the_Virgin_Mary_in_Ephesus.jpg",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "shareAlike": false,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      },
+      {
+        "caption": "Great Theatre",
+        "url": "/axu-international-pages/images/tours/ephesus/ephesus-great-theatre.jpg",
+        "alt": "Great Theatre of Ephesus",
+        "credit": {
+          "title": "Great Theatre of Ephesus",
+          "author": "Austrian Archaeological Institute",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Great_Theatre,_Ephesus.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      },
+      {
+        "caption": "Temple of Artemis",
+        "url": "/axu-international-pages/images/tours/ephesus/temple-of-artemis.jpg",
+        "alt": "Temple of Artemis",
+        "credit": {
+          "title": "Temple of Artemis",
+          "author": "Ronan Reinart",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Site_of_Temple_of_Artemis.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      },
+      {
+        "caption": "Curetes Street",
+        "url": "/axu-international-pages/images/tours/ephesus/ephesus-curetes-street.jpg",
+        "alt": "Curetes Street",
+        "credit": {
+          "title": "Curetes Street",
+          "author": "Rita1234",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ephesus_Curetes_street.jpg",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "shareAlike": true,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      }
     ],
     "highlights": [
       "Private Ephesus Experience",
@@ -1058,21 +1073,35 @@
     "currency": null,
     "images": [
       {
-        "caption": "Pergamon Acropolis",
-        "url": "https://upload.wikimedia.org/wikipedia/commons/3/3e/The_Temple_of_Trajan_%28Trajaneum%29%2C_Upper_Acropolis%2C_Pergamon%2C_Turkey_%285918905252%29.jpg",
-        "alt": "Temple of Trajan on the Acropolis of Pergamon",
+        "caption": "Sardis — Temple of Artemis",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/84/Temple_of_Artemis_in_Sardis.jpg",
+        "alt": "Temple of Artemis and surrounding landscape at Sardis",
         "credit": {
-          "title": "The Temple of Trajan (Trajaneum), Upper Acropolis, Pergamon, Turkey",
-          "author": "Carole Raddato",
-          "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Temple_of_Trajan_(Trajaneum),_Upper_Acropolis,_Pergamon,_Turkey_(5918905252).jpg",
-          "license": "CC BY 2.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-          "shareAlike": false,
+          "title": "Temple of Artemis in Sardis",
+          "author": "Quintucket",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Temple_of_Artemis_in_Sardis.jpg",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "shareAlike": true,
           "changes": "Original photograph linked without file modification. Site CSS crops gallery previews; the lightbox shows the full frame."
         }
       }
     ],
     "gallery": [
+      {
+        "caption": "Sardis — Temple of Artemis",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/84/Temple_of_Artemis_in_Sardis.jpg",
+        "alt": "Temple of Artemis and surrounding landscape at Sardis",
+        "credit": {
+          "title": "Temple of Artemis in Sardis",
+          "author": "Quintucket",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Temple_of_Artemis_in_Sardis.jpg",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "shareAlike": true,
+          "changes": "Original photograph linked without file modification. Site CSS crops gallery previews; the lightbox shows the full frame."
+        }
+      },
       {
         "caption": "Ephesus Ancient City",
         "url": "/axu-international-pages/images/tours/ephesus/ephesus-celsus.jpg",
@@ -1088,9 +1117,9 @@
         }
       },
       {
-        "caption": "Pergamon Acropolis",
+        "caption": "Trajaneum in Pergamon",
         "url": "https://upload.wikimedia.org/wikipedia/commons/3/3e/The_Temple_of_Trajan_%28Trajaneum%29%2C_Upper_Acropolis%2C_Pergamon%2C_Turkey_%285918905252%29.jpg",
-        "alt": "Temple of Trajan on the Acropolis of Pergamon",
+        "alt": "Temple of Trajan (Trajaneum) on the Pergamon Acropolis",
         "credit": {
           "title": "The Temple of Trajan (Trajaneum), Upper Acropolis, Pergamon, Turkey",
           "author": "Carole Raddato",
@@ -1098,20 +1127,6 @@
           "license": "CC BY 2.0",
           "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
           "shareAlike": false,
-          "changes": "Original photograph linked without file modification. Site CSS crops gallery previews; the lightbox shows the full frame."
-        }
-      },
-      {
-        "caption": "Sardis — Temple of Artemis",
-        "url": "https://upload.wikimedia.org/wikipedia/commons/8/84/Temple_of_Artemis_in_Sardis.jpg",
-        "alt": "Temple of Artemis and surrounding landscape at Sardis",
-        "credit": {
-          "title": "Temple of Artemis in Sardis",
-          "author": "Quintucket",
-          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Temple_of_Artemis_in_Sardis.jpg",
-          "license": "CC BY-SA 4.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-          "shareAlike": true,
           "changes": "Original photograph linked without file modification. Site CSS crops gallery previews; the lightbox shows the full frame."
         }
       },
@@ -1360,21 +1375,35 @@
     "currency": null,
     "images": [
       {
-        "caption": "Ephesus Ancient City",
-        "url": "/axu-international-pages/images/tours/ephesus/ephesus-celsus.jpg",
-        "alt": "Celsus Library",
+        "caption": "House of the Virgin Mary",
+        "url": "/axu-international-pages/images/tours/ephesus/house-of-virgin-mary.jpg",
+        "alt": "House of the Virgin Mary",
         "credit": {
-          "title": "Celsus Library",
-          "author": "Benh LIEU SONG",
-          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ephesus_Celsus_Library_Fa%C3%A7ade.jpg",
-          "license": "CC BY-SA 3.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
-          "shareAlike": true,
+          "title": "House of the Virgin Mary",
+          "author": "Peter C in Toronto Canada",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:House_of_the_Virgin_Mary_in_Ephesus.jpg",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "shareAlike": false,
           "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
         }
       }
     ],
     "gallery": [
+      {
+        "caption": "House of the Virgin Mary",
+        "url": "/axu-international-pages/images/tours/ephesus/house-of-virgin-mary.jpg",
+        "alt": "House of the Virgin Mary",
+        "credit": {
+          "title": "House of the Virgin Mary",
+          "author": "Peter C in Toronto Canada",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:House_of_the_Virgin_Mary_in_Ephesus.jpg",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "shareAlike": false,
+          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
+        }
+      },
       {
         "caption": "Ephesus Ancient City",
         "url": "/axu-international-pages/images/tours/ephesus/ephesus-celsus.jpg",
@@ -1401,20 +1430,6 @@
           "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
           "shareAlike": true,
           "changes": "Original photograph, unmodified. CSS crops previews; the lightbox retains the full frame."
-        }
-      },
-      {
-        "caption": "House of the Virgin Mary",
-        "url": "/axu-international-pages/images/tours/ephesus/house-of-virgin-mary.jpg",
-        "alt": "House of the Virgin Mary",
-        "credit": {
-          "title": "House of the Virgin Mary",
-          "author": "Peter C in Toronto Canada",
-          "sourceUrl": "https://commons.wikimedia.org/wiki/File:House_of_the_Virgin_Mary_in_Ephesus.jpg",
-          "license": "CC BY 2.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-          "shareAlike": false,
-          "changes": "Resize to a maximum width of 1920 pixels without upscaling or cropping; JPEG quality 86. Existing CSS crops previews; lightbox retains the full frame. No WebP encoder available locally."
         }
       },
       {

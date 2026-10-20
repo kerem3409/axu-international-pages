@@ -133,7 +133,7 @@ try {
   for(const listing of ['/tours/','/shore-excursions/']){
    await page.goto(origin+listing);const card=page.locator(`.tour-card:has(a[href="${base}${route}"])`).first();await card.waitFor();
    for(const type of ['Private tour','Shore excursion']){await page.locator('[name="type"]').selectOption(type);assert.equal(await card.count(),1);}
-   assert.match(await card.locator('.card-summary').textContent(),/reviewing the ship’s arrival and all-aboard times/);
+   assert.match(await card.locator('.card-summary').textContent(),/for cruise guests, the ship schedule/);
    await card.scrollIntoViewIfNeeded();await page.waitForFunction(src=>[...document.querySelectorAll('.cover img')].some(img=>img.getAttribute('src')===src&&img.naturalWidth>0),tour.images[0].url);
    assert.equal(await card.locator('.cover img').getAttribute('src'),tour.images[0].url);assert.equal(await card.locator('.cover img').evaluate(el=>getComputedStyle(el).objectFit),'cover');
   }

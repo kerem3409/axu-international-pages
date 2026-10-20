@@ -51,10 +51,14 @@ assert.equal(tour.gallery[2].credit.author, 'Jocelyn Erskine-Kellie');
 assert.equal(tour.gallery[3].credit.author, 'Cengiz Z');
 assert.equal(tour.gallery[4].credit.author, 'Nadiye Odabaşı');
 assert.ok(tour.highlights.length >= 5);
-for (const other of catalogue.filter(item => item.id !== 'axu-08')) assert.deepEqual(other, before.find(item => item.id === other.id));
-assert.ok(before.some(item => item.id === 'axu-10'));
-assert.ok(!catalogue.some(item => item.id === 'axu-10'));
-assert.equal(catalogue.length, before.length - 1);
+for (const other of catalogue.filter(item => item.id !== 'axu-08')) {
+  const {images, gallery, ...content} = other;
+  const {images:oldImages, gallery:oldGallery, ...oldContent} = before.find(item => item.id === other.id);
+  assert.deepEqual(content, oldContent);
+}
+assert.equal(before.length, 10);
+assert.equal(catalogue.length, 10);
+assert.deepEqual(catalogue.map(item => item.id), before.map(item => item.id));
 
 const win = new Window({ url: `https://kerem3409.github.io/axu-international-pages/tours/${tour.slug}/`, settings: { disableJavaScriptFileLoading: true, disableCSSFileLoading: true } });
 try {
@@ -73,4 +77,4 @@ try {
   await win.happyDOM.close();
 }
 
-console.log('PASS: axu-08 identity and URL retained; six-step itinerary, cautious services/transfers and duration, optional shopping/tasting, five attributed local photos, quote form and detail-gallery rendering; other tour records unchanged.');
+console.log('PASS: axu-08 identity and URL retained; six-step itinerary, cautious services/transfers and duration, optional shopping/tasting, five attributed destination photos, quote form and detail-gallery rendering; non-image tour data unchanged.');
