@@ -32,11 +32,14 @@ assert.doesNotMatch(logo, /<rect[^>]+fill=/i, 'Logo background must remain trans
 
 const app = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
 const catalogue = JSON.parse(fs.readFileSync(path.join(root, 'catalogue.json'), 'utf8'));
+assert.match(app, /TÜRSAB License No: 14169/);
+assert.doesNotMatch(app, /TÜRSAB Belge No/);
 assert.equal(catalogue.length, 10, 'The active catalogue should retain ten tours');
 for (const tour of catalogue) {
   assert.ok(Array.isArray(tour.cardSummary) && tour.cardSummary.length <= 2 && tour.cardSummary.length > 0, `${tour.id} needs one or two card summary paragraphs`);
   const words = tour.cardSummary.join(' ').trim().split(/\s+/).length;
-  assert.ok(words >= 35 && words <= 50, `${tour.id} Turkish card summary has ${words} words`);
+  assert.ok(words >= 35 && words <= 50, `${tour.id} English card summary has ${words} words`);
+  assert.doesNotMatch(tour.cardSummary.join(' '), /[çğıöşüÇĞİÖŞÜ]/u, `${tour.id} card summary should be English`);
   for (const paragraph of tour.cardSummary) assert.match(paragraph, /[.!?]$/u, `${tour.id} paragraph should end with a complete sentence`);
 }
 assert.match(app, /tours\.map\(card\)\.join\(''\)/, 'Homepage should render every catalogue tour in order');
@@ -51,4 +54,4 @@ assert.match(css, /\.tour-grid\{[^}]*repeat\(3,minmax\(0,1fr\)\)/);
 assert.match(css, /@media\(max-width:800px\)[\s\S]*?\.tour-grid\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
 assert.match(css, /@media\(max-width:520px\)[\s\S]*?\.tour-grid\{grid-template-columns:1fr/);
 
-console.log(`PASS: ${pages.length} HTML pages have no test banner and use the linked SVG brand; all ${catalogue.length} tours have complete 35–50 word Turkish card summaries and responsive, unclipped card text.`);
+console.log(`PASS: ${pages.length} HTML pages have no test banner and use the linked SVG brand; all ${catalogue.length} tours have complete 35–50 word English card summaries and responsive, unclipped card text.`);

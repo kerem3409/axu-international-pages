@@ -38,7 +38,7 @@ try {
       'Discover the Aegean with AXU TOURS','Explore Our Tours','Why Travel with AXU TOURS?','Plan Your Journey with AXU TOURS'
     ]);
     assert.match(await page.locator('.home-about').textContent(),/Discover the history, culture and landscapes of western Türkiye/);
-    assert.match(await page.locator('.reason-grid').textContent(),/TÜRSAB Belge No: 14169/);
+    assert.match(await page.locator('.reason-grid').textContent(),/TÜRSAB License No: 14169/);
     assert.ok((await page.getByRole('link',{name:'Request a Quote'}).last().getAttribute('href')).endsWith('/contact/'));
     assert.ok((await page.locator('header .brand img').getAttribute('src')).endsWith('/images/axu-tours-logo.svg'));
     assert.ok((await page.locator('footer .brand img').getAttribute('src')).endsWith('/images/axu-tours-logo.svg'));
@@ -80,6 +80,7 @@ try {
       if (row.length>1) assert.ok(Math.max(...row.map(item=>item.top))-Math.min(...row.map(item=>item.top))<=2, `Card links align in row at ${width}px`);
     }
     await page.goto(origin + '/tours/');
+    await page.locator('main .tour-card').first().waitFor();
     assert.equal(await page.locator('main .tour-card').count(), 10, `Tours page count at ${width}px`);
     assert.equal(await page.locator('main .tour-grid').evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length), columns, `Tours grid columns at ${width}px`);
     assert.equal(await page.locator('#filters select').count(), 4, 'The catalogue keeps its destination, departure, duration and type filters');
