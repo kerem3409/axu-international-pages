@@ -4,7 +4,7 @@ import fs from 'node:fs';import path from 'node:path';import http from 'node:htt
 const root=path.resolve(import.meta.dirname,'..',process.env.AXU_SITE_ROOT||'.'),base='/axu-international-pages';
 const read=file=>fs.readFileSync(path.join(root,file),'utf8'),catalogue=JSON.parse(read('catalogue.json')),app=read('app.js');
 const tour=catalogue.find(t=>t.id==='axu-07'),route=`/tours/${tour.slug}/`;
-assert.equal(catalogue.length,11);assert.equal(catalogue.filter(t=>t.id==='axu-07'||t.slug===tour.slug).length,1);
+assert.equal(catalogue.length,10);assert.equal(catalogue.filter(t=>t.id==='axu-07'||t.slug===tour.slug).length,1);
 assert.equal(tour.slug,'didyma-priene-miletos-tour-from-kusadasi');assert.equal(tour.title,'Priene, Miletus & Didyma Tour from Kusadasi');
 assert.equal(tour.duration,'Approximately 8 hours, including transfers');assert.equal(tour.itinerary.length,6);assert.equal(tour.price,null);
 assert.ok(!tour.types.some(t=>/private|group|small group/i.test(t)));assert.ok(tour.types.includes('Shore excursion'));

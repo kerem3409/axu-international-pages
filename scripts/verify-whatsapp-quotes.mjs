@@ -6,9 +6,9 @@ const root = new URL('../', import.meta.url);
 const read = file => fs.readFileSync(new URL(file,root),'utf8');
 const catalogue = JSON.parse(read('catalogue.json'));
 const app = read('app.js');
-assert.equal(catalogue.length,11);
+assert.equal(catalogue.length,10);
 assert.ok(!catalogue.some(t=>['axu-02','axu-03'].includes(t.id)||['archeological-ephesus-tour-from-kusadasi','biblical-ephesus-tour-from-kusadasi'].includes(t.slug)));
-assert.deepEqual(catalogue.filter(t=>!['axu-06','axu-07','axu-08'].includes(t.id)&&!t.enquiryVariant),JSON.parse(cp.execFileSync('git',['show','HEAD:catalogue.json'],{cwd:root,encoding:'utf8'})).filter(t=>!['axu-02','axu-03','axu-04','axu-05','axu-06','axu-07','axu-08'].includes(t.id)&&!t.enquiryVariant));
+assert.deepEqual(catalogue.filter(t=>!['axu-06','axu-07','axu-08','axu-10'].includes(t.id)&&!t.enquiryVariant),JSON.parse(cp.execFileSync('git',['show','HEAD:catalogue.json'],{cwd:root,encoding:'utf8'})).filter(t=>!['axu-02','axu-03','axu-04','axu-05','axu-06','axu-07','axu-08','axu-10'].includes(t.id)&&!t.enquiryVariant));
 assert.ok(!app.includes('/api/quote-requests'));
 assert.ok(!app.includes('localStorage') && !app.includes('sessionStorage'));
 assert.ok(!app.includes('window.open('));assert.ok(app.includes('window.location.assign(url)'));
@@ -87,7 +87,7 @@ for (const tour of catalogue) {
 }
 const contact=await page('contact/',device);
 try {
- const form=contact.d.querySelector('#quote-form');assert.equal(form.elements.tourId.options.length,12);
+ const form=contact.d.querySelector('#quote-form');assert.equal(form.elements.tourId.options.length,11);
  fill(form);submit(contact.w,form);assert.equal(contact.opened.length,0);
  for (const tour of catalogue) {form.elements.tourId.value=tour.id;form.elements.tourId.dispatchEvent(new contact.w.Event('change',{bubbles:true}));fillPickup(contact.w,form,tour);submit(contact.w,form);checkLink(contact.opened,tour,device);assert.equal(form.querySelector('#copy-quote').hidden,false);}
 } finally {await contact.w.happyDOM.close();}
@@ -95,5 +95,5 @@ try {
 const home=await page('');
 try {assert.ok([...home.d.querySelectorAll('a')].some(a=>a.textContent==='Request a Quote'&&a.href.endsWith('/contact/')));} finally {await home.w.happyDOM.close();}
 const listing=await page('tours/');
-try {assert.equal(listing.d.querySelectorAll('.quote-link').length,11);for(const a of listing.d.querySelectorAll('.quote-link'))assert.ok(a.href.endsWith('/#request-quote'));} finally {await listing.w.happyDOM.close();}
-console.log('PASS: all eleven tour names, required/invalid fields, future date, message encoding, optional fields, manual-send wording, popup fallback, contact tour selection, home/list CTAs and no request storage/submission.');
+try {assert.equal(listing.d.querySelectorAll('.quote-link').length,10);for(const a of listing.d.querySelectorAll('.quote-link'))assert.ok(a.href.endsWith('/#request-quote'));} finally {await listing.w.happyDOM.close();}
+console.log('PASS: all ten remaining tour names, required/invalid fields, future date, message encoding, optional fields, manual-send wording, popup fallback, contact tour selection, home/list CTAs and no request storage/submission.');

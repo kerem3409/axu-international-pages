@@ -52,7 +52,9 @@ assert.equal(tour.gallery[3].credit.author, 'Cengiz Z');
 assert.equal(tour.gallery[4].credit.author, 'Nadiye Odabaşı');
 assert.ok(tour.highlights.length >= 5);
 for (const other of catalogue.filter(item => item.id !== 'axu-08')) assert.deepEqual(other, before.find(item => item.id === other.id));
-assert.equal(catalogue.length, before.length);
+assert.ok(before.some(item => item.id === 'axu-10'));
+assert.ok(!catalogue.some(item => item.id === 'axu-10'));
+assert.equal(catalogue.length, before.length - 1);
 
 const win = new Window({ url: `https://kerem3409.github.io/axu-international-pages/tours/${tour.slug}/`, settings: { disableJavaScriptFileLoading: true, disableCSSFileLoading: true } });
 try {

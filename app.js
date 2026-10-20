@@ -307,6 +307,10 @@ function render() {
   location.replace(`${BASE}/tours/ephesus-shore-excursion/${location.search}${location.hash}`);
   return;
  }
+ if(path==='/tours/philosophers-stone-tour-from-izmir') {
+  location.replace(`${BASE}/tours/didyma-priene-miletos-tour-from-kusadasi/${location.search}${location.hash}`);
+  return;
+ }
  let title='AXU TOURS · Discover the Aegean';
  if(path==='/') main.innerHTML=home();
  else if(['/tours','/shore-excursions','/multi-day-tours'].includes(path)) {main.innerHTML=listing(path);setupFilters(path);title=`${path==='/tours'?'Tours':path==='/shore-excursions'?'Shore Excursions':'Multi-Day Tours'} · AXU TOURS`;}

@@ -9,7 +9,7 @@ const root=path.resolve(import.meta.dirname,'..',process.env.AXU_SITE_ROOT||'.')
 const read=file=>fs.readFileSync(path.join(root,file),'utf8');
 const catalogue=JSON.parse(read('catalogue.json')),app=read('app.js'),tour=catalogue.find(t=>t.id==='axu-05');
 const route=`/tours/${tour.slug}/`;
-assert.equal(catalogue.length,11);
+assert.equal(catalogue.length,10);
 assert.equal(catalogue.filter(t=>t.slug==='pamukkale-tour-from-kusadasi').length,1);
 assert.equal(tour.title,'Private Pamukkale & Hierapolis Tour from Kusadasi Port or Hotels');
 assert.equal(tour.duration,'Approximately 9–11 hours, including road travel');

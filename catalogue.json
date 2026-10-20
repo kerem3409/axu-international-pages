@@ -1155,59 +1155,6 @@
     "language": "English; other languages on request"
   },
   {
-    "id": "axu-10",
-    "slug": "philosophers-stone-tour-from-izmir",
-    "title": "Philosopher’s Stone: Didyma, Miletus and Priene from Izmir",
-    "summary": "Explore Didyma, Miletus and Priene through the theme of ancient thought and Ionian civilisation.",
-    "departure": "Izmir",
-    "duration": null,
-    "durationGroup": null,
-    "destinations": [
-      "Didyma",
-      "Miletus",
-      "Priene"
-    ],
-    "types": [
-      "Archaeology"
-    ],
-    "itinerary": [
-      "Visit Miletus.",
-      "Explore Priene.",
-      "Visit the Temple of Apollo at Didyma.",
-      "The source discusses Thales, Anaximander, Anaximenes, urban planning and the region’s intellectual heritage."
-    ],
-    "included": [],
-    "excluded": [],
-    "conditions": [],
-    "conditionsConfirmed": false,
-    "price": null,
-    "currency": null,
-    "images": [],
-    "gallery": [
-      {
-        "caption": "Miletus"
-      },
-      {
-        "caption": "Priene"
-      },
-      {
-        "caption": "Temple of Apollo at Didyma"
-      },
-      {
-        "caption": "Miletus Archaeological Remains"
-      },
-      {
-        "caption": "Priene Archaeological Remains"
-      }
-    ],
-    "highlights": [
-      "Archaeology",
-      "Didyma",
-      "Miletus",
-      "Priene"
-    ]
-  },
-  {
     "id": "axu-11",
     "slug": "ephesus-pamukkale-group-tour-from-istanbul-by-plane",
     "title": "Ephesus & Pamukkale Group Tour from Istanbul by Plane — 2 Days / 1 Night",
