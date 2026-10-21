@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import http from 'node:http';
 import assert from 'node:assert/strict';
-const root=path.resolve(import.meta.dirname,'..',process.env.AXU_SITE_ROOT || '.'),base='/axu-international-pages';
+const root=path.resolve(import.meta.dirname,'..',process.env.AXU_SITE_ROOT || '.'),base='';
 const catalogue=JSON.parse(fs.readFileSync(path.join(root,'catalogue.json'),'utf8'));
 const app=fs.readFileSync(path.join(root,'app.js'),'utf8');
 assert.equal(app.split('window.location.assign(url)').length,2);assert.ok(!app.includes('window.open('));
@@ -91,8 +91,10 @@ try {
    await page.locator('[name="notes"]').fill('Edited notes');assert.equal(await page.locator('#copy-quote').isVisible(),false);
    await page.locator('.td-hero-photo').click();await page.keyboard.press('ArrowRight');assert.equal(await page.locator('.td-counter').textContent(),'2 / 5');await page.keyboard.press('Escape');
   }
+  await page.goto(origin+'/');await page.locator('#home-title').waitFor();
+  if(width<=390){const menu=page.locator('.menu-toggle');await menu.click();assert.equal(await menu.getAttribute('aria-expanded'),'true');assert.ok(await page.locator('#navigation').evaluate(el=>el.classList.contains('open')));await page.locator('#navigation a').filter({hasText:'Tours'}).click();await page.locator('.tour-card').first().waitFor();assert.equal(await menu.getAttribute('aria-expanded'),'false');assert.ok(!await page.locator('#navigation').evaluate(el=>el.classList.contains('open')));}
   await page.goto(origin+'/contact/');await page.locator('#quote-form').waitFor();
-  assert.equal(await page.locator('[name="tourId"] option').count(),12);
+  assert.equal(await page.locator('[name="tourId"] option').count(),11);
   await page.locator('[name="fullName"]').fill('John & Jane Smith');await page.locator('[name="tourDate"]').fill('2099-10-20');await page.locator('[name="guests"]').fill('4');
   for(const tour of catalogue){await page.locator('[name="tourId"]').selectOption(tour.id);if(tour.pickupEnquiry||tour.cruiseDetailsEnquiry)await page.locator('[name="pickupType"]').selectOption('Hotel');await page.getByRole('button',{name:'Continue to WhatsApp'}).click();const href=await page.evaluate(()=>window.openedWhatsApp.at(-1)[0]);checkDestination(new URL(href),width<=390);assert.ok(new URL(href).searchParams.get('text').includes(`Tour: ${tour.title}\n`));}
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));

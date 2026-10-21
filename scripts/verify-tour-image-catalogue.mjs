@@ -31,7 +31,7 @@ for (const tour of catalogue) {
     assert.match(credit.sourceUrl, /^https:\/\//);
     assert.match(credit.licenseUrl, /^https:\/\//);
     if (photo.url.startsWith('/')) {
-      const local = path.join(root, photo.url.replace(/^\/axu-international-pages\//, '').replaceAll('/', path.sep));
+      const local = path.join(root, photo.url.replace(/^\//, '').replaceAll('/', path.sep));
       assert.ok(fs.existsSync(local), `${tour.id}: missing local image ${photo.url}`);
       const data = fs.readFileSync(local);
       assert.equal(data.readUInt16BE(0), 0xffd8, `${photo.url}: expected JPEG`);

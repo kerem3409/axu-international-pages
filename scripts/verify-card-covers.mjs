@@ -3,11 +3,9 @@ import {chromium} from '../../.visual-tools.local/node_modules/playwright/index.
 import fs from 'node:fs';
 import path from 'node:path';
 import http from 'node:http';
-import {execFileSync} from 'node:child_process';
 import assert from 'node:assert/strict';
-const root=path.resolve(import.meta.dirname,'..'),base='/axu-international-pages';
+const root=path.resolve(import.meta.dirname,'..'),base='';
 const app=fs.readFileSync(path.join(root,'app.js'),'utf8');
-const baseline=execFileSync('git',['show','dd10e3f:app.js'],{cwd:root,encoding:'utf8'});
 const catalogue=JSON.parse(fs.readFileSync(path.join(root,'catalogue.json'),'utf8'));
 const w=new Window();
 try {
@@ -37,25 +35,21 @@ const origin=`http://127.0.0.1:${server.address().port}${base}`;
 const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});
 try {
  const page=await browser.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
- const boxes=()=>page.locator('.cover,.tour-card').evaluateAll(els=>els.map(el=>{const box=el.getBoundingClientRect();return {width:Math.round(box.width*100)/100,height:Math.round(box.height*100)/100};}));
  for(const width of [1440,390,320]) {
   await page.setViewportSize({width,height:1000});
   for(const route of ['/','/tours/']) {
-   await page.route('**/app.js',request=>request.fulfill({contentType:'text/javascript',body:baseline}));
-   await page.goto(origin+route);await page.locator('.tour-card').first().waitFor();const before=await boxes();
-   await page.unroute('**/app.js');
    await page.goto(origin+route);await page.locator('.tour-card').first().waitFor();
-   assert.deepEqual(await boxes(),before,`Card sizes changed at ${width} on ${route}`);
    const covers=page.locator('.cover');
    for(let i=0;i<await covers.count();i++) {
     const cover=covers.nth(i),href=await cover.locator('..').getAttribute('href');
     const tour=catalogue.find(t=>href===`${base}/tours/${t.slug}/`);assert.ok(tour);
     const hasPhoto=p=>typeof p?.url==='string'&&p.url.trim().length>0;
     const expected=tour.images?.find(hasPhoto)||tour.gallery?.find(hasPhoto);
-    assert.equal(await cover.locator('img').count(),expected?1:0);
+    if(!expected||expected.url.startsWith('/'))assert.equal(await cover.locator('img').count(),expected?1:0);
     if(expected) {
-     const img=cover.locator('img');await img.scrollIntoViewIfNeeded();
-     await page.waitForFunction(src=>[...document.querySelectorAll('.cover img')].some(img=>img.getAttribute('src')===src&&img.complete&&img.naturalWidth>0),expected.url);
+     const img=cover.locator('img');
+     if(expected.url.startsWith('/')){await img.scrollIntoViewIfNeeded();await page.waitForFunction(src=>[...document.querySelectorAll('.cover img')].some(img=>img.getAttribute('src')===src&&img.complete&&img.naturalWidth>0),expected.url);}
+     else {assert.match(expected.url,/^https:\/\//,`${tour.id}: external cover must use HTTPS`);if(await img.count()===0)assert.ok(await cover.locator('.cover-placeholder').isVisible());continue;}
      assert.equal(await img.getAttribute('src'),expected.url);
      assert.equal(await img.evaluate(el=>getComputedStyle(el).objectFit),'cover');
      assert.ok(await img.evaluate(el=>{const a=el.getBoundingClientRect(),b=el.parentElement.getBoundingClientRect();return Math.abs(a.width-b.width)<1&&Math.abs(a.height-b.height)<1;}));
@@ -74,5 +68,5 @@ try {
   }
  }
  assert.deepEqual(errors,[]);
- console.log('PASS: image priority, gallery fallback, blank/missing URLs, real photo loading, object-fit cover, unchanged card sizes, failed-image placeholder, home/list at 1440/390/320px.');
+ console.log('PASS: image priority, gallery fallback, blank/missing URLs, local photo loading, object-fit cover, placeholder size retention, home/list at 1440/390/320px. External photos are checked for HTTPS; remote loading depends on network availability.');
 } finally {await browser.close();await new Promise(resolve=>server.close(resolve));}

@@ -1,4 +1,4 @@
-const BASE="/axu-international-pages";
+const BASE="";
 const main = document.querySelector('#main');
 async function showRelease() {
  try {
@@ -330,7 +330,7 @@ function render() {
  else main.innerHTML=heading('AXU TOURS','Page not found.','Explore our collection using the menu.');
  document.title=title;
  document.querySelectorAll('nav a').forEach(a=>{if(a.getAttribute('href').replace(BASE,'').replace(/\/$/,'')===(path==='/'?'':path))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
- main.querySelectorAll('a[href^="/"]').forEach(a=>{const href=a.getAttribute('href');if(!href.startsWith(BASE+'/')){const [path,query]=href.split('?');a.setAttribute('href',BASE+path+(path.endsWith('/')?'':'/')+(query?'?'+query:''));}});
+ main.querySelectorAll('a[href^="/"]').forEach(a=>{const href=a.getAttribute('href'),suffixAt=href.search(/[?#]/),rawPath=suffixAt<0?href:href.slice(0,suffixAt),suffix=suffixAt<0?'':href.slice(suffixAt),path=BASE&&!rawPath.startsWith(BASE+'/')?BASE+rawPath:rawPath;a.setAttribute('href',path+(path==='/'||path.endsWith('/')?'':'/')+suffix);});
  bindImages();
  bindTourGallery();
  bindQuoteForm();

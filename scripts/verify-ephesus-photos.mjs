@@ -18,7 +18,7 @@ const ephesus = catalogue.find(tour => tour.id === 'axu-01');
 const installed = ephesus.gallery.every(photo => photo.url);
 if (installed) {
  for (const [i, photo] of ephesus.gallery.entries()) {
-  assert.equal(photo.url, `/axu-international-pages/images/tours/ephesus/${sources.photos[i].file}`);
+  assert.equal(photo.url, `/images/tours/ephesus/${sources.photos[i].file}`);
   assert.equal(photo.credit.author,sources.photos[i].author);
   const bytes=fs.readFileSync(new URL('images/tours/ephesus/'+sources.photos[i].file,root));
   assert.equal(bytes.readUInt16BE(0),0xffd8);
@@ -26,7 +26,7 @@ if (installed) {
  }
 }
 async function verify(data, hasPhotos) {
- const w = new Window({url:'https://kerem3409.github.io/axu-international-pages/tours/ephesus-shore-excursion/',settings:{disableCSSFileLoading:true,disableJavaScriptFileLoading:true}});
+ const w = new Window({url:'https://axutours.tr/tours/ephesus-shore-excursion/',settings:{disableCSSFileLoading:true,disableJavaScriptFileLoading:true}});
  try {
   w.document.write(read('tours/ephesus-shore-excursion/index.html'));
   w.fetch = async () => ({ok:true,json:async()=>data});

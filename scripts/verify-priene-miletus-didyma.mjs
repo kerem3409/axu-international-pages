@@ -1,7 +1,7 @@
 import {Window} from '../../node_modules/happy-dom/lib/index.js';
 import {chromium} from '../../.visual-tools.local/node_modules/playwright/index.mjs';
 import fs from 'node:fs';import path from 'node:path';import http from 'node:http';import crypto from 'node:crypto';import assert from 'node:assert/strict';
-const root=path.resolve(import.meta.dirname,'..',process.env.AXU_SITE_ROOT||'.'),base='/axu-international-pages';
+const root=path.resolve(import.meta.dirname,'..',process.env.AXU_SITE_ROOT||'.'),base='';
 const read=file=>fs.readFileSync(path.join(root,file),'utf8'),catalogue=JSON.parse(read('catalogue.json')),app=read('app.js');
 const tour=catalogue.find(t=>t.id==='axu-07'),route=`/tours/${tour.slug}/`;
 assert.equal(catalogue.length,10);assert.equal(catalogue.filter(t=>t.id==='axu-07'||t.slug===tour.slug).length,1);

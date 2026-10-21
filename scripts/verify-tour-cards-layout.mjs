@@ -5,7 +5,7 @@ import path from 'node:path';
 import {chromium} from '../../.visual-tools.local/node_modules/playwright/index.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
-const base = '/axu-international-pages';
+const base = '';
 const catalogue = JSON.parse(fs.readFileSync(path.join(root, 'catalogue.json'), 'utf8'));
 assert.equal(catalogue.length, 10);
 

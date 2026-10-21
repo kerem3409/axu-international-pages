@@ -5,7 +5,7 @@ import path from 'node:path';
 import http from 'node:http';
 import crypto from 'node:crypto';
 import assert from 'node:assert/strict';
-const root=path.resolve(import.meta.dirname,'..',process.env.AXU_SITE_ROOT||'.'),base='/axu-international-pages';
+const root=path.resolve(import.meta.dirname,'..',process.env.AXU_SITE_ROOT||'.'),base='';
 const read=file=>fs.readFileSync(path.join(root,file),'utf8');
 const catalogue=JSON.parse(read('catalogue.json')),app=read('app.js'),tour=catalogue.find(t=>t.id==='axu-05');
 const route=`/tours/${tour.slug}/`;
