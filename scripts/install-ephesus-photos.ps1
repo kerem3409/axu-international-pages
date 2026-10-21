@@ -187,7 +187,7 @@ try {
   for ($i = 0; $i -lt 5; $i++) {
     $photo = $sources.photos[$i]
     $slot = $tour.gallery[$i]
-    $slot | Add-Member -Force -NotePropertyName url -NotePropertyValue ('/axu-international-pages/images/tours/ephesus/' + $photo.file)
+    $slot | Add-Member -Force -NotePropertyName url -NotePropertyValue ('/images/tours/ephesus/' + $photo.file)
     $slot | Add-Member -Force -NotePropertyName alt -NotePropertyValue $photo.title
     $credit = [pscustomobject]@{title=$photo.title; author=$photo.author; sourceUrl=$photo.sourceUrl; license=$photo.license; licenseUrl=$photo.licenseUrl; shareAlike=$photo.shareAlike; changes=$sources.plannedChanges}
     $slot | Add-Member -Force -NotePropertyName credit -NotePropertyValue $credit

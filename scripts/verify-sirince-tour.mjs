@@ -60,7 +60,7 @@ assert.equal(before.length, 10);
 assert.equal(catalogue.length, 10);
 assert.deepEqual(catalogue.map(item => item.id), before.map(item => item.id));
 
-const win = new Window({ url: `https://kerem3409.github.io/axu-international-pages/tours/${tour.slug}/`, settings: { disableJavaScriptFileLoading: true, disableCSSFileLoading: true } });
+const win = new Window({ url: `https://axutours.tr/tours/${tour.slug}/`, settings: { disableJavaScriptFileLoading: true, disableCSSFileLoading: true } });
 try {
   win.document.write(read(`tours/${tour.slug}/index.html`));
   win.fetch = async url => ({ ok: true, json: async () => url.endsWith('/version.json') ? { version: 'test', updated: '19.10.2026' } : catalogue });

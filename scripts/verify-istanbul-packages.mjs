@@ -1,7 +1,7 @@
 import {Window} from '../../node_modules/happy-dom/lib/index.js';
 import {chromium} from '../../.visual-tools.local/node_modules/playwright/index.mjs';
 import fs from 'node:fs';import path from 'node:path';import http from 'node:http';import assert from 'node:assert/strict';
-const root=path.resolve(import.meta.dirname,'..'),base='/axu-international-pages';
+const root=path.resolve(import.meta.dirname,'..'),base='';
 const read=file=>fs.readFileSync(path.join(root,file),'utf8'),catalogue=JSON.parse(read('catalogue.json')),app=read('app.js');
 const packages=catalogue.filter(t=>t.enquiryVariant&&!t.pickupEnquiry);assert.equal(packages.length,4);assert.equal(catalogue.length,10);
  assert.equal(new Set(catalogue.map(t=>t.id)).size,10);assert.equal(new Set(catalogue.map(t=>t.slug)).size,10);

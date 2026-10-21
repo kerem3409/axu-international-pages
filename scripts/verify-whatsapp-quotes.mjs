@@ -19,12 +19,12 @@ const future = new Date();future.setDate(future.getDate()+30);
 const date = `${future.getFullYear()}-${String(future.getMonth()+1).padStart(2,'0')}-${String(future.getDate()).padStart(2,'0')}`;
 const formattedDate = new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'long',year:'numeric'}).format(future);
 async function page(route, device = 'desktop') {
- const w = new Window({url:`https://kerem3409.github.io/axu-international-pages/${route}`,settings:{disableCSSFileLoading:true,disableJavaScriptFileLoading:true}});
+ const w = new Window({url:`https://axutours.tr/${route}`,settings:{disableCSSFileLoading:true,disableJavaScriptFileLoading:true}});
  w.document.write(read(route+'index.html'));
  Object.defineProperty(w.navigator,'userAgent',{value:device==='desktop' ? 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' : device==='android' ? 'Mozilla/5.0 (Linux; Android 14) Mobile' : device==='iphone' ? 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) Mobile' : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15)'});
  Object.defineProperty(w.navigator,'platform',{value:device==='ipad' ? 'MacIntel' : 'Win32'});
  Object.defineProperty(w.navigator,'maxTouchPoints',{value:device==='ipad' ? 5 : 0});
- const requests=[];w.fetch=async url=>{if(url==='/axu-international-pages/version.json')return {ok:true,json:async()=>({version:'1.0.7+abcdef0',updated:'14.10.2026'})};requests.push(url);assert.equal(url,'/axu-international-pages/catalogue.json');return {ok:true,json:async()=>catalogue};};
+ const requests=[];w.fetch=async url=>{if(url==='/version.json')return {ok:true,json:async()=>({version:'1.0.7+abcdef0',updated:'14.10.2026'})};requests.push(url);assert.equal(url,'/catalogue.json');return {ok:true,json:async()=>catalogue};};
  const opened=[];w.location.assign=url=>opened.push([url]);w.open=()=>{throw new Error('Must navigate in the same tab');};
  w.eval(app);await new Promise(resolve=>setTimeout(resolve,30));
  assert.equal(w.document.querySelector('footer .release-info')?.textContent,'Version 1.0.7+abcdef0 · Updated 14.10.2026');
