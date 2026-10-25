@@ -33,6 +33,7 @@ function cover(tour, large = false) {
  return `<div class="cover ${large ? 'cover-large' : ''} tone-${Number(tour.id.slice(-2)) % 4}">
   <div class="cover-placeholder"><span class="cover-brand">AXU TOURS</span><span class="cover-title">${esc(tour.title)}</span><span class="cover-caption">${esc(tour.destinations.join(' · '))}</span></div>
   ${image ? `<img src="${esc(image.url)}" alt="${esc(image.alt || tour.title)}" loading="${large ? 'eager' : 'lazy'}">` : ''}
+  ${image?.credit?.author==='P. Vasiliadis' ? '<span class="photo-attribution">Photo: P. Vasiliadis · CC BY-SA 3.0</span>' : ''}
  </div>`;
 }
 function cardSummaryParagraphs(tour) {
@@ -48,12 +49,12 @@ function card(tour) {
 }
 const heading = (kicker, title, copy) => `<div class="page-heading"><p class="eyebrow">${kicker}</p><h1>${title}</h1><p>${copy}</p></div>`;
 function home() {
- const photo = (src,alt,cls='') => `<img class="${cls}" src="${BASE}${src}" alt="${alt}" loading="lazy" width="800" height="600">`;
+ const photo = (src,alt,cls='') => `<img class="${cls}" src="${BASE}${src}" alt="${alt}" loading="lazy" width="800" height="600">${src.includes('pamukkale-terraces') ? '<span class="photo-attribution">Photo: P. Vasiliadis · CC BY-SA 3.0</span>' : ''}`;
  const categories = [
   ['Shore Excursions','/shore-excursions/','/images/home/kusadasi.jpg','Illustrated view of Pigeon Island in Kusadasi'],
   ['Private Tours','/tours/?type=Private%20tour','/images/home/sirince.jpg','Traditional hillside houses in Sirince'],
   ['Group Tours','/tours/?type=Group%20tour','/images/tours/ephesus/ephesus-great-theatre.jpg','The Great Theatre of Ephesus'],
-  ['Multi-Day Tours','/multi-day-tours/','/images/tours/pamukkale/pamukkale-travertines.jpg','White travertine terraces at Pamukkale']
+  ['Multi-Day Tours','/multi-day-tours/','/images/tours/pamukkale-hierapolis/pamukkale-terraces-wide.jpg','White travertine terraces at Pamukkale']
  ];
  const selected = [
   ['axu-01','Ephesus Shore Excursion','Kusadasi','4–6 hours','Ancient wonders, at your own pace.'],
@@ -63,11 +64,12 @@ function home() {
  const pin='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-7.6 7-13a7 7 0 1 0-14 0c0 5.4 7 13 7 13Z"/><circle cx="12" cy="9" r="2.5"/></svg>';
  const clock='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg>';
  return `<div class="axh">
- <section class="axh-hero" aria-labelledby="home-title"><img class="axh-hero-image" src="${BASE}/images/home/ephesus-hero.jpg" alt="Illustrated view of the Library of Celsus in Ephesus" fetchpriority="high" width="1920" height="1280"><div class="axh-hero-copy"><h1 id="home-title">Discover<br>the Aegean.</h1><p>Private journeys. Remarkable places.</p><a class="axh-button axh-button-gold" href="/tours/">Explore Tours <span aria-hidden="true">→</span></a></div></section>
+ <section class="axh-hero" aria-labelledby="home-title"><img class="axh-hero-image" src="${BASE}/images/home/ephesus-hero.jpg" alt="Illustrated view of the Library of Celsus in Ephesus" fetchpriority="high" width="1920" height="1280"><div class="axh-hero-copy"><h1 id="home-title"><span>Your gateway</span> <span>to the Aegean.</span></h1><a class="axh-button axh-button-gold" href="/tours/">Explore Tours <span aria-hidden="true">→</span></a></div></section>
  <section class="axh-benefits" aria-label="Travel with AXU"><div><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M7 32 29 4M12 25C3 23 3 16 4 12c8 2 12 7 8 13ZM18 18c-8-2-8-9-7-13 8 2 11 7 7 13ZM14 24c2-9 10-9 14-8-2 8-7 11-14 8ZM22 14c0-8 6-11 10-11 0 8-3 12-10 11Z"/></svg>Local Expertise</div><div><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="10" r="4"/><circle cx="7" cy="14" r="3"/><circle cx="29" cy="14" r="3"/><path d="M11 30v-7a7 7 0 0 1 14 0v7ZM2 30v-7a5 5 0 0 1 6-5M34 30v-7a5 5 0 0 0-6-5"/></svg>Private &amp; Group Tours</div><div><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="14"/><path d="m23 11-3 10-8 4 3-10Z"/></svg>Personal Travel Planning</div></section>
  <section class="axh-section" id="experiences" aria-labelledby="axh-experiences-title"><h2 id="axh-experiences-title">Find your way to explore</h2><div class="axh-categories">${categories.map(([title,href,src,alt])=>`<a class="axh-category" href="${href}">${photo(src,alt)}<h3>${title} <span aria-hidden="true">→</span></h3></a>`).join('')}</div></section>
  <section class="axh-section axh-selected" aria-labelledby="axh-selected-title"><div class="axh-heading"><h2 id="axh-selected-title">Selected Journeys</h2><a class="axh-text-link" href="/tours/">View all tours <span aria-hidden="true">→</span></a></div><div class="axh-tour-grid">${selected.map(([id,title,departure,duration,summary])=>{const t=tours.find(t=>t.id===id);if(!t)return '';return `<article class="axh-tour"><a class="axh-tour-photo" href="${link(t)}" aria-label="Explore ${esc(title)}">${photo(t.images[0].url,t.images[0].alt)}</a><div class="axh-tour-copy"><h3><a href="${link(t)}">${title}</a></h3><div class="axh-meta"><span>${pin}${departure}</span><span>${clock}${duration}</span></div><p>${summary}</p><a class="axh-text-link" href="${link(t)}">View Tour <span aria-hidden="true">→</span></a></div></article>`;}).join('')}</div></section>
- <section class="axh-story" aria-labelledby="axh-story-title"><div class="axh-story-copy"><h2 id="axh-story-title">The Aegean, thoughtfully explored</h2><p>From ancient cities to coastal towns and timeless villages, we design meaningful journeys across Aegean Türkiye — with local insight, authentic experiences and personal planning.</p><a class="axh-button axh-button-outline" href="/contact/">Plan Your Trip <span aria-hidden="true">→</span></a></div><div class="axh-map"><svg viewBox="0 0 600 320" role="img" aria-label="Stylized destination guide to western Türkiye, not to scale"><path class="axh-water" d="M0 0h600v320H0Z"/><path class="axh-land" d="M210 0h390v320H280l-20-22 12-18-32-20 9-22-25-10 7-19-36-9 27-24-17-18 30-20-23-25 30-17-21-20 13-22-19-15 18-21Z"/><path class="axh-island" d="m100 74 19-11 15 15-10 17-20-4Zm40 112 26-8 14 18-23 11-14-6Zm-38 79 32-9 14 14-33 11Z"/><text x="30" y="150" class="axh-sea-label">AEGEAN SEA</text><text x="420" y="160" class="axh-country">TÜRKİYE</text><g class="axh-destinations"><circle cx="337" cy="35" r="4"/><text x="348" y="40">Istanbul</text><circle cx="275" cy="103" r="4"/><text x="286" y="108">Pergamon</text><circle cx="258" cy="178" r="4"/><text x="270" y="181">Ephesus</text><circle cx="236" cy="201" r="4"/><text x="165" y="219">Kusadasi</text><circle cx="294" cy="224" r="4"/><text x="304" y="229">Sirince</text><circle cx="404" cy="223" r="4"/><text x="415" y="228">Pamukkale</text></g><text x="365" y="300" class="axh-map-note">DESTINATION GUIDE · NOT TO SCALE</text></svg></div></section>
+ <p class="axh-photo-credit">Pamukkale terraces: <a href="https://commons.wikimedia.org/wiki/File:Pamukkale_Hierapolis_Travertine_pools.JPG" target="_blank" rel="noopener noreferrer">P. Vasiliadis</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>. Resized and cropped.</p>
+ <section class="axh-story" aria-labelledby="axh-story-title"><div class="axh-story-copy"><h2 id="axh-story-title">The Aegean, thoughtfully explored</h2><p>From ancient cities to coastal towns and timeless villages, we design meaningful journeys across Aegean Türkiye — with local insight, authentic experiences and personal planning.</p><a class="axh-button axh-button-outline" href="/contact/">Plan Your Trip <span aria-hidden="true">→</span></a></div><figure class="axh-map"><img src="/images/map/aegean.svg" alt="Geographic map of western Türkiye showing Istanbul, Pergamon, Ephesus, Kusadasi, Sirince and Pamukkale" loading="lazy" width="600" height="634"><figcaption>Made with <a href="https://www.naturalearthdata.com/downloads/10m-physical-vectors/10m-land/" target="_blank" rel="noopener noreferrer">Natural Earth</a> · <a href="https://www.naturalearthdata.com/about/terms-of-use/" target="_blank" rel="noopener noreferrer">Public domain</a></figcaption></figure></section>
  <details class="axh-credits"><summary>Photography &amp; image credits</summary><p>Homepage photographs retain the source credits and licences shown on the corresponding tour pages. The opening image and the Sirince and Kusadasi category images are AI-generated destination illustrations. Tour card photographs are authentic source images.</p>${selected.map(([id])=>{const t=tours.find(t=>t.id===id),c=t?.images?.[0]?.credit;return c?`<p>${esc(c.title)} — ${esc(c.author)} · <a href="${esc(c.sourceUrl)}" target="_blank" rel="noopener">Source</a> · <a href="${esc(c.licenseUrl)}" target="_blank" rel="noopener">${esc(c.license)}</a>. Display cropped.</p>`:'';}).join('')}</details></div>`;
 }
 function listing(path) {
@@ -238,7 +240,7 @@ function tourPhoto(photo, index, hero = false, interactive = true) {
  const label = `PHOTO ${String(index+1).padStart(2,'0')}`;
  const inside = `<span class="td-photo-label"><strong>${label}</strong><small>${esc(photo.caption)}</small></span>`;
  const image = photo.url ? `<img src="${esc(photo.url)}" alt="${esc(photo.alt || photo.caption)}" loading="${hero ? 'eager' : 'lazy'}" decoding="async" ${hero ? 'fetchpriority="high"' : ''}>` : '';
- return `<${interactive ? 'button' : 'div'} class="td-photo${hero ? ' td-hero-photo' : ''}" ${interactive ? `type="button" data-photo="${index}" aria-label="Open ${esc(photo.caption)} in photo gallery"` : ''}>${inside}${image}</${interactive ? 'button' : 'div'}>`;
+ return `<${interactive ? 'button' : 'div'} class="td-photo${hero ? ' td-hero-photo' : ''}" ${interactive ? `type="button" data-photo="${index}" aria-label="Open ${esc(photo.caption)} in photo gallery"` : ''}>${inside}${image}${photo.credit?.author==='P. Vasiliadis' ? '<span class="photo-attribution">Photo: P. Vasiliadis · CC BY-SA 3.0</span>' : ''}</${interactive ? 'button' : 'div'}>`;
 }
 function itineraryStop(item, index) {
  const text = typeof item === 'string' ? visitorWording(item) : item.description || '';
@@ -315,7 +317,7 @@ function about() {
 }
 function contact() {
  return `${heading('LET’S PLAN YOUR VISIT','Your journey starts here.','Tell us which tour interests you and when you would like to travel.')}
- <section class="contact-page section"><div><p class="eyebrow">REQUEST A QUOTE</p><h2>A few details.<br>A journey to look forward to.</h2><p>Choose your tour and share your preferred date and party size. Add your hotel or ship details if you have them.</p><p>The itinerary and price will need to be confirmed before a booking can be made.</p><p>Continue on WhatsApp to review and send your request to AXU TOURS.</p></div><div>${tours.length ? requestForm() : '<p>Quote requests will open when tours are available.</p>'}</div></section>`;
+ <section class="contact-page section"><div><p class="eyebrow">REQUEST A QUOTE</p><h2>A few details.<br>A journey to look forward to.</h2><p>Choose your tour and share your preferred date and party size. Add your hotel or ship details if you have them.</p><p>The itinerary and price will need to be confirmed before a booking can be made.</p><p>Continue on WhatsApp to review and send your request to AXU TOURS.</p><address class="contact-details"><strong>AXU Tours</strong><dl><div><dt>Phone / WhatsApp</dt><dd><a href="tel:+905367040944">+90 536 704 09 44</a> · <a href="https://wa.me/905367040944" target="_blank" rel="noopener noreferrer">WhatsApp</a></dd></div><div><dt>Email</dt><dd><a href="mailto:info@axutours.com">info@axutours.com</a></dd></div><div><dt>Instagram</dt><dd><a href="https://www.instagram.com/axutours/" target="_blank" rel="noopener noreferrer">@axutours</a></dd></div><div class="contact-address"><dt>Address</dt><dd><a lang="tr" href="https://www.google.com/maps/search/?api=1&amp;query=Ortaklar%20Mahallesi%2C%201424.%20Sokak%20No%3A%2038%20D%2C%2009330%20Germencik%20%2F%20Ayd%C4%B1n" target="_blank" rel="noopener noreferrer">Ortaklar Mahallesi, 1424. Sokak No: 38 D, 09330 Germencik / Aydın</a></dd></div></dl></address></div><div>${tours.length ? requestForm() : '<p>Quote requests will open when tours are available.</p>'}</div></section>`;
 }
 function bindImages() {
  document.querySelectorAll('.cover img').forEach(img=>{img.addEventListener('error',()=>img.remove(),{once:true});});
@@ -323,9 +325,9 @@ function bindImages() {
 function render() {
  const path=location.pathname.slice(BASE.length).replace(/\/$/,'')||'/';
  document.body.classList.toggle('home-page',path==='/');
- if(path==='/') {
+ {
   const nav=document.querySelector('#navigation');
-  nav.innerHTML=`<a href="${BASE}/">Home</a><a href="${BASE}/tours/">Tours</a><a href="#experiences">Experiences</a><a href="${BASE}/about/">About AXU</a><a href="${BASE}/contact/">Contact</a><a href="${BASE}/contact/" class="axh-nav-cta">Plan Your Trip <span aria-hidden="true">→</span></a>`;
+  // Navigation is shared by every static page shell.
   nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');document.querySelector('.menu-toggle').setAttribute('aria-expanded','false');}));
  }
  if(['/tours/archeological-ephesus-tour-from-kusadasi','/tours/biblical-ephesus-tour-from-kusadasi'].includes(path)) {
@@ -336,7 +338,7 @@ function render() {
   location.replace(`${BASE}/tours/didyma-priene-miletos-tour-from-kusadasi/${location.search}${location.hash}`);
   return;
  }
- let title='AXU TOURS · Discover the Aegean';
+ let title='AXU TOURS · Your gateway to the Aegean';
  if(path==='/') main.innerHTML=home();
  else if(['/tours','/shore-excursions','/multi-day-tours'].includes(path)) {main.innerHTML=listing(path);setupFilters(path);title=`${path==='/tours'?'Tours':path==='/shore-excursions'?'Shore Excursions':'Multi-Day Tours'} · AXU TOURS`;}
  else if(path.startsWith('/tours/')) {const tour=tours.find(t=>t.slug===decodeURIComponent(path.slice(7)));main.innerHTML=details(tour);title=`${tour?.title||'Tour not found'} · AXU TOURS`;if(tour)document.querySelector('meta[name="description"]').content=tour.summary;}
@@ -344,13 +346,14 @@ function render() {
  else if(path==='/contact') {main.innerHTML=contact();title='Request a Quote · AXU TOURS';}
  else main.innerHTML=heading('AXU TOURS','Page not found.','Explore our collection using the menu.');
  document.title=title;
- document.querySelectorAll('nav a').forEach(a=>{if(a.getAttribute('href').replace(BASE,'').replace(/\/$/,'')===(path==='/'?'':path))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+ document.querySelectorAll('nav a').forEach(a=>{if(a.getAttribute('href').replace(BASE,'').replace(/\/$/,'')===(path==='/'?'':path.startsWith('/tours/')?'/tours':path))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
  main.querySelectorAll('a[href^="/"]').forEach(a=>{const href=a.getAttribute('href'),suffixAt=href.search(/[?#]/),rawPath=suffixAt<0?href:href.slice(0,suffixAt),suffix=suffixAt<0?'':href.slice(suffixAt),path=BASE&&!rawPath.startsWith(BASE+'/')?BASE+rawPath:rawPath;a.setAttribute('href',path+(path==='/'||path.endsWith('/')?'':'/')+suffix);});
  bindImages();
  bindTourGallery();
  bindQuoteForm();
  if(location.hash==='#request-quote') requestAnimationFrame(()=>document.querySelector('#request-quote')?.scrollIntoView());
 }
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&document.querySelector('#navigation').classList.contains('open')){document.querySelector('#navigation').classList.remove('open');document.querySelector('.menu-toggle').setAttribute('aria-expanded','false');document.querySelector('.menu-toggle').focus();}});
 document.querySelector('.menu-toggle').addEventListener('click',event=>{const open=event.currentTarget.getAttribute('aria-expanded')!=='true';event.currentTarget.setAttribute('aria-expanded',open);document.querySelector('#navigation').classList.toggle('open',open);});
 async function start() {
  try {

@@ -1,1 +1,3 @@
 _site/
+.tools/
+images/map/land.source.geojson

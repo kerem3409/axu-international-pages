@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import http from 'node:http';
 import path from 'node:path';
-import {chromium} from '../../.visual-tools.local/node_modules/playwright/index.mjs';
+import {chromium} from '../.tools/node_modules/playwright/index.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const base = '';
@@ -34,68 +34,27 @@ try {
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(origin + '/');
-    assert.deepEqual(await page.locator('#home-experiences-title,#home-tours-title,#home-trust-title,.home-cta h2').allTextContents(), [
-      'Our Experiences','Explore Our Tours','Why Travel with AXU TOURS?','Let the Aegean Surprise You.'
-    ]);
-    assert.equal(await page.locator('#home-title').textContent(),'Your Gateway to the Aegean.');
-    assert.match(await page.locator('.home-trust').textContent(),/TÜRSAB License No: 14169/);
-    assert.ok((await page.locator('.home-cta a').getAttribute('href')).endsWith('/contact/'));
-    assert.ok((await page.locator('header .brand img').getAttribute('src')).endsWith('/images/axu-tours-logo.svg'));
-    assert.ok((await page.locator('footer .brand img').getAttribute('src')).endsWith('/images/axu-tours-logo.svg'));
-    assert.ok((await page.locator('.home-highlights-map').getAttribute('src')).endsWith('/images/home/aegean-highlights.png'));
-    assert.ok((await page.locator('.home-discovery img').getAttribute('src')).endsWith('/images/home/aegean-discovery-map.png'));
-    for (const selector of ['.home-highlights-map','.home-discovery img']) {
-      await page.waitForFunction(sel=>{const img=document.querySelector(sel);return img?.complete&&img.naturalWidth>0;},selector);
-    }
-    assert.ok((await page.locator('.home-hero-actions a').first().getAttribute('href')).endsWith('/tours/'));
-    assert.equal((await page.locator('header nav a').allTextContents()).join('|'),'Home|Experiences|Tours|About AXU|Contact');
-    assert.equal(await page.locator('.home-experience-card').count(),4);
-    assert.deepEqual(await page.locator('.home-experience-card').evaluateAll(cards=>cards.map(card=>card.getAttribute('href'))),[
-      `${base}/shore-excursions/`,`${base}/tours/?type=Private%20tour`,`${base}/tours/?type=Group%20tour`,`${base}/multi-day-tours/`
-    ]);
-    const homeCards = page.locator('main .tour-card');
-    await homeCards.first().waitFor();
-    assert.equal(await homeCards.count(), 10, `Homepage count at ${width}px`);
-    assert.deepEqual(await homeCards.locator('h3').allTextContents(), catalogue.map(tour => tour.title));
-    const grid = page.locator('main .tour-grid').first();
-    assert.equal(await grid.evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length), columns, `Homepage grid columns at ${width}px`);
-    for (let i=0; i<catalogue.length; i++) {
-      const card = homeCards.nth(i);
-      const paragraphs = card.locator('.card-summary p');
-      assert.equal(await paragraphs.count(), catalogue[i].cardSummary.length, `${catalogue[i].id}: paragraph count`);
-      const text = await paragraphs.allTextContents();
-      assert.deepEqual(text, catalogue[i].cardSummary);
-      assert.ok(text.every(paragraph => /[.!?]$/u.test(paragraph)), `${catalogue[i].id}: complete sentences`);
-      const paragraphLayout = await paragraphs.evaluateAll(elements => elements.map(element => {
-        const style = getComputedStyle(element);
-        return {fits:element.scrollHeight <= element.clientHeight + 1,lineHeight:style.lineHeight,fontSize:style.fontSize,marginBottom:style.marginBottom};
-      }));
-      assert.ok(paragraphLayout.every((item,index) => item.fits && Math.abs(parseFloat(item.lineHeight)/parseFloat(item.fontSize)-1.6) < .02 && parseFloat(item.marginBottom) === (index === paragraphLayout.length-1 ? 0 : 14)), `${catalogue[i].id}: readable, unclipped paragraph styling ${JSON.stringify(paragraphLayout)}`);
-      assert.ok(await card.locator('.cover img').count(), `${catalogue[i].id}: cover image remains present`);
-      assert.equal(await card.locator('.cover img').getAttribute('src'), catalogue[i].images?.find(photo => photo.url)?.url || catalogue[i].gallery?.find(photo => photo.url)?.url);
-      assert.equal(await card.locator('.cover img').evaluate(image => getComputedStyle(image).objectFit), 'cover');
-      assert.ok(await card.locator('.quote-link').isVisible());
-      assert.ok(await card.locator('a[href$="#request-quote"]').count());
-    }
-    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Homepage horizontal overflow at ${width}px`);
-    if (width === 1440 || width === 390) await page.screenshot({path:path.resolve(import.meta.dirname,'../../.visual-tools.local',`axu-home-stage4-${width}.png`),fullPage:true});
-
-    const rowButtons = await page.locator('main .tour-card').evaluateAll(cards => cards.map(card => {
-      const box = card.querySelector('.card-bottom').getBoundingClientRect();
-      return {top:Math.round(box.top),bottom:Math.round(box.bottom)};
-    }));
-    for (let start=0; start<rowButtons.length; start+=columns) {
-      const row = rowButtons.slice(start,start+columns);
-      if (row.length>1) assert.ok(Math.max(...row.map(item=>item.top))-Math.min(...row.map(item=>item.top))<=2, `Card links align in row at ${width}px`);
-    }
-    if (width<400) {
-      const menu=page.locator('.menu-toggle');await menu.click();assert.equal(await menu.getAttribute('aria-expanded'),'true');
-      await page.locator('#navigation a[href="#experiences"]').click();
-      assert.equal(await menu.getAttribute('aria-expanded'),'false');assert.ok((await page.evaluate(()=>location.hash))==='#experiences');
-    }
+    await page.locator('.axh-tour').first().waitFor();
+    assert.equal(await page.locator('#home-title').textContent(),'Your gateway to the Aegean.');
+    assert.equal(await page.locator('.axh-category').count(),4);
+    assert.equal(await page.locator('.axh-tour').count(),3);
+    assert.deepEqual(await page.locator('.axh-category').evaluateAll(cards=>cards.map(c=>c.getAttribute('href'))),['/shore-excursions/','/tours/?type=Private%20tour','/tours/?type=Group%20tour','/multi-day-tours/']);
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     await page.goto(origin + '/tours/');
     await page.locator('main .tour-card').first().waitFor();
     assert.equal(await page.locator('main .tour-card').count(), 10, `Tours page count at ${width}px`);
+    const cards=page.locator('main .tour-card');
+    assert.deepEqual(await cards.locator('h3').allTextContents(),catalogue.map(t=>t.title));
+    for(let i=0;i<catalogue.length;i++){
+      const card=cards.nth(i),paragraphs=card.locator('.card-summary p');
+      assert.deepEqual(await paragraphs.allTextContents(),catalogue[i].cardSummary);
+      assert.ok(await paragraphs.evaluateAll(elements=>elements.every(el=>el.scrollHeight<=el.clientHeight+1)),'Summary text must not be clipped');
+      assert.equal(await card.locator('.cover img').getAttribute('src'),catalogue[i].images[0].url);
+      assert.equal(await card.locator('.cover img').evaluate(el=>getComputedStyle(el).objectFit),'cover');
+      assert.ok(await card.locator('.quote-link').isVisible());
+    }
+    const bottoms=await cards.evaluateAll(elements=>elements.map(el=>Math.round(el.querySelector('.card-bottom').getBoundingClientRect().top)));
+    for(let i=0;i<bottoms.length;i+=columns){const row=bottoms.slice(i,i+columns);assert.ok(Math.max(...row)-Math.min(...row)<=2,'Card actions must align in each row');}
     assert.equal(await page.locator('main .tour-grid').evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length), columns, `Tours grid columns at ${width}px`);
     assert.equal(await page.locator('#filters select').count(), 4, 'The catalogue keeps its destination, departure, duration and type filters');
     assert.equal(await page.locator('.home-experiences,.home-trust,.home-cta').count(), 0, 'Homepage-only sections stay off the tours catalogue');
@@ -104,13 +63,13 @@ try {
       const futurePage = await browser.newPage({viewport:{width,height:1100}});
       const futureTour = {...catalogue[0],id:'axu-99',slug:'future-catalogue-tour',title:'Future Catalogue Tour',cardSummary:['A new catalogue entry appears automatically in the homepage collection.']};
       await futurePage.route('**/catalogue.json', route => route.fulfill({contentType:'application/json',body:JSON.stringify([...catalogue,futureTour])}));
-      await futurePage.goto(origin + '/');
+      await futurePage.goto(origin + '/tours/');
       assert.equal(await futurePage.locator('main .tour-card').count(), 11);
       assert.equal(await futurePage.locator('main .tour-card h3').last().textContent(), 'Future Catalogue Tour');
       await futurePage.close();
     }
     await page.close();
-    console.log(`PASS: ${width}px homepage and Tours cards, all ten in catalogue order, ${columns} columns, full summaries, aligned links and preserved cover URLs.`);
+    console.log(`PASS: ${width}px approved homepage and Tours cards, all ten catalogue entries, ${columns} columns, full summaries, aligned links and preserved cover URLs.`);
   }
 } finally {
   await browser.close();

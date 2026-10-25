@@ -32,8 +32,8 @@ assert.doesNotMatch(logo, /<rect[^>]+fill=/i, 'Logo background must remain trans
 
 const app = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
 const catalogue = JSON.parse(fs.readFileSync(path.join(root, 'catalogue.json'), 'utf8'));
-assert.match(app, /TÜRSAB License No: 14169/);
-assert.doesNotMatch(app, /TÜRSAB Belge No/);
+assert.match(app, /Your gateway<\/span> <span>to the Aegean\./);
+assert.doesNotMatch(app, /Private journeys\. Remarkable places\.|TÜRSAB License No/);
 assert.equal(catalogue.length, 10, 'The active catalogue should retain ten tours');
 for (const tour of catalogue) {
   assert.ok(Array.isArray(tour.cardSummary) && tour.cardSummary.length <= 2 && tour.cardSummary.length > 0, `${tour.id} needs one or two card summary paragraphs`);
@@ -42,9 +42,9 @@ for (const tour of catalogue) {
   assert.doesNotMatch(tour.cardSummary.join(' '), /[çğıöşüÇĞİÖŞÜ]/u, `${tour.id} card summary should be English`);
   for (const paragraph of tour.cardSummary) assert.match(paragraph, /[.!?]$/u, `${tour.id} paragraph should end with a complete sentence`);
 }
-assert.match(app, /tours\.map\(card\)\.join\(''\)/, 'Homepage should render every catalogue tour in order');
+assert.match(app, /filtered\.map\(card\)\.join\(''\)/, 'Catalogue should render filtered tours in order');
 const homeBlock = app.match(/function home\(\) \{([\s\S]*?)\n\}/)?.[1] || '';
-assert.doesNotMatch(homeBlock, /featured|slice\(0,\s*\d+\)/, 'Homepage must not use a fixed tour subset');
+assert.match(homeBlock, /Selected Journeys/, 'Retain the approved selected journeys section');
 assert.match(app, /tour\.cardSummary/);
 const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
 assert.match(css, /\.card-summary\{[^}]*line-height:1\.6/);

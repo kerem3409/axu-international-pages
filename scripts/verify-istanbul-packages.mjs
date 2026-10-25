@@ -1,5 +1,5 @@
-import {Window} from '../../node_modules/happy-dom/lib/index.js';
-import {chromium} from '../../.visual-tools.local/node_modules/playwright/index.mjs';
+import {Window} from '../.tools/node_modules/happy-dom/lib/index.js';
+import {chromium} from '../.tools/node_modules/playwright/index.mjs';
 import fs from 'node:fs';import path from 'node:path';import http from 'node:http';import assert from 'node:assert/strict';
 const root=path.resolve(import.meta.dirname,'..'),base='';
 const read=file=>fs.readFileSync(path.join(root,file),'utf8'),catalogue=JSON.parse(read('catalogue.json')),app=read('app.js');
@@ -62,7 +62,7 @@ await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin=`http://127.0.
 const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});
 try {
  const page=await browser.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await page.route('**/app.js',r=>r.fulfill({contentType:'text/javascript',body:app.replace('window.location.assign(url)','window.testNavigate(url)')}));
+ await page.route('**/app.js*',r=>r.fulfill({contentType:'text/javascript',body:app.replace('window.location.assign(url)','window.testNavigate(url)')}));
  await page.addInitScript(()=>{window.handoffs=[];window.testNavigate=url=>window.handoffs.push(url);});
  for(const width of [1440,390,320]) {
   await page.setViewportSize({width,height:1000});
@@ -87,8 +87,8 @@ try {
    await page.locator('[name="notes"]').fill('Türkçe\nSecond line 🌅');await submit.click();
    const message=new URL(await page.evaluate(()=>window.handoffs.at(-1))).searchParams.get('text');assert.ok(message.includes(`Tour Type: ${tour.enquiryVariant}\nEnquiry Type: Travel Agency\nAgency Name: A&B + İzmir`));assert.ok(message.includes('Türkçe\nSecond line 🌅'));
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${tour.id} overflow at ${width}`);
-   await page.locator('.td-hero').screenshot({path:path.resolve(root,`../.visual-tools.local/${tour.id}-hero-${width}.png`)});
-   await page.locator('#quote-form').screenshot({path:path.resolve(root,`../.visual-tools.local/${tour.id}-form-${width}.png`)});
+   await page.locator('.td-hero').screenshot({path:path.resolve(root,`.tools/qa/${tour.id}-hero-${width}.png`)});
+   await page.locator('#quote-form').screenshot({path:path.resolve(root,`.tools/qa/${tour.id}-form-${width}.png`)});
   }
   for(const route of ['/tours/','/multi-day-tours/']) {
    await page.goto(origin+route);await page.locator('.tour-card').first().waitFor();

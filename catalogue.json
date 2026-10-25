@@ -420,39 +420,39 @@
     "currency": null,
     "images": [
       {
-        "caption": "Pamukkale Travertine Terraces",
-        "alt": "White travertine terraces and turquoise pools at Pamukkale",
-        "url": "/images/tours/pamukkale-hierapolis/pamukkale-pools-overview.jpg",
+        "caption": "Pamukkale travertine terraces",
+        "alt": "Turquoise water in white travertine terraces at Pamukkale",
+        "url": "/images/tours/pamukkale-hierapolis/pamukkale-terraces.jpg",
         "credit": {
-          "title": "The travertines of Pamukkale 3",
-          "author": "Slyronit",
-          "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_travertines_of_Pamukkale_3.jpg",
-          "license": "CC BY-SA 4.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-          "shareAlike": true,
-          "changes": "Resized to a maximum of 1920 pixels without upscaling or cropping; JPEG quality 86, metadata removed. CSS crops previews; the lightbox displays the full frame."
+          "title": "Pamukkale Hierapolis Travertine pools",
+          "author": "P. Vasiliadis",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pamukkale_Hierapolis_Travertine_pools.JPG",
+          "sourceLabel": "Wikimedia Commons",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "changes": "Official Wikimedia 1280px thumbnail, optimized as JPEG quality 86; metadata removed. CSS crops previews. No colour changes or generated content."
         }
       }
     ],
     "gallery": [
       {
-        "caption": "Pamukkale Travertine Terraces",
-        "alt": "White travertine terraces and turquoise pools at Pamukkale",
-        "url": "/images/tours/pamukkale-hierapolis/pamukkale-pools-overview.jpg",
+        "caption": "Pamukkale travertine terraces",
+        "alt": "Turquoise water in white travertine terraces at Pamukkale",
+        "url": "/images/tours/pamukkale-hierapolis/pamukkale-terraces.jpg",
         "credit": {
-          "title": "The travertines of Pamukkale 3",
-          "author": "Slyronit",
-          "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_travertines_of_Pamukkale_3.jpg",
-          "license": "CC BY-SA 4.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-          "shareAlike": true,
-          "changes": "Resized to a maximum of 1920 pixels without upscaling or cropping; JPEG quality 86, metadata removed. CSS crops previews; the lightbox displays the full frame."
+          "title": "Pamukkale Hierapolis Travertine pools",
+          "author": "P. Vasiliadis",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pamukkale_Hierapolis_Travertine_pools.JPG",
+          "sourceLabel": "Wikimedia Commons",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "changes": "Official Wikimedia 1280px thumbnail, optimized as JPEG quality 86; metadata removed. CSS crops previews. No colour changes or generated content."
         }
       },
       {
         "caption": "Hierapolis Ancient Theatre",
         "alt": "Stone seating and archaeological remains of the theatre at Hierapolis",
-        "url": "/images/tours/pamukkale-hierapolis/hierapolis-theatre.jpg",
+        "url": "/images/tours/pamukkale-hierapolis/hierapolis-theatre-optimized.jpg",
         "credit": {
           "title": "The Theatre of Hierapolis, Pamukkale",
           "author": "Slyronit",
@@ -460,12 +460,12 @@
           "license": "CC BY-SA 4.0",
           "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
           "shareAlike": true,
-          "changes": "Resized to a maximum of 1920 pixels without upscaling or cropping; JPEG quality 86, metadata removed. CSS crops previews; the lightbox displays the full frame."
+          "changes": "Resized to at most 1600px wide; global 1–99 percentile tonal normalization; mild sharpening (sigma 0.5); JPEG quality 84; metadata removed. No generated or replaced content. CSS crops previews; gallery retains full frame."
         }
       },
       {
         "caption": "Travertine Pools — Close View",
-        "url": "/images/tours/pamukkale/pamukkale-travertines.jpg",
+        "url": "/images/tours/pamukkale/pamukkale-travertines-optimized.jpg",
         "alt": "Turquoise water beside white travertine formations at Pamukkale",
         "credit": {
           "title": "The Travertine terraces of Pamukkale",
@@ -474,13 +474,13 @@
           "license": "CC BY-SA 4.0",
           "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
           "shareAlike": true,
-          "changes": "Original photograph, unmodified. CSS crops previews; the lightbox retains the full frame."
+          "changes": "Resized to at most 1600px wide; global 1–99 percentile tonal normalization; mild sharpening (sigma 0.5); JPEG quality 84; metadata removed. No generated or replaced content. CSS crops previews; gallery retains full frame."
         }
       },
       {
         "caption": "Hierapolis Monumental Ruins",
         "alt": "Ancient stone arches at Hierapolis",
-        "url": "/images/tours/pamukkale-hierapolis/hierapolis-ruins.jpg",
+        "url": "/images/tours/pamukkale-hierapolis/hierapolis-ruins-optimized.jpg",
         "credit": {
           "title": "Hierapolis, Pamukkale",
           "author": "Slyronit",
@@ -488,13 +488,13 @@
           "license": "CC BY-SA 4.0",
           "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
           "shareAlike": true,
-          "changes": "Resized to a maximum of 1920 pixels without upscaling or cropping; JPEG quality 86, metadata removed. CSS crops previews; the lightbox displays the full frame."
+          "changes": "Resized to at most 1600px wide; global 1–99 percentile tonal normalization; mild sharpening (sigma 0.5); JPEG quality 84; metadata removed. No generated or replaced content. CSS crops previews; gallery retains full frame."
         }
       },
       {
         "caption": "Pamukkale Landscape",
         "alt": "Lake and landscape below the Pamukkale travertines",
-        "url": "/images/tours/pamukkale-hierapolis/pamukkale-landscape.jpg",
+        "url": "/images/tours/pamukkale-hierapolis/pamukkale-landscape-optimized.jpg",
         "credit": {
           "title": "Lake of Pamukkale seen from the travertines",
           "author": "Slyronit",
@@ -502,7 +502,7 @@
           "license": "CC BY-SA 4.0",
           "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
           "shareAlike": true,
-          "changes": "Resized to a maximum of 1920 pixels without upscaling or cropping; JPEG quality 86, metadata removed. CSS crops previews; the lightbox displays the full frame."
+          "changes": "Resized to at most 1600px wide; global 1–99 percentile tonal normalization; mild sharpening (sigma 0.5); JPEG quality 84; metadata removed. No generated or replaced content. CSS crops previews; gallery retains full frame."
         }
       }
     ],
@@ -1252,33 +1252,33 @@
     "currency": null,
     "images": [
       {
-        "caption": "Pamukkale Travertine Terraces",
-        "url": "/images/tours/pamukkale/pamukkale-travertines.jpg",
-        "alt": "White travertine terraces at Pamukkale, Denizli",
+        "caption": "Pamukkale travertine terraces",
+        "url": "/images/tours/pamukkale-hierapolis/pamukkale-terraces-wide.jpg",
+        "alt": "Turquoise water in white travertine terraces at Pamukkale",
         "credit": {
-          "title": "The Travertine terraces of Pamukkale",
-          "author": "Slyronit",
-          "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Travertine_terraces_of_Pamukkale.jpg",
-          "license": "CC BY-SA 4.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-          "shareAlike": true,
-          "changes": "Original photograph, unmodified. CSS crops previews; the lightbox retains the full frame."
+          "title": "Pamukkale Hierapolis Travertine pools",
+          "author": "P. Vasiliadis",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pamukkale_Hierapolis_Travertine_pools.JPG",
+          "sourceLabel": "Wikimedia Commons",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "changes": "Official Wikimedia 1280px thumbnail, optimized as JPEG quality 86; metadata removed. CSS crops previews. No colour changes or generated content. Upper sky cropped by 220 pixels."
         }
       }
     ],
     "gallery": [
       {
-        "caption": "Pamukkale Travertine Terraces",
-        "url": "/images/tours/pamukkale/pamukkale-travertines.jpg",
-        "alt": "White travertine terraces at Pamukkale, Denizli",
+        "caption": "Pamukkale travertine terraces",
+        "url": "/images/tours/pamukkale-hierapolis/pamukkale-terraces-wide.jpg",
+        "alt": "Turquoise water in white travertine terraces at Pamukkale",
         "credit": {
-          "title": "The Travertine terraces of Pamukkale",
-          "author": "Slyronit",
-          "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Travertine_terraces_of_Pamukkale.jpg",
-          "license": "CC BY-SA 4.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-          "shareAlike": true,
-          "changes": "Original photograph, unmodified. CSS crops previews; the lightbox retains the full frame."
+          "title": "Pamukkale Hierapolis Travertine pools",
+          "author": "P. Vasiliadis",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pamukkale_Hierapolis_Travertine_pools.JPG",
+          "sourceLabel": "Wikimedia Commons",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "changes": "Official Wikimedia 1280px thumbnail, optimized as JPEG quality 86; metadata removed. CSS crops previews. No colour changes or generated content. Upper sky cropped by 220 pixels."
         }
       },
       {
@@ -1451,17 +1451,17 @@
         }
       },
       {
-        "caption": "Pamukkale Travertine Terraces",
-        "url": "/images/tours/pamukkale/pamukkale-travertines.jpg",
-        "alt": "White travertine terraces at Pamukkale, Denizli",
+        "caption": "Pamukkale travertine terraces",
+        "url": "/images/tours/pamukkale-hierapolis/pamukkale-terraces-wide.jpg",
+        "alt": "Turquoise water in white travertine terraces at Pamukkale",
         "credit": {
-          "title": "The Travertine terraces of Pamukkale",
-          "author": "Slyronit",
-          "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Travertine_terraces_of_Pamukkale.jpg",
-          "license": "CC BY-SA 4.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-          "shareAlike": true,
-          "changes": "Original photograph, unmodified. CSS crops previews; the lightbox retains the full frame."
+          "title": "Pamukkale Hierapolis Travertine pools",
+          "author": "P. Vasiliadis",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pamukkale_Hierapolis_Travertine_pools.JPG",
+          "sourceLabel": "Wikimedia Commons",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "changes": "Official Wikimedia 1280px thumbnail, optimized as JPEG quality 86; metadata removed. CSS crops previews. No colour changes or generated content. Upper sky cropped by 220 pixels."
         }
       },
       {

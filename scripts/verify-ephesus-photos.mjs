@@ -1,4 +1,4 @@
-import {Window} from '../../node_modules/happy-dom/lib/index.js';
+import {Window} from '../.tools/node_modules/happy-dom/lib/index.js';
 import fs from 'node:fs';
 import cp from 'node:child_process';
 import assert from 'node:assert/strict';

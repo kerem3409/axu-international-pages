@@ -1,0 +1,24 @@
+{
+  "title": "Pamukkale Hierapolis Travertine pools",
+  "author": "P. Vasiliadis",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pamukkale_Hierapolis_Travertine_pools.JPG",
+  "sourceLabel": "Wikimedia Commons",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "changes": "Official Wikimedia 1280px thumbnail, optimized as JPEG quality 86; metadata removed. CSS crops previews. No colour changes or generated content.",
+  "verifiedOn": "2026-10-25",
+  "commercialUse": true,
+  "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/53/Pamukkale_Hierapolis_Travertine_pools.JPG",
+  "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Pamukkale_Hierapolis_Travertine_pools.JPG/1280px-Pamukkale_Hierapolis_Travertine_pools.JPG",
+  "downloadSha256": "6298bb14201f83b74a9914974b7fc491a3d1710f804f40e528a3e8d02825cf10",
+  "derivatives": [
+    {
+      "file": "pamukkale-terraces.jpg",
+      "sha256": "87aa0a86dd8eb7d38d7d0d8af62ada4382937bdcd4dc7ac647cea90f88cc249f"
+    },
+    {
+      "file": "pamukkale-terraces-wide.jpg",
+      "sha256": "8dd234eb9efc566fd70833e0895d76b844cbd9f955cb53c995f1da9c024e20ae"
+    }
+  ]
+}

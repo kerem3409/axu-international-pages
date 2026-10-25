@@ -1,4 +1,4 @@
-import {chromium} from '../../.visual-tools.local/node_modules/playwright/index.mjs';
+import {chromium} from '../.tools/node_modules/playwright/index.mjs';
 const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});
 try {
  const page=await browser.newPage();
