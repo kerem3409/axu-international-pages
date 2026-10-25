@@ -1,4 +1,4 @@
-import {Window} from '../../node_modules/happy-dom/lib/index.js';
+import {Window} from '../.tools/node_modules/happy-dom/lib/index.js';
 import fs from 'node:fs';import path from 'node:path';import cp from 'node:child_process';import assert from 'node:assert/strict';
 const root=path.resolve(import.meta.dirname,'..'),read=file=>fs.readFileSync(path.join(root,file),'utf8');
 const catalogue=JSON.parse(read('catalogue.json')),before=JSON.parse(cp.execFileSync('git',['show','HEAD:catalogue.json'],{cwd:root,encoding:'utf8'}));

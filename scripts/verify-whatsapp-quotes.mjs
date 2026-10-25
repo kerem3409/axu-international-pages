@@ -1,4 +1,4 @@
-import {Window} from '../../node_modules/happy-dom/lib/index.js';
+import {Window} from '../.tools/node_modules/happy-dom/lib/index.js';
 import fs from 'node:fs';
 import cp from 'node:child_process';
 import assert from 'node:assert/strict';
@@ -96,7 +96,7 @@ try {
 } finally {await contact.w.happyDOM.close();}
 }
 const home=await page('');
-try {assert.ok([...home.d.querySelectorAll('a')].some(a=>a.textContent.includes('Plan Your Journey')&&a.href.endsWith('/contact/')));assert.equal(home.d.querySelectorAll('.tour-card').length,10);assert.deepEqual([...home.d.querySelectorAll('.tour-card h3')].map(h=>h.textContent),catalogue.map(t=>t.title));} finally {await home.w.happyDOM.close();}
+try {assert.ok([...home.d.querySelectorAll('a')].some(a=>a.textContent.includes('Plan Your Trip')&&a.href.endsWith('/contact/')));assert.equal(home.d.querySelectorAll('.axh-tour').length,3);assert.equal(home.d.querySelector('#home-title').textContent,'Your gateway to the Aegean.');} finally {await home.w.happyDOM.close();}
 const listing=await page('tours/');
 try {assert.equal(listing.d.querySelectorAll('.quote-link').length,10);for(const a of listing.d.querySelectorAll('.quote-link'))assert.ok(a.href.endsWith('/#request-quote'));} finally {await listing.w.happyDOM.close();}
 console.log('PASS: all ten remaining tour names, required/invalid fields, future date, message encoding, optional fields, manual-send wording, popup fallback, contact tour selection, home/list CTAs and no request storage/submission.');

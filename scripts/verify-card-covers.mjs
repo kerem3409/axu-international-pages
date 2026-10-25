@@ -1,5 +1,5 @@
-import {Window} from '../../node_modules/happy-dom/lib/index.js';
-import {chromium} from '../../.visual-tools.local/node_modules/playwright/index.mjs';
+import {Window} from '../.tools/node_modules/happy-dom/lib/index.js';
+import {chromium} from '../.tools/node_modules/playwright/index.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import http from 'node:http';
@@ -37,7 +37,7 @@ try {
  const page=await browser.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
  for(const width of [1440,390,320]) {
   await page.setViewportSize({width,height:1000});
-  for(const route of ['/','/tours/']) {
+  for(const route of ['/tours/']) {
    await page.goto(origin+route);await page.locator('.tour-card').first().waitFor();
    const covers=page.locator('.cover');
    for(let i=0;i<await covers.count();i++) {
@@ -64,9 +64,9 @@ try {
    await page.goto(origin+route);await page.locator('.tour-card').first().waitFor();
    const ephesus=page.locator(`.tour-card:has(a[href="${base}/tours/${catalogue[0].slug}/"])`).first();
    await ephesus.scrollIntoViewIfNeeded();await page.waitForFunction(()=>document.querySelector('.tour-card .cover img')?.naturalWidth>0);
-   await ephesus.screenshot({path:path.resolve(root,`../.visual-tools.local/card-cover-${route==='/'?'home':'tours'}-${width}.png`)});
+   await ephesus.screenshot({path:path.resolve(root,`.tools/qa/card-cover-${route==='/'?'home':'tours'}-${width}.png`)});
   }
  }
  assert.deepEqual(errors,[]);
- console.log('PASS: image priority, gallery fallback, blank/missing URLs, local photo loading, object-fit cover, placeholder size retention, home/list at 1440/390/320px. External photos are checked for HTTPS; remote loading depends on network availability.');
+ console.log('PASS: image priority, gallery fallback, blank/missing URLs, local photo loading, object-fit cover, placeholder size retention, tour list at 1440/390/320px. External photos are checked for HTTPS; remote loading depends on network availability.');
 } finally {await browser.close();await new Promise(resolve=>server.close(resolve));}

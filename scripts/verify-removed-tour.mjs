@@ -1,4 +1,4 @@
-﻿import {Window} from '../../node_modules/happy-dom/lib/index.js';
+﻿import {Window} from '../.tools/node_modules/happy-dom/lib/index.js';
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';
 const root=path.resolve(import.meta.dirname,'..'),base='',removed='biblical-ephesus-tour-from-kusadasi',target='/tours/ephesus-shore-excursion/';
 const read=file=>fs.readFileSync(path.join(root,file),'utf8');

@@ -1,4 +1,4 @@
-import { Window } from '../../node_modules/happy-dom/lib/index.js';
+import { Window } from '../.tools/node_modules/happy-dom/lib/index.js';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';

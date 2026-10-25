@@ -1,4 +1,4 @@
-import {chromium} from '../../.visual-tools.local/node_modules/playwright/index.mjs';
+import {chromium} from '../.tools/node_modules/playwright/index.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import http from 'node:http';
@@ -24,7 +24,7 @@ try {
   const page=await browser.newPage({viewport:{width,height:1000},isMobile:mobile,hasTouch:mobile,userAgent:mobile ? (width===390 ? 'Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 Chrome/130.0.0.0 Mobile Safari/537.36' : 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Version/18.0 Mobile/15E148 Safari/604.1') : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130.0.0.0 Safari/537.36'});
   page.on('pageerror',error=>errors.push(error.message));
   // Isolate the external handoff for form/clipboard checks; real same-tab navigation is tested below.
-  await page.route('**/app.js',route=>route.fulfill({contentType:'text/javascript',body:app.replace('window.location.assign(url)','window.__testNavigate(url)')}));
+  await page.route('**/app.js*',route=>route.fulfill({contentType:'text/javascript',body:app.replace('window.location.assign(url)','window.__testNavigate(url)')}));
   await page.addInitScript(()=>{window.openedWhatsApp=[];window.__testNavigate=url=>window.openedWhatsApp.push([url]);window.open=()=>{throw new Error('Unexpected popup');};});
   return page;
  }
@@ -87,12 +87,12 @@ try {
    }
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${tour.id}: overflow at ${width}`);
    assert.ok(await page.locator('#quote-form input, #quote-form select, #quote-form textarea, #quote-form button').evaluateAll(elements=>elements.filter(el=>el.getClientRects().length>0).every(el=>{const box=el.getBoundingClientRect();return box.width>0&&box.x>=0&&box.right<=innerWidth+1&&box.height>=44;})),`${tour.id}: visible field layout at ${width}`);
-   if(tour.id==='axu-01')await page.locator('#quote-form').screenshot({path:path.resolve(import.meta.dirname,`../../.visual-tools.local/whatsapp-form-${width}.png`)});
+   if(tour.id==='axu-01')await page.locator('#quote-form').screenshot({path:path.resolve(import.meta.dirname,`../.tools/qa/whatsapp-form-${width}.png`)});
    await page.locator('[name="notes"]').fill('Edited notes');assert.equal(await page.locator('#copy-quote').isVisible(),false);
    await page.locator('.td-hero-photo').click();await page.keyboard.press('ArrowRight');assert.equal(await page.locator('.td-counter').textContent(),'2 / 5');await page.keyboard.press('Escape');
   }
   await page.goto(origin+'/');await page.locator('#home-title').waitFor();
-  if(width<=390){const menu=page.locator('.menu-toggle');await menu.click();assert.equal(await menu.getAttribute('aria-expanded'),'true');assert.ok(await page.locator('#navigation').evaluate(el=>el.classList.contains('open')));await page.locator('#navigation a').filter({hasText:'Tours'}).click();await page.locator('.tour-card').first().waitFor();assert.equal(await menu.getAttribute('aria-expanded'),'false');assert.ok(!await page.locator('#navigation').evaluate(el=>el.classList.contains('open')));}
+  if(width<=390){const menu=page.locator('.menu-toggle');await menu.click();assert.equal(await menu.getAttribute('aria-expanded'),'true');assert.ok(await page.locator('#navigation').evaluate(el=>el.classList.contains('open')));await page.locator('#navigation a[href="/tours/"]').click();await page.locator('.tour-card').first().waitFor();assert.equal(await menu.getAttribute('aria-expanded'),'false');assert.ok(!await page.locator('#navigation').evaluate(el=>el.classList.contains('open')));}
   await page.goto(origin+'/contact/');await page.locator('#quote-form').waitFor();
   assert.equal(await page.locator('[name="tourId"] option').count(),11);
   await page.locator('[name="fullName"]').fill('John & Jane Smith');await page.locator('[name="tourDate"]').fill('2099-10-20');await page.locator('[name="guests"]').fill('4');
@@ -108,7 +108,7 @@ try {
     assert.equal(await page.locator('footer .release-info').count(),1);
     assert.ok(await page.locator('footer .release-info').evaluate(el=>{const box=el.getBoundingClientRect();return box.x>=0&&box.right<=innerWidth+1&&el.scrollWidth<=box.width+1;}),`Footer overflow: ${route} at ${width}`);
    }
-   await page.locator('footer').screenshot({path:path.resolve(import.meta.dirname,`../../.visual-tools.local/release-footer-${width}.png`)});
+   await page.locator('footer').screenshot({path:path.resolve(import.meta.dirname,`../.tools/qa/release-footer-${width}.png`)});
   }
  }
  assert.deepEqual(errors,[]);

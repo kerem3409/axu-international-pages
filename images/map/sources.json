@@ -1,0 +1,53 @@
+{
+  "dataset": "Natural Earth 1:10m land",
+  "version": "5.1.2",
+  "license": "Public domain",
+  "sourceUrl": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_land.geojson",
+  "licenseUrl": "https://www.naturalearthdata.com/about/terms-of-use/",
+  "sourceSha256": "1ac90796408bc6ad6911d69448485d3c4dbf2190370080368a09976e1c9f7416",
+  "bounds": [
+    24.5,
+    36.8,
+    30.5,
+    41.7
+  ],
+  "projection": "Mercator, north up",
+  "places": [
+    {
+      "name": "Istanbul",
+      "longitude": 28.9784,
+      "latitude": 41.0082,
+      "sourceUrl": "https://www.openstreetmap.org/?mlat=41.0082&mlon=28.9784#map=15/41.0082/28.9784"
+    },
+    {
+      "name": "Pergamon",
+      "longitude": 27.1842,
+      "latitude": 39.1325,
+      "sourceUrl": "https://www.openstreetmap.org/?mlat=39.1325&mlon=27.1842#map=15/39.1325/27.1842"
+    },
+    {
+      "name": "Ephesus",
+      "longitude": 27.3411,
+      "latitude": 37.939,
+      "sourceUrl": "https://www.openstreetmap.org/?mlat=37.939&mlon=27.3411#map=15/37.939/27.3411"
+    },
+    {
+      "name": "Kusadasi",
+      "longitude": 27.2567,
+      "latitude": 37.8579,
+      "sourceUrl": "https://www.openstreetmap.org/?mlat=37.8579&mlon=27.2567#map=15/37.8579/27.2567"
+    },
+    {
+      "name": "Sirince",
+      "longitude": 27.4333,
+      "latitude": 37.9436,
+      "sourceUrl": "https://www.openstreetmap.org/?mlat=37.9436&mlon=27.4333#map=15/37.9436/27.4333"
+    },
+    {
+      "name": "Pamukkale",
+      "longitude": 29.1233,
+      "latitude": 37.92,
+      "sourceUrl": "https://www.openstreetmap.org/?mlat=37.92&mlon=29.1233#map=15/37.92/29.1233"
+    }
+  ]
+}

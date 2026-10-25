@@ -1,5 +1,5 @@
-import {Window} from '../../node_modules/happy-dom/lib/index.js';
-import {chromium} from '../../.visual-tools.local/node_modules/playwright/index.mjs';
+import {Window} from '../.tools/node_modules/happy-dom/lib/index.js';
+import {chromium} from '../.tools/node_modules/playwright/index.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import http from 'node:http';
@@ -94,21 +94,21 @@ try {
  for(const width of [1440,390,320]) {
   const context=await browser.newContext({viewport:{width,height:1000},isMobile:width<400,hasTouch:width<400});
   const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
-  await page.route('**/app.js',r=>r.fulfill({contentType:'text/javascript',body:app.replace('window.location.assign(url)','window.testNavigate(url)')}));
+  await page.route('**/app.js*',r=>r.fulfill({contentType:'text/javascript',body:app.replace('window.location.assign(url)','window.testNavigate(url)')}));
   await page.addInitScript(()=>{window.handoffs=[];window.testNavigate=url=>window.handoffs.push(url);});
   await page.goto(origin+route);await page.locator('#quote-form').waitFor();
   assert.equal(await page.title(),`${tour.title} · AXU TOURS`);assert.equal(await page.locator('meta[name="description"]').getAttribute('content'),tour.summary);
   assert.deepEqual(await page.locator('.td-stop h3').allTextContents(),tour.itinerary.map(s=>s.title));
   await page.locator('.td-gallery').scrollIntoViewIfNeeded();
   await page.waitForFunction(()=>[...document.querySelectorAll('.td-hero-photo img,.td-gallery img')].length===6&&[...document.querySelectorAll('.td-hero-photo img,.td-gallery img')].every(img=>img.complete&&img.naturalWidth>0));
-  await page.locator('.td-hero').screenshot({path:path.resolve(import.meta.dirname,`../../.visual-tools.local/pamukkale-hero-${width}.png`)});
-  await page.locator('.td-gallery').screenshot({path:path.resolve(import.meta.dirname,`../../.visual-tools.local/pamukkale-gallery-${width}.png`)});
+  await page.locator('.td-hero').screenshot({path:path.resolve(import.meta.dirname,`../.tools/qa/pamukkale-hero-${width}.png`)});
+  await page.locator('.td-gallery').screenshot({path:path.resolve(import.meta.dirname,`../.tools/qa/pamukkale-gallery-${width}.png`)});
   await page.locator('.td-hero-photo').click();
   for(let index=0;index<5;index++){
    assert.equal(await page.locator('.td-counter').textContent(),`${index+1} / 5`);
    await page.waitForFunction(()=>document.querySelector('.td-modal-photo img')?.naturalWidth>0);
    assert.equal(await page.locator('.td-modal-photo img').evaluate(el=>getComputedStyle(el).objectFit),'contain');
-   if(index===1)await page.locator('.td-overlay').screenshot({path:path.resolve(import.meta.dirname,`../../.visual-tools.local/pamukkale-lightbox-${width}.png`)});
+   if(index===1)await page.locator('.td-overlay').screenshot({path:path.resolve(import.meta.dirname,`../.tools/qa/pamukkale-lightbox-${width}.png`)});
    await page.keyboard.press('ArrowRight');
   }await page.keyboard.press('Escape');assert.equal(await page.locator('.td-overlay').isVisible(),false);
   for(const target of [route,'/contact/']) {
@@ -123,7 +123,7 @@ try {
    await submit.click();const message=new URL(await page.evaluate(()=>window.handoffs.at(-1))).searchParams.get('text');
    assert.ok(message.includes('Ship Name: MSC Fantasia\nArrival Time: 08:00\nAll-Aboard Time: 19:30'));assert.ok(message.includes('Agency Name: A&B İzmir'));assert.ok(message.includes('Türkçe\nSecond line 🌅'));
    assert.equal(await page.locator('#quote-status').textContent(),'');
-   await page.locator('#quote-form').screenshot({path:path.resolve(import.meta.dirname,`../../.visual-tools.local/pamukkale-cruise-${target==='/contact/'?'contact':'detail'}-${width}.png`)});
+   await page.locator('#quote-form').screenshot({path:path.resolve(import.meta.dirname,`../.tools/qa/pamukkale-cruise-${target==='/contact/'?'contact':'detail'}-${width}.png`)});
    await page.locator('[name="pickupType"]').selectOption('Hotel');assert.equal(await page.locator('[name="shipName"]').isVisible(),false);
    await page.locator('[name="hotelName"]').fill('Kusadasi Hotel');await submit.click();const hotel=new URL(await page.evaluate(()=>window.handoffs.at(-1))).searchParams.get('text');
    assert.ok(hotel.includes('Hotel Name: Kusadasi Hotel'));assert.ok(!hotel.includes('All-Aboard Time:'));
@@ -133,7 +133,7 @@ try {
   for(const listing of ['/tours/','/shore-excursions/']){
    await page.goto(origin+listing);const card=page.locator(`.tour-card:has(a[href="${base}${route}"])`).first();await card.waitFor();
    for(const type of ['Private tour','Shore excursion']){await page.locator('[name="type"]').selectOption(type);assert.equal(await card.count(),1);}
-   assert.match(await card.locator('.card-summary').textContent(),/gemi programı değerlendirilerek teklif aşamasında teyit edilir/);
+   assert.match(await card.locator('.card-summary').textContent(),/for cruise guests, the ship schedule/);
    await card.scrollIntoViewIfNeeded();await page.waitForFunction(src=>[...document.querySelectorAll('.cover img')].some(img=>img.getAttribute('src')===src&&img.naturalWidth>0),tour.images[0].url);
    assert.equal(await card.locator('.cover img').getAttribute('src'),tour.images[0].url);assert.equal(await card.locator('.cover img').evaluate(el=>getComputedStyle(el).objectFit),'cover');
   }
