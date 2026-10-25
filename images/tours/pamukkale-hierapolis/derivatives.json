@@ -2,15 +2,6 @@
   "license": "Each derivative retains the source photograph’s CC BY-SA 4.0 license; see sources.json in the original directory and catalogue photo credits.",
   "photos": [
     {
-      "file": "images/tours/pamukkale-hierapolis/pamukkale-pools-overview-optimized.jpg",
-      "original": "images/tours/pamukkale-hierapolis/pamukkale-pools-overview.jpg",
-      "width": 1600,
-      "height": 1200,
-      "bytes": 288636,
-      "sha256": "f42387216b3eb8cbc3f700e6724b0c35b058c2e65fa7f718fe6bb24fa9a285b8",
-      "changes": "Resized to at most 1600px wide; global 1–99 percentile tonal normalization; mild sharpening (sigma 0.5); JPEG quality 84; metadata removed. No generated or replaced content. CSS crops previews; gallery retains full frame."
-    },
-    {
       "file": "images/tours/pamukkale-hierapolis/hierapolis-theatre-optimized.jpg",
       "original": "images/tours/pamukkale-hierapolis/hierapolis-theatre.jpg",
       "width": 1600,

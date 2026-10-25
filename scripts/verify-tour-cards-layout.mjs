@@ -43,6 +43,18 @@ try {
     await page.goto(origin + '/tours/');
     await page.locator('main .tour-card').first().waitFor();
     assert.equal(await page.locator('main .tour-card').count(), 10, `Tours page count at ${width}px`);
+    const cards=page.locator('main .tour-card');
+    assert.deepEqual(await cards.locator('h3').allTextContents(),catalogue.map(t=>t.title));
+    for(let i=0;i<catalogue.length;i++){
+      const card=cards.nth(i),paragraphs=card.locator('.card-summary p');
+      assert.deepEqual(await paragraphs.allTextContents(),catalogue[i].cardSummary);
+      assert.ok(await paragraphs.evaluateAll(elements=>elements.every(el=>el.scrollHeight<=el.clientHeight+1)),'Summary text must not be clipped');
+      assert.equal(await card.locator('.cover img').getAttribute('src'),catalogue[i].images[0].url);
+      assert.equal(await card.locator('.cover img').evaluate(el=>getComputedStyle(el).objectFit),'cover');
+      assert.ok(await card.locator('.quote-link').isVisible());
+    }
+    const bottoms=await cards.evaluateAll(elements=>elements.map(el=>Math.round(el.querySelector('.card-bottom').getBoundingClientRect().top)));
+    for(let i=0;i<bottoms.length;i+=columns){const row=bottoms.slice(i,i+columns);assert.ok(Math.max(...row)-Math.min(...row)<=2,'Card actions must align in each row');}
     assert.equal(await page.locator('main .tour-grid').evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length), columns, `Tours grid columns at ${width}px`);
     assert.equal(await page.locator('#filters select').count(), 4, 'The catalogue keeps its destination, departure, duration and type filters');
     assert.equal(await page.locator('.home-experiences,.home-trust,.home-cta').count(), 0, 'Homepage-only sections stay off the tours catalogue');
